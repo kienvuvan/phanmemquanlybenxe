@@ -38,7 +38,8 @@ public class CarOwnerController {
             String nhaXe = listCarOwners.get(i).getNhaXe();
             List<Car> listCar = listCarOwners.get(i).getListCar();
             for(int j=0;j<listCar.size();j++){
-                dtm.addRow(new Object[]{listCar.get(j).getBsx(), nhaXe, listCar.get(j).getSoGhe(), listCar.get(j).getLoTrinh(), listCar.get(j).getLichTrinh(),listCar.get(j).getGiaVe()});
+                dtm.addRow(new Object[]{listCar.get(j).getBsx(), nhaXe, listCar.get(j).getSoGhe(), 
+                    listCar.get(j).getLoTrinh(), listCar.get(j).getLichTrinh(),listCar.get(j).getGiaVe()});
             }
         }
         jtb.setModel(dtm);

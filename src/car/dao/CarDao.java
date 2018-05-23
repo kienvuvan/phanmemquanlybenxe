@@ -5,10 +5,13 @@
  */
 package car.dao;
 
+import car.model.Car;
+import java.util.List;
+
 /**
  *
  * @author kienanh2903
  */
 public interface CarDao {
-    
+    List<Car> searchCarForBookTicket(String keySearch);
 }

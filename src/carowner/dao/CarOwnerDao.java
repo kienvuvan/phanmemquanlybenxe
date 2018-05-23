@@ -16,4 +16,6 @@ public interface CarOwnerDao {
     int addCarOwner(CarOwner carOwner);
     
     List<CarOwner> getAllListCarOwner();
+    
+    List<CarOwner> searchCarOwner();
 }

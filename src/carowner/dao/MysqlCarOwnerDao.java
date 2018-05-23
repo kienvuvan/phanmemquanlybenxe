@@ -96,9 +96,9 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 ResultSet rs1 = pstm.executeQuery();
                 List<Car> listCars = new ArrayList<>();
                 while(rs1.next()){
-                    String id = rs1.getString("id");
+                    int id = rs1.getInt("id");
                     String bienSoXe = rs1.getString("BienSoXe");
-                    String soGhe = rs1.getString("SoGhe");
+                    int soGhe = rs1.getInt("SoGhe");
                     Double giaVe = rs1.getDouble("GiaVe");
                     String loTrinh = rs1.getString("LoTrinh");
                     String lichTrinh = rs1.getString("LichTrinh");
@@ -112,6 +112,11 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
             Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCarOwners;
+    }
+
+    @Override
+    public List<CarOwner> searchCarOwner() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

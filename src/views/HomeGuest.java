@@ -5,6 +5,7 @@
  */
 package views;
 
+import car.controller.CarController;
 import carowner.controller.CarOwnerController;
 import login.view.LoginForm;
 
@@ -14,6 +15,7 @@ import login.view.LoginForm;
  */
 public class HomeGuest extends javax.swing.JFrame {
     CarOwnerController coc;
+    CarController cc;
     /**
      * Creates new form HomeGuess
      */
@@ -21,6 +23,7 @@ public class HomeGuest extends javax.swing.JFrame {
         initComponents();
         setVisiableNews();
         coc = new CarOwnerController();
+        cc = new CarController();
         coc.displayInforCarOwnerToJTable(jTable1);
     }
 
@@ -47,7 +50,7 @@ public class HomeGuest extends javax.swing.JFrame {
         jPanel_bookticket = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_searchCarForBookTicket = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -156,6 +159,11 @@ public class HomeGuest extends javax.swing.JFrame {
         jLabel1.setText("Nhập thông tin cần tìm kiếm :");
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,7 +173,7 @@ public class HomeGuest extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(115, Short.MAX_VALUE))
@@ -176,7 +184,7 @@ public class HomeGuest extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -376,6 +384,12 @@ public class HomeGuest extends javax.swing.JFrame {
         loginForm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String keySearch = jTextField_searchCarForBookTicket.getText();
+        cc.displaySearchCarForBookTicket(jTable1, keySearch);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -441,7 +455,7 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu_bookticket;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField_searchCarForBookTicket;
     // End of variables declaration//GEN-END:variables
 
     private void setVisiableNews() {

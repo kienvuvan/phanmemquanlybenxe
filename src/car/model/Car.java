@@ -7,21 +7,22 @@ package car.model;
 
 import car.dao.CarDao;
 import car.dao.MysqlCarDao;
+import java.util.List;
 
 /**
  *
  * @author kienanh2903
  */
 public class Car {
-    private String id; 
+    private int id; 
     private String bsx;
     private String cmtNhaXe;
-    private String soGhe;
+    private int soGhe;
     private Double giaVe;
     private String loTrinh;
     private String lichTrinh;
 
-    public Car(String id, String bsx, String cmtNhaXe, String soGhe, Double giaVe, String loTrinh, String lichTrinh) {
+    public Car(int id, String bsx, String cmtNhaXe, int soGhe, Double giaVe, String loTrinh, String lichTrinh) {
         this.id = id;
         this.bsx = bsx;
         this.cmtNhaXe = cmtNhaXe;
@@ -34,11 +35,11 @@ public class Car {
     public Car() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,11 +59,11 @@ public class Car {
         this.cmtNhaXe = cmtNhaXe;
     }
 
-    public String getSoGhe() {
+    public int getSoGhe() {
         return soGhe;
     }
 
-    public void setSoGhe(String soGhe) {
+    public void setSoGhe(int soGhe) {
         this.soGhe = soGhe;
     }
 
@@ -92,5 +93,9 @@ public class Car {
     
     public CarDao carDao() {
         return MysqlCarDao.getInstance();
+    }
+    
+    public List<Car> searchCarForBookTicket(String keySearch) {
+        return carDao().searchCarForBookTicket(keySearch);
     }
 }
