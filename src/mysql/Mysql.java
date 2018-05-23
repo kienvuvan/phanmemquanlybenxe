@@ -29,7 +29,6 @@ public class Mysql  {
         try {
             Class.forName(DRIVER).newInstance();
             this.connection = DriverManager.getConnection(URL + DATABASE_NAME, USER_NAME, PASSWORD);
-            System.out.println("Connect Success");
         } catch (ClassNotFoundException ex) {
             System.out.println("Database Connection Creation Failed : " + ex.getMessage());
         } catch (InstantiationException | IllegalAccessException ex) {
