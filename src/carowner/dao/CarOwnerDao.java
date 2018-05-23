@@ -6,6 +6,7 @@
 package carowner.dao;
 
 import carowner.model.CarOwner;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,6 @@ import carowner.model.CarOwner;
  */
 public interface CarOwnerDao {
     int addCarOwner(CarOwner carOwner);
+    
+    List<CarOwner> getAllListCarOwner();
 }

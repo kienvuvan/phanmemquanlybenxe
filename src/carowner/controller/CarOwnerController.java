@@ -5,7 +5,11 @@
  */
 package carowner.controller;
 
+import car.model.Car;
 import carowner.model.CarOwner;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,8 +27,21 @@ public class CarOwnerController {
         return this.carOwner.addCarOwner(carOwner);
     }
     
-    public void displayInforCarOwnerToJTable(){
-        
+    public List<CarOwner> getAllListCarOwner() {
+        return carOwner.getAllListCarOwner();
+    }
+    
+    public void displayInforCarOwnerToJTable(JTable jtb){
+        List<CarOwner> listCarOwners = getAllListCarOwner();
+        DefaultTableModel dtm = (DefaultTableModel)jtb.getModel();
+        for(int i=0;i<listCarOwners.size(); i++){
+            String nhaXe = listCarOwners.get(i).getNhaXe();
+            List<Car> listCar = listCarOwners.get(i).getListCar();
+            for(int j=0;j<listCar.size();j++){
+                dtm.addRow(new Object[]{listCar.get(j).getBsx(), nhaXe, listCar.get(j).getSoGhe(), listCar.get(j).getLoTrinh(), listCar.get(j).getLichTrinh(),listCar.get(j).getGiaVe()});
+            }
+        }
+        jtb.setModel(dtm);
     }
     
 }

@@ -5,8 +5,10 @@
  */
 package carowner.model;
 
+import car.model.Car;
 import carowner.dao.CarOwnerDao;
 import carowner.dao.MysqlCarOwnerDao;
+import java.util.List;
 import java.sql.Date;
 
 /**
@@ -22,8 +24,15 @@ public class CarOwner {
     private String gioitinh;
     private Date ngaySinh;
     private String diaChi;
-
+    private List<Car> listCar;
+    
     public CarOwner() {
+    }
+
+    public CarOwner(String cmt, String nhaXe, List<Car> listCar) {
+        this.cmt = cmt;
+        this.nhaXe = nhaXe;
+        this.listCar = listCar;
     }
 
     public CarOwner(String cmt, String ten, String nhaXe, String sdt, String email, String gioitinh, Date ngaySinh, String diaChi) {
@@ -35,6 +44,14 @@ public class CarOwner {
         this.gioitinh = gioitinh;
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
+    }
+
+    public List<Car> getListCar() {
+        return listCar;
+    }
+
+    public void setListCar(List<Car> listCar) {
+        this.listCar = listCar;
     }
 
     public String getCmt() {
@@ -107,5 +124,9 @@ public class CarOwner {
     
     public int addCarOwner(CarOwner carOwner){
         return carOwnerDao().addCarOwner(carOwner);
+    }
+    
+    public List<CarOwner> getAllListCarOwner() {
+        return carOwnerDao().getAllListCarOwner();
     }
 }
