@@ -6,7 +6,6 @@
 package cartravel.controller;
 
 import cartravel.model.CarTravel;
-import cartravel.model.CarTravelDetail;
 import guest.model.Guest;
 import java.sql.Date;
 
@@ -31,6 +30,14 @@ public class CarTravelController {
     }
     
     public int bookTicket(CarTravel carTravel, Guest guest) {
-        return carTravel.bookTicket(carTravel, guest);
+        return this.carTravel.bookTicket(carTravel, guest);
+    }
+    
+    public boolean checkTicketForDestroy(String maChuyenXe, String cmt){
+        return carTravel.checkTicketForDestroy(maChuyenXe, cmt);
+    }
+    
+    public int unbookTicket(String maChuyenXe, String cmt) {
+        return carTravel.unbookTicket(maChuyenXe, cmt);
     }
 }

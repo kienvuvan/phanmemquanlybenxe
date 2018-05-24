@@ -108,6 +108,14 @@ public class HomeGuest extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel_unbookticket = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jTextField_maChuyenXe = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField_cmtKhach = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jPanel_searchInfor = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -552,16 +560,80 @@ public class HomeGuest extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Hủy đặt vé online");
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Bạn vui lòng điền các thông tin cần thiết để xác nhận hủy đăng ký vé xe online");
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Mã chuyến xe : ");
+
+        jLabel23.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("*Mã chuyến xe đã được gửi vào email của bạn khi đăng ký.Vui lòng kiểm tra lại.");
+
+        jLabel24.setText("Chứng minh thư của bạn khi đăng ký xe :");
+
+        jButton4.setText("Hủy vé");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_unbookticketLayout = new javax.swing.GroupLayout(jPanel_unbookticket);
         jPanel_unbookticket.setLayout(jPanel_unbookticketLayout);
         jPanel_unbookticketLayout.setHorizontalGroup(
             jPanel_unbookticketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_unbookticketLayout.createSequentialGroup()
+                .addContainerGap(135, Short.MAX_VALUE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_maChuyenXe, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(206, 206, 206))
+            .addGroup(jPanel_unbookticketLayout.createSequentialGroup()
+                .addGroup(jPanel_unbookticketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_unbookticketLayout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField_cmtKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_unbookticketLayout.createSequentialGroup()
+                        .addGap(323, 323, 323)
+                        .addComponent(jButton4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel_unbookticketLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel22, jLabel24});
+
         jPanel_unbookticketLayout.setVerticalGroup(
             jPanel_unbookticketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(jPanel_unbookticketLayout.createSequentialGroup()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel_unbookticketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_maChuyenXe)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel23)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_unbookticketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(jTextField_cmtKhach))
+                .addGap(40, 40, 40)
+                .addComponent(jButton4)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
+
+        jPanel_unbookticketLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel22, jLabel24});
 
         javax.swing.GroupLayout jPanel_searchInforLayout = new javax.swing.GroupLayout(jPanel_searchInfor);
         jPanel_searchInfor.setLayout(jPanel_searchInforLayout);
@@ -752,65 +824,98 @@ public class HomeGuest extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String bienSoXe = jTextField_bsx.getText();
-        Date ngayDi = new java.sql.Date(jXDatePicker1_ngayDatVeDi.getDate().getTime());
-        String thoiGian = jTextField_lichTrinh.getText();
-        String maChuyenXe = ctc.generateCarTravelId(bienSoXe, (java.sql.Date) ngayDi, thoiGian);
-        System.out.println(maChuyenXe);
-        CarTravel carTravel = new CarTravel(maChuyenXe, bienSoXe, (java.sql.Date) ngayDi, thoiGian);
-        String cmt = jTextField_cmt.getText().trim();
-        String ten = jTextField_ten.getText().trim();
-        Date ngaySinh = new java.sql.Date(jXDatePicker_ngaySinh.getDate().getTime());
-        String gioiTinh = "";
-        if (jRadioButton_nam.isSelected()) {
-            gioiTinh = "Nam";
-        } else {
-            gioiTinh = "Nữ";
-        }
-        String sdt = jTextField_sdt.getText().trim();
-        String email = jTextField_email.getText().trim();
-        String diaChi = jTextField_diaChi.getText().trim();
-        Guest guest = new Guest(cmt, ten, (java.sql.Date) ngaySinh, gioiTinh, sdt, email, diaChi);
-        int result = ctc.bookTicket(carTravel, guest);
-        switch (result) {
-            case MysqlCarTravelDao.RESULT_DATE_NULL:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Vui lòng chọn ngày cần đặt vé");
-                break;
-            case MysqlCarTravelDao.RESULT_DATE_BORN_NULL:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền ngày sinh của bạn.Vui lòng điền đầy đủ");
-                break;
-            case MysqlCarTravelDao.RESULT_EMPTY:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền đủ các thông tin");
-                break;
-            case MysqlCarTravelDao.RESULT_ERROR_CMT:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại");
-                break;
-            case MysqlCarTravelDao.RESULT_ERROR_SDT:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng số điện thoại không đúng.Vui lòng nhập lại");
-                break;
-            case MysqlCarTravelDao.RESULT_ERROR_EMAIL:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng email không đúng.Vui lòng nhập lại");
-                break;
-            case MysqlCarTravelDao.RESULT_GUEST_REGISTED:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn đã đăng ký chuyến xe này rồi.Không thể đăng ký thêm");
-                break;
-            case MysqlCarTravelDao.RESULT_SUCCESS:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Đăng ký thành công.Chúng tôi đã gửi các thông tin đến email của bạn.Vui lòng kiểm tra lại");
-                SendMail.send(email, "Đăng ký vé xe online bến xe khách Hà Nội", "Bạn vừa đăng ký vé xe thông qua hệ thống đặt vé online.\n"
-                        + "Thông tin chuyến xe:\n"
-                        + "Biển số xe : " + bienSoXe + "\n"
-                        + "Nhà xe : " + jTextField_nhaXe.getText() + "\n"
-                        + "Lộ trình : " + jTextField_loTrinh.getText() + "\n"
-                        + "Lịch trình : " + jTextField_lichTrinh.getText() + "\n"
-                        + "Giá vé : " + jTextField_giaVe.getText() + "\n"
-                        + "Số chứng minh thư bạn đăng ký vé : " + cmt + "\n"
-                        + "Vui lòng đến bến xe xác nhận mua vé trước thời hạn hủy vé của bến. Vui lòng cảm ơn quý khách đã sử dụng dịch vụ");
-                break;
-            case MysqlCarTravelDao.RESULT_EXCEPTION:
-                JOptionPane.showMessageDialog(jDialog_bookTicket, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
-                break;
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng ký chuyến xe này không ??", "Thông báo ",
+                JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+            String bienSoXe = jTextField_bsx.getText();
+            Date ngayDi = new java.sql.Date(jXDatePicker1_ngayDatVeDi.getDate().getTime());
+            String thoiGian = jTextField_lichTrinh.getText();
+            String maChuyenXe = ctc.generateCarTravelId(bienSoXe, (java.sql.Date) ngayDi, thoiGian);
+            System.out.println(maChuyenXe);
+            CarTravel carTravel = new CarTravel(maChuyenXe, bienSoXe, (java.sql.Date) ngayDi, thoiGian);
+            String cmt = jTextField_cmt.getText().trim();
+            String ten = jTextField_ten.getText().trim();
+            Date ngaySinh = new java.sql.Date(jXDatePicker_ngaySinh.getDate().getTime());
+            String gioiTinh = "";
+            if (jRadioButton_nam.isSelected()) {
+                gioiTinh = "Nam";
+            } else {
+                gioiTinh = "Nữ";
+            }
+            String sdt = jTextField_sdt.getText().trim();
+            String email = jTextField_email.getText().trim();
+            String diaChi = jTextField_diaChi.getText().trim();
+            Guest guest = new Guest(cmt, ten, (java.sql.Date) ngaySinh, gioiTinh, sdt, email, diaChi);
+            int result = ctc.bookTicket(carTravel, guest);
+            switch (result) {
+                case MysqlCarTravelDao.RESULT_DATE_NULL:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Vui lòng chọn ngày cần đặt vé");
+                    break;
+                case MysqlCarTravelDao.RESULT_DATE_BORN_NULL:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền ngày sinh của bạn.Vui lòng điền đầy đủ");
+                    break;
+                case MysqlCarTravelDao.RESULT_EMPTY:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền đủ các thông tin");
+                    break;
+                case MysqlCarTravelDao.RESULT_ERROR_CMT:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại");
+                    break;
+                case MysqlCarTravelDao.RESULT_ERROR_SDT:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng số điện thoại không đúng.Vui lòng nhập lại");
+                    break;
+                case MysqlCarTravelDao.RESULT_ERROR_EMAIL:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng email không đúng.Vui lòng nhập lại");
+                    break;
+                case MysqlCarTravelDao.RESULT_GUEST_REGISTED:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn đã đăng ký chuyến xe này rồi.Không thể đăng ký thêm");
+                    break;
+                case MysqlCarTravelDao.RESULT_SUCCESS:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Đăng ký thành công.Chúng tôi đã gửi các thông tin đến email của bạn.Vui lòng kiểm tra lại");
+                    SendMail.send(email, "Đăng ký vé xe online bến xe khách Hà Nội", "Bạn vừa đăng ký vé xe thông qua hệ thống đặt vé online.\n"
+                            + "Thông tin chuyến xe:\n"
+                            + "Mã chuyến xe : " + maChuyenXe
+                            + "Biển số xe : " + bienSoXe + "\n"
+                            + "Nhà xe : " + jTextField_nhaXe.getText() + "\n"
+                            + "Lộ trình : " + jTextField_loTrinh.getText() + "\n"
+                            + "Lịch trình : " + jTextField_lichTrinh.getText() + "\n"
+                            + "Giá vé : " + jTextField_giaVe.getText() + "\n"
+                            + "Số chứng minh thư bạn đăng ký vé : " + cmt + "\n"
+                            + "Vui lòng đến bến xe xác nhận mua vé trước thời hạn hủy vé của bến. Vui lòng cảm ơn quý khách đã sử dụng dịch vụ");
+                    break;
+                case MysqlCarTravelDao.RESULT_EXCEPTION:
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                    break;
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn hủy đăng ký chuyến xe này không ??", "Cảnh báo",
+                JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+            String maChuyenXe = jTextField_maChuyenXe.getText().trim();
+            String cmt = jTextField_cmtKhach.getText().trim();
+            int result = ctc.unbookTicket(maChuyenXe, cmt);
+            switch(result){
+                case MysqlCarTravelDao.RESULT_EMPTY :
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền đủ các thông tin");
+                    break;
+                case MysqlCarTravelDao.RESULT_ERROR_CMT :
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại");
+                    break;
+                case MysqlCarTravelDao.RESULT_NOT_EXIT_TICKET :
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Thông tin nhập không chính xác.Vui lòng kiểm tra lại thông tin trong email");
+                    break;
+                case MysqlCarTravelDao.RESULT_SUCCESS :
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Hủy vé thành công");
+                    jTextField_maChuyenXe.setText("");
+                    jTextField_cmtKhach.setText("");
+                    break;
+                case MysqlCarTravelDao.RESULT_EXCEPTION :
+                    JOptionPane.showMessageDialog(jDialog_bookTicket, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                    break;
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -853,6 +958,7 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialog_bookTicket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -866,6 +972,11 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -905,11 +1016,13 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField_bsx;
     private javax.swing.JTextField jTextField_cmt;
+    private javax.swing.JTextField jTextField_cmtKhach;
     private javax.swing.JTextField jTextField_diaChi;
     private javax.swing.JTextField jTextField_email;
     private javax.swing.JTextField jTextField_giaVe;
     private javax.swing.JTextField jTextField_lichTrinh;
     private javax.swing.JTextField jTextField_loTrinh;
+    private javax.swing.JTextField jTextField_maChuyenXe;
     private javax.swing.JTextField jTextField_nhaXe;
     private javax.swing.JTextField jTextField_sdt;
     private javax.swing.JTextField jTextField_searchCarForBookTicket;

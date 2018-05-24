@@ -6,7 +6,6 @@
 package cartravel.dao;
 
 import cartravel.model.CarTravel;
-import cartravel.model.CarTravelDetail;
 import guest.model.Guest;
 import java.sql.Date;
 
@@ -27,4 +26,8 @@ public interface CarTravelDao {
     boolean addInforCarTravelDetail(String maChuyenXe, String maHanhKhach);
     
     boolean addInforCarTravel(CarTravel carTravel);
+    
+    boolean checkTicketForDestroy(String maChuyenXe, String cmt);
+    
+    int unbookTicket(String maChuyenXe, String cmt);
 }

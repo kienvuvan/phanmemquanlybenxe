@@ -7,7 +7,6 @@ package cartravel.dao;
 
 import cartravel.controller.CarTravelController;
 import cartravel.model.CarTravel;
-import cartravel.model.CarTravelDetail;
 import com.mysql.cj.util.StringUtils;
 import guest.controller.GuestController;
 import guest.model.Guest;
@@ -33,7 +32,9 @@ public class MysqlCarTravelDao implements CarTravelDao {
     private static final String CHECK_GUEST_IN_CAR_TRAVEL = "SELECT COUNT(*) FROM chitietchuyenxe WHERE MaChuyenXe = ? AND MaHanhKhach = ?";
     private static final String ADD_INFOR_CAR_TRAVEL_DETAIL = "INSERT INTO chitietchuyenxe VALUES(?,?)";
     private static final String ADD_INFOR_CAR_TRAVEL = "INSERT INTO chuyenxe VALUES(?,?,?,?)";
-
+    private static final String CHECK_TICKET_FOR_DESTROY = "SELECT COUNT(*) FROM chitietchuyenxe WHERE MaChuyenXe = ?  AND MaHanhKhach = ?";
+    private static final String UN_BOOKTICKET = "DELETE FROM chitietchuyenxe WHERE MaChuyenXe = ? AND MaHanhKhach = ?";
+    
     public static final int RESULT_DATE_NULL = 0;
     public static final int RESULT_DATE_BORN_NULL = 1;
     public static final int RESULT_EMPTY = 2;
@@ -43,6 +44,7 @@ public class MysqlCarTravelDao implements CarTravelDao {
     public static final int RESULT_GUEST_REGISTED = 6;
     public static final int RESULT_SUCCESS = 7;
     public static final int RESULT_EXCEPTION = 8;
+    public static final int RESULT_NOT_EXIT_TICKET = 9;
 
     @Override
     public String generateCarTravelId(String bienSoXe, Date ngayDi, String thoiGian) {
@@ -205,5 +207,49 @@ public class MysqlCarTravelDao implements CarTravelDao {
             Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public boolean checkTicketForDestroy(String maChuyenXe, String cmt) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(CHECK_TICKET_FOR_DESTROY);
+            pstm.setString(1, maChuyenXe);
+            pstm.setString(2, cmt);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public int unbookTicket(String maChuyenXe, String cmt) {
+        if (StringUtils.isNullOrEmpty(maChuyenXe) || StringUtils.isNullOrEmpty(cmt)) {
+            return RESULT_EMPTY;
+        } else if (Utils.isCmt(cmt) == false) {
+            return RESULT_ERROR_CMT;
+        } else if (checkTicketForDestroy(maChuyenXe, cmt) == false) {
+            return RESULT_NOT_EXIT_TICKET;
+        } else {
+            try {
+                Connection connection = Mysql.getInstance().getConnection();
+                PreparedStatement pstm = connection.prepareCall(UN_BOOKTICKET);
+                pstm.setString(1, maChuyenXe);
+                pstm.setString(2, cmt);
+                int check = pstm.executeUpdate();
+                if (check > 0) {
+                    return RESULT_SUCCESS;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return RESULT_EXCEPTION;
+        }
     }
 }

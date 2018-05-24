@@ -95,4 +95,12 @@ public class CarTravel {
     public int bookTicket(CarTravel carTravel, Guest guest) {
         return carTravelDao().bookTicket(carTravel, guest);
     }
+    
+    public boolean checkTicketForDestroy(String maChuyenXe, String cmt){
+        return carTravelDao().checkTicketForDestroy(maChuyenXe, cmt);
+    }
+    
+    public int unbookTicket(String maChuyenXe, String cmt) {
+        return carTravelDao().unbookTicket(maChuyenXe, cmt);
+    }
 }
