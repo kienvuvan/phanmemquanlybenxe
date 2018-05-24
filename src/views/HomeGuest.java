@@ -7,16 +7,26 @@ package views;
 
 import car.controller.CarController;
 import carowner.controller.CarOwnerController;
+import cartravel.controller.CarTravelController;
+import cartravel.dao.MysqlCarTravelDao;
+import cartravel.model.CarTravel;
+import guest.model.Guest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import login.view.LoginForm;
+import utils.SendMail;
 
 /**
  *
  * @author kienanh2903
  */
 public class HomeGuest extends javax.swing.JFrame {
+
     CarOwnerController coc;
     CarController cc;
+    CarTravelController ctc;
+
     /**
      * Creates new form HomeGuess
      */
@@ -25,6 +35,7 @@ public class HomeGuest extends javax.swing.JFrame {
         setVisiableNews();
         coc = new CarOwnerController();
         cc = new CarController();
+        ctc = new CarTravelController();
         coc.displayInforCarOwnerToJTable(jTable1);
     }
 
@@ -43,24 +54,46 @@ public class HomeGuest extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_bsx = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextField_nhaXe = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextField_giaVe = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextField_soGhe = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jTextField_lichTrinh = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextField_loTrinh = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jXDatePicker1_ngayDatVeDi = new org.jdesktop.swingx.JXDatePicker();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField_cmt = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField_ten = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jXDatePicker_ngaySinh = new org.jdesktop.swingx.JXDatePicker();
+        jLabel15 = new javax.swing.JLabel();
+        jRadioButton_nam = new javax.swing.JRadioButton();
+        jRadioButton_nu = new javax.swing.JRadioButton();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField_sdt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField_email = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField_diaChi = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_news = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -103,100 +136,209 @@ public class HomeGuest extends javax.swing.JFrame {
 
         jLabel4.setText("Biển số xe : ");
 
-        jTextField1.setEditable(false);
+        jTextField_bsx.setEditable(false);
 
         jLabel5.setText("Nhà xe :");
 
-        jTextField2.setEditable(false);
+        jTextField_nhaXe.setEditable(false);
 
-        jLabel6.setText("Nhà xe :");
+        jLabel7.setText("Giá vé :");
 
-        jTextField3.setEditable(false);
+        jTextField_giaVe.setEditable(false);
 
-        jLabel7.setText("Số ghế :");
+        jLabel8.setText("Số ghế :");
 
-        jTextField4.setEditable(false);
-
-        jLabel8.setText("Lộ trình :");
-
-        jTextField5.setEditable(false);
+        jTextField_soGhe.setEditable(false);
 
         jLabel9.setText("Lịch trình :");
 
-        jTextField6.setEditable(false);
+        jTextField_lichTrinh.setEditable(false);
 
-        jLabel10.setText("Giá vé :");
+        jLabel10.setText("Lộ trình :");
 
-        jTextField7.setEditable(false);
+        jTextField_loTrinh.setEditable(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_bsx, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_soGhe, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_loTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField4))
-                .addContainerGap())
+                    .addComponent(jTextField_nhaXe, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(jTextField_giaVe)
+                    .addComponent(jTextField_lichTrinh))
+                .addGap(34, 34, 34))
         );
+
+        jPanel9Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField_bsx, jTextField_giaVe, jTextField_lichTrinh, jTextField_loTrinh, jTextField_nhaXe, jTextField_soGhe});
+
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_bsx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_nhaXe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_giaVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_lichTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_soGhe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_loTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jPanel9Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField_bsx, jTextField_giaVe, jTextField_lichTrinh, jTextField_loTrinh, jTextField_nhaXe, jTextField_soGhe});
+
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin khách hàng"));
+
+        jLabel11.setText("Ngày đặt vé đi : ");
+
+        jXDatePicker1_ngayDatVeDi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker1_ngayDatVeDiActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Chứng minh thư :");
+
+        jLabel6.setText("Họ tên : ");
+
+        jLabel14.setText("Ngày sinh :");
+
+        jXDatePicker_ngaySinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker_ngaySinhActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Giới tính :");
+
+        buttonGroup1.add(jRadioButton_nam);
+        jRadioButton_nam.setSelected(true);
+        jRadioButton_nam.setText("Nam");
+
+        buttonGroup1.add(jRadioButton_nu);
+        jRadioButton_nu.setText("Nữ");
+
+        jLabel16.setText("Số điện thoại :");
+
+        jLabel17.setText("Email :");
+
+        jLabel19.setText("Địa chỉ :");
+
+        jButton3.setText("Đặt vé");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jXDatePicker1_ngayDatVeDi, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField_diaChi)
+                            .addComponent(jXDatePicker_ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(jTextField_cmt)
+                            .addComponent(jTextField_sdt, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_ten, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jRadioButton_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton_nu, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField_email))))
+                .addContainerGap())
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 168, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jXDatePicker1_ngayDatVeDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_cmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXDatePicker_ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButton_nam)
+                    .addComponent(jRadioButton_nu))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addGap(4, 4, 4))
         );
 
         javax.swing.GroupLayout jDialog_bookTicketLayout = new javax.swing.GroupLayout(jDialog_bookTicket.getContentPane());
@@ -217,21 +359,47 @@ public class HomeGuest extends javax.swing.JFrame {
                 .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel13.setText("jLabel13");
+
+        jLabel18.setText("Email :");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel_news.setLayout(new java.awt.GridLayout(2, 0));
 
         jLabel2.setText("yhngbfv");
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton2)))
+                .addGap(53, 53, 53))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel_news.add(jPanel3);
@@ -541,12 +709,108 @@ public class HomeGuest extends javax.swing.JFrame {
     private void jMenuItem_bookticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_bookticketActionPerformed
         // TODO add your handling code here:
         int index = jTable1.getSelectedRow();
-        if(index < 0){
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe để đặt vé.Vui lòng chọn lại");
-        }else{
-            
+        } else {
+            jDialog_bookTicket.setVisible(true);
+            jDialog_bookTicket.setSize(620, 600);
+            jDialog_bookTicket.setLocationRelativeTo(null);
+            Date dateNow = new Date();
+            Date ngaySinh = new Date(97, 2, 29);
+            jXDatePicker1_ngayDatVeDi.setDate(dateNow);
+            jXDatePicker_ngaySinh.setDate(ngaySinh);
+            jTextField_bsx.setText(jTable1.getValueAt(index, 0).toString());
+            jTextField_nhaXe.setText(jTable1.getValueAt(index, 1).toString());
+            jTextField_soGhe.setText(jTable1.getValueAt(index, 2).toString());
+            jTextField_giaVe.setText(jTable1.getValueAt(index, 5).toString());
+            jTextField_loTrinh.setText(jTable1.getValueAt(index, 3).toString());
+            jTextField_lichTrinh.setText(jTable1.getValueAt(index, 4).toString());
         }
     }//GEN-LAST:event_jMenuItem_bookticketActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println(sdf.format(jXDatePicker2.getDate()));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jXDatePicker1_ngayDatVeDiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1_ngayDatVeDiActionPerformed
+        // TODO add your handling code here:
+        Date dateBookTicket = jXDatePicker1_ngayDatVeDi.getDate();
+        Date dateNow = new Date();
+        Date dateAfter = new Date(dateNow.getTime() + 7 * 24 * 3600 * 1000);
+        if (dateBookTicket.before(dateNow)) {
+            JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn không thể đặt vé những ngày đã qua.Vui lòng chọn lại ngày khác!!!");
+        } else if (dateBookTicket.after(dateAfter)) {
+            JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn chỉ được đặt vé trong vòng 7 ngày trở lại.Vui lòng chọn lại!!!");
+        }
+    }//GEN-LAST:event_jXDatePicker1_ngayDatVeDiActionPerformed
+
+    private void jXDatePicker_ngaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker_ngaySinhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jXDatePicker_ngaySinhActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String bienSoXe = jTextField_bsx.getText();
+        Date ngayDi = new java.sql.Date(jXDatePicker1_ngayDatVeDi.getDate().getTime());
+        String thoiGian = jTextField_lichTrinh.getText();
+        String maChuyenXe = ctc.generateCarTravelId(bienSoXe, (java.sql.Date) ngayDi, thoiGian);
+        System.out.println(maChuyenXe);
+        CarTravel carTravel = new CarTravel(maChuyenXe, bienSoXe, (java.sql.Date) ngayDi, thoiGian);
+        String cmt = jTextField_cmt.getText().trim();
+        String ten = jTextField_ten.getText().trim();
+        Date ngaySinh = new java.sql.Date(jXDatePicker_ngaySinh.getDate().getTime());
+        String gioiTinh = "";
+        if (jRadioButton_nam.isSelected()) {
+            gioiTinh = "Nam";
+        } else {
+            gioiTinh = "Nữ";
+        }
+        String sdt = jTextField_sdt.getText().trim();
+        String email = jTextField_email.getText().trim();
+        String diaChi = jTextField_diaChi.getText().trim();
+        Guest guest = new Guest(cmt, ten, (java.sql.Date) ngaySinh, gioiTinh, sdt, email, diaChi);
+        int result = ctc.bookTicket(carTravel, guest);
+        switch (result) {
+            case MysqlCarTravelDao.RESULT_DATE_NULL:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Vui lòng chọn ngày cần đặt vé");
+                break;
+            case MysqlCarTravelDao.RESULT_DATE_BORN_NULL:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền ngày sinh của bạn.Vui lòng điền đầy đủ");
+                break;
+            case MysqlCarTravelDao.RESULT_EMPTY:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền đủ các thông tin");
+                break;
+            case MysqlCarTravelDao.RESULT_ERROR_CMT:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại");
+                break;
+            case MysqlCarTravelDao.RESULT_ERROR_SDT:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng số điện thoại không đúng.Vui lòng nhập lại");
+                break;
+            case MysqlCarTravelDao.RESULT_ERROR_EMAIL:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng email không đúng.Vui lòng nhập lại");
+                break;
+            case MysqlCarTravelDao.RESULT_GUEST_REGISTED:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn đã đăng ký chuyến xe này rồi.Không thể đăng ký thêm");
+                break;
+            case MysqlCarTravelDao.RESULT_SUCCESS:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Đăng ký thành công.Chúng tôi đã gửi các thông tin đến email của bạn.Vui lòng kiểm tra lại");
+                SendMail.send(email, "Đăng ký vé xe online bến xe khách Hà Nội", "Bạn vừa đăng ký vé xe thông qua hệ thống đặt vé online.\n"
+                        + "Thông tin chuyến xe:\n"
+                        + "Biển số xe : " + bienSoXe + "\n"
+                        + "Nhà xe : " + jTextField_nhaXe.getText() + "\n"
+                        + "Lộ trình : " + jTextField_loTrinh.getText() + "\n"
+                        + "Lịch trình : " + jTextField_lichTrinh.getText() + "\n"
+                        + "Giá vé : " + jTextField_giaVe.getText() + "\n"
+                        + "Số chứng minh thư bạn đăng ký vé : " + cmt + "\n"
+                        + "Vui lòng đến bến xe xác nhận mua vé trước thời hạn hủy vé của bến. Vui lòng cảm ơn quý khách đã sử dụng dịch vụ");
+                break;
+            case MysqlCarTravelDao.RESULT_EXCEPTION:
+                JOptionPane.showMessageDialog(jDialog_bookTicket, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                break;
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -585,10 +849,22 @@ public class HomeGuest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDialog jDialog_bookTicket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -622,16 +898,26 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_searchInfor;
     private javax.swing.JPanel jPanel_unbookticket;
     private javax.swing.JPopupMenu jPopupMenu_bookticket;
+    private javax.swing.JRadioButton jRadioButton_nam;
+    private javax.swing.JRadioButton jRadioButton_nu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField_bsx;
+    private javax.swing.JTextField jTextField_cmt;
+    private javax.swing.JTextField jTextField_diaChi;
+    private javax.swing.JTextField jTextField_email;
+    private javax.swing.JTextField jTextField_giaVe;
+    private javax.swing.JTextField jTextField_lichTrinh;
+    private javax.swing.JTextField jTextField_loTrinh;
+    private javax.swing.JTextField jTextField_nhaXe;
+    private javax.swing.JTextField jTextField_sdt;
     private javax.swing.JTextField jTextField_searchCarForBookTicket;
+    private javax.swing.JTextField jTextField_soGhe;
+    private javax.swing.JTextField jTextField_ten;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1_ngayDatVeDi;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker_ngaySinh;
     // End of variables declaration//GEN-END:variables
 
     private void setVisiableNews() {
