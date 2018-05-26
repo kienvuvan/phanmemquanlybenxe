@@ -11,8 +11,10 @@ import cartravel.controller.CarTravelController;
 import cartravel.dao.MysqlCarTravelDao;
 import cartravel.model.CarTravel;
 import guest.model.Guest;
-import java.text.SimpleDateFormat;
+import information.controller.InformationController;
+import information.model.Information;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import login.view.LoginForm;
 import utils.SendMail;
@@ -26,6 +28,9 @@ public class HomeGuest extends javax.swing.JFrame {
     CarOwnerController coc;
     CarController cc;
     CarTravelController ctc;
+    InformationController ic;
+    List<Information> listInformations;
+    private int stt = 1;
 
     /**
      * Creates new form HomeGuess
@@ -37,6 +42,11 @@ public class HomeGuest extends javax.swing.JFrame {
         cc = new CarController();
         ctc = new CarTravelController();
         coc.displayInforCarOwnerToJTable(jTable1);
+        ic = new InformationController();
+        listInformations = ic.getAllInfor();
+        setVisiablePrevious();
+        setVisiableNext();
+        ic.displayInformation(jPanel4, jPanel_news, listInformations, stt);
     }
 
     /**
@@ -90,15 +100,10 @@ public class HomeGuest extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_news = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
-        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel_next = new javax.swing.JLabel();
+        jLabel_before = new javax.swing.JLabel();
         jPanel_bookticket = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -373,109 +378,58 @@ public class HomeGuest extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel_news.setLayout(new java.awt.GridLayout(2, 0));
+        jPanel4.setLayout(new java.awt.GridLayout(2, 3));
 
-        jLabel2.setText("yhngbfv");
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jLabel2.setText("Đầu ");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton2)))
-                .addGap(53, 53, 53))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel_next.setText("Tiếp >>");
+        jLabel_next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_nextMouseClicked(evt);
+            }
+        });
 
-        jPanel_news.add(jPanel3);
+        jLabel_before.setText("<< Trước");
+        jLabel_before.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_beforeMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel_newsLayout = new javax.swing.GroupLayout(jPanel_news);
+        jPanel_news.setLayout(jPanel_newsLayout);
+        jPanel_newsLayout.setHorizontalGroup(
+            jPanel_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_newsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_before)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_next)
+                .addContainerGap(598, Short.MAX_VALUE))
+            .addGroup(jPanel_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
+        jPanel_newsLayout.setVerticalGroup(
+            jPanel_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_newsLayout.createSequentialGroup()
+                .addContainerGap(369, Short.MAX_VALUE)
+                .addGroup(jPanel_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel_next)
+                    .addComponent(jLabel_before))
+                .addContainerGap())
+            .addGroup(jPanel_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_newsLayout.createSequentialGroup()
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 39, Short.MAX_VALUE)))
         );
-
-        jPanel_news.add(jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
-        );
-
-        jPanel_news.add(jPanel5);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
-        );
-
-        jPanel_news.add(jPanel6);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
-        );
-
-        jPanel_news.add(jPanel7);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
-        );
-
-        jPanel_news.add(jPanel8);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -663,7 +617,7 @@ public class HomeGuest extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel_searchInfor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_news, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
+                .addComponent(jPanel_news, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -675,7 +629,7 @@ public class HomeGuest extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel_searchInfor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_news, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                .addComponent(jPanel_news, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/applications_system.png"))); // NOI18N
@@ -800,12 +754,6 @@ public class HomeGuest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem_bookticketActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println(sdf.format(jXDatePicker2.getDate()));
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jXDatePicker1_ngayDatVeDiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1_ngayDatVeDiActionPerformed
         // TODO add your handling code here:
         Date dateBookTicket = jXDatePicker1_ngayDatVeDi.getDate();
@@ -895,27 +843,94 @@ public class HomeGuest extends javax.swing.JFrame {
             String maChuyenXe = jTextField_maChuyenXe.getText().trim();
             String cmt = jTextField_cmtKhach.getText().trim();
             int result = ctc.unbookTicket(maChuyenXe, cmt);
-            switch(result){
-                case MysqlCarTravelDao.RESULT_EMPTY :
+            switch (result) {
+                case MysqlCarTravelDao.RESULT_EMPTY:
                     JOptionPane.showMessageDialog(jDialog_bookTicket, "Bạn phải điền đủ các thông tin");
                     break;
-                case MysqlCarTravelDao.RESULT_ERROR_CMT :
+                case MysqlCarTravelDao.RESULT_ERROR_CMT:
                     JOptionPane.showMessageDialog(jDialog_bookTicket, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại");
                     break;
-                case MysqlCarTravelDao.RESULT_NOT_EXIT_TICKET :
+                case MysqlCarTravelDao.RESULT_NOT_EXIT_TICKET:
                     JOptionPane.showMessageDialog(jDialog_bookTicket, "Thông tin nhập không chính xác.Vui lòng kiểm tra lại thông tin trong email");
                     break;
-                case MysqlCarTravelDao.RESULT_SUCCESS :
+                case MysqlCarTravelDao.RESULT_SUCCESS:
                     JOptionPane.showMessageDialog(jDialog_bookTicket, "Hủy vé thành công");
                     jTextField_maChuyenXe.setText("");
                     jTextField_cmtKhach.setText("");
                     break;
-                case MysqlCarTravelDao.RESULT_EXCEPTION :
+                case MysqlCarTravelDao.RESULT_EXCEPTION:
                     JOptionPane.showMessageDialog(jDialog_bookTicket, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                     break;
             }
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jLabel_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_nextMouseClicked
+        // TODO add your handling code here:
+        stt++;
+        setVisiablePrevious();
+        setVisiableNext();
+        int checkStt = 0;
+        if ((float) listInformations.size() / 4 == listInformations.size() / 4) {
+            checkStt = listInformations.size() / 4;
+        } else {
+            checkStt = listInformations.size() / 4 + 1;
+        }
+        if (stt <= checkStt) {
+            jPanel4.removeAll();
+            jPanel4.revalidate();
+            jPanel4.repaint();
+            ic.displayInformation(jPanel4, jPanel_news, listInformations, stt);
+        }
+    }//GEN-LAST:event_jLabel_nextMouseClicked
+
+    private void jLabel_beforeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_beforeMouseClicked
+        // TODO add your handling code here:
+        stt--;
+        setVisiablePrevious();
+        setVisiableNext();
+        if (stt >= 1) {
+            jPanel4.removeAll();
+            jPanel4.revalidate();
+            jPanel4.repaint();
+            ic.displayInformation(jPanel4, jPanel_news, listInformations, stt);
+        }
+    }//GEN-LAST:event_jLabel_beforeMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        stt = 1;
+        setVisiablePrevious();
+        setVisiableNext();
+        jPanel4.removeAll();
+        jPanel4.revalidate();
+        jPanel4.repaint();
+        ic.displayInformation(jPanel4, jPanel_news, listInformations, stt);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void setVisiablePrevious() {
+        if (stt == 1) {
+            jLabel_before.setVisible(false);
+        } else {
+            jLabel_before.setVisible(true);
+        }
+    }
+
+    private void setVisiableNext() {
+        int checkStt = 0;
+        if ((float) listInformations.size() / 4 == listInformations.size() / 4) {
+            checkStt = listInformations.size() / 4;
+        } else {
+            checkStt = (int) (listInformations.size() / 4) + 1;
+        }
+        if (stt == checkStt) {
+            jLabel_next.setVisible(false);
+            System.out.println(stt + " " + checkStt);
+            System.out.println((float) listInformations.size() / 4);
+        } else {
+            jLabel_next.setVisible(true);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -956,7 +971,6 @@ public class HomeGuest extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialog_bookTicket;
@@ -984,6 +998,8 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_before;
+    private javax.swing.JLabel jLabel_next;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -997,12 +1013,7 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_bookticket;
     private javax.swing.JPanel jPanel_news;
@@ -1029,7 +1040,6 @@ public class HomeGuest extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_soGhe;
     private javax.swing.JTextField jTextField_ten;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1_ngayDatVeDi;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker_ngaySinh;
     // End of variables declaration//GEN-END:variables
 
