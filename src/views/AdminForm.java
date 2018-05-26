@@ -9,7 +9,6 @@ import carowner.controller.CarOwnerController;
 import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
 import java.sql.Date;
-import java.util.Calendar;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
@@ -28,6 +27,7 @@ public class AdminForm extends javax.swing.JFrame {
         initComponents();
         coc = new CarOwnerController();
         setVisiableManagerCarOwner();
+        coc.displayInforCarOwner(jTable_inforCarOwner);
     }
 
     /**
@@ -62,13 +62,14 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField_diaChi = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_inforCarOwner = new javax.swing.JTable();
         jPanel_managerCar = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField_cmt1 = new javax.swing.JTextField();
+        jTextField_bsx = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -121,6 +122,7 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel6.setText("Giới tính :");
 
         buttonGroup1.add(jRadioButton_nam);
+        jRadioButton_nam.setSelected(true);
         jRadioButton_nam.setText("Nam");
 
         buttonGroup1.add(jRadioButton_nu);
@@ -138,6 +140,18 @@ public class AdminForm extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cập nhật");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Xóa chữ");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,10 +189,11 @@ public class AdminForm extends javax.swing.JFrame {
                                 .addComponent(jRadioButton_nam)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jRadioButton_nu)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(32, 32, 32))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -205,7 +220,8 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton_nam)
-                    .addComponent(jRadioButton_nu))
+                    .addComponent(jRadioButton_nu)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,29 +233,23 @@ public class AdminForm extends javax.swing.JFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8, jRadioButton_nam, jRadioButton_nu, jTextField_cmt, jTextField_diaChi, jTextField_email, jTextField_nhaXe, jTextField_sdt, jTextField_ten, jXDatePicker_ngaySinh});
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_inforCarOwner.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Chứng minh thư", "Họ tên", "Nhà xe", "Số điện thoại", "Email", "Giới tính", "Ngày sinh", "Địa chỉ"
+                "Chứng minh thư", "Họ tên", "Giới tính", "Nhà xe", "Số điện thoại", "Email", "Ngày sinh", "Địa chỉ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false, false
+                false, false, false, true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("Email");
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("Giới tính");
-            jTable1.getColumnModel().getColumn(6).setHeaderValue("Ngày sinh");
-            jTable1.getColumnModel().getColumn(7).setHeaderValue("Địa chỉ");
-        }
+        jScrollPane1.setViewportView(jTable_inforCarOwner);
 
         javax.swing.GroupLayout jPanel_managerCarOwnerLayout = new javax.swing.GroupLayout(jPanel_managerCarOwner);
         jPanel_managerCarOwner.setLayout(jPanel_managerCarOwnerLayout);
@@ -253,7 +263,7 @@ public class AdminForm extends javax.swing.JFrame {
             .addGroup(jPanel_managerCarOwnerLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -316,7 +326,7 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_cmt1)
+                    .addComponent(jTextField_bsx)
                     .addComponent(jTextField_email1)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
@@ -348,14 +358,14 @@ public class AdminForm extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBox1, jSpinner1, jSpinner2, jTextField_cmt1, jTextField_email1});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBox1, jSpinner1, jSpinner2, jTextField_bsx, jTextField_email1});
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel17, jLabel19});
 
@@ -369,7 +379,7 @@ public class AdminForm extends javax.swing.JFrame {
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton3)
                         .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField_cmt1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_bsx, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,7 +413,7 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox1, jComboBox2, jComboBox3, jLabel10, jLabel11, jLabel12, jLabel13, jLabel14, jLabel15, jLabel17, jLabel9, jSpinner1, jSpinner2, jTextField_cmt1, jTextField_email1});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox1, jComboBox2, jComboBox3, jLabel10, jLabel11, jLabel12, jLabel13, jLabel14, jLabel15, jLabel17, jLabel9, jSpinner1, jSpinner2, jTextField_bsx, jTextField_email1});
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -435,20 +445,20 @@ public class AdminForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_managerCarLayout = new javax.swing.GroupLayout(jPanel_managerCar);
         jPanel_managerCar.setLayout(jPanel_managerCarLayout);
         jPanel_managerCarLayout.setHorizontalGroup(
             jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 774, Short.MAX_VALUE)
+            .addGap(0, 794, Short.MAX_VALUE)
             .addGroup(jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_managerCarLayout.setVerticalGroup(
             jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
             .addGroup(jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -457,11 +467,11 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_parkCar.setLayout(jPanel_parkCarLayout);
         jPanel_parkCarLayout.setHorizontalGroup(
             jPanel_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 794, Short.MAX_VALUE)
         );
         jPanel_parkCarLayout.setVerticalGroup(
             jPanel_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel_managerCarOwner, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -593,6 +603,7 @@ public class AdminForm extends javax.swing.JFrame {
                     break;
                 case MysqlCarOwnerDao.RESULT_SUCCESS:
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
+                    coc.addCarOwnerToJTable(carOwner, jTable_inforCarOwner);
                     break;
                 case MysqlCarOwnerDao.RESULT_ERROR_SQL:
                     JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
@@ -614,6 +625,15 @@ public class AdminForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisiableManagerCar();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        deleteWords();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -656,6 +676,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -704,10 +725,10 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable_inforCarOwner;
+    private javax.swing.JTextField jTextField_bsx;
     private javax.swing.JTextField jTextField_cmt;
-    private javax.swing.JTextField jTextField_cmt1;
     private javax.swing.JTextField jTextField_diaChi;
     private javax.swing.JTextField jTextField_email;
     private javax.swing.JTextField jTextField_email1;
@@ -728,4 +749,14 @@ public class AdminForm extends javax.swing.JFrame {
         AutoCompleteDecorator.decorate(jComboBox2);
     }
 
+    private void deleteWords() {
+        jTextField_cmt.setText("");
+        jTextField_ten.setText("");
+        jTextField_nhaXe.setText("");
+        jTextField_sdt.setText("");
+        jTextField_email.setText("");
+        jRadioButton_nam.setSelected(true);
+        jXDatePicker_ngaySinh.setDate(null);
+        jTextField_diaChi.setText("");
+    }
 }

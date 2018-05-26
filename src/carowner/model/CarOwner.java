@@ -129,4 +129,8 @@ public class CarOwner {
     public List<CarOwner> getAllListCarOwner() {
         return carOwnerDao().getAllListCarOwner();
     }
+    
+    public List<CarOwner> getAllInforCarOwner() {
+        return carOwnerDao().getAllInforCarOwner();
+    }
 }

@@ -10,6 +10,7 @@ import mysql.Mysql;
 import carowner.model.CarOwner;
 import com.mysql.cj.util.StringUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,16 +26,16 @@ import utils.Utils;
  * @author kienanh2903
  */
 public class MysqlCarOwnerDao implements CarOwnerDao {
-    
-    private static final String COLUMN_CMT_CAROWNER ="Chuxe.Cmt";
-    private static final String COLUMN_NAME_CAROWNER ="HoTen";
-    private static final String COLUMN_NHAXE_CAROWNER ="NhaXe";
-    private static final String COLUMN_SDT_CAROWNER ="Sdt";
-    private static final String COLUMN_EMAIL_CAROWNER ="Email";
-    private static final String COLUMN_GIOITINH_CAROWNER ="GioiTinh";
-    private static final String COLUMN_NGAYSINH_CAROWNER ="NgaySinh";
-    private static final String COLUMN_DIACHI_CAROWNER ="DiaChi";
-    
+
+    private static final String COLUMN_CMT_CAROWNER = "Chuxe.Cmt";
+    private static final String COLUMN_NAME_CAROWNER = "HoTen";
+    private static final String COLUMN_NHAXE_CAROWNER = "NhaXe";
+    private static final String COLUMN_SDT_CAROWNER = "Sdt";
+    private static final String COLUMN_EMAIL_CAROWNER = "Email";
+    private static final String COLUMN_GIOITINH_CAROWNER = "GioiTinh";
+    private static final String COLUMN_NGAYSINH_CAROWNER = "NgaySinh";
+    private static final String COLUMN_DIACHI_CAROWNER = "DiaChi";
+
     private static final String ADD_CAROWNER = "INSERT INTO chuxe VALUES (?,?,?,?,?,?,?,?)";
     private static final String GET_ALL_CAROWNER = "SELECT * FROM chuxe";
     private static final String GET_ALL_CAR_BY_CAROWNER = "SELECT * FROM xe WHERE CmtNhaXe =?";
@@ -87,15 +88,15 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
         try {
             Connection connection = Mysql.getInstance().getConnection();
             Statement stm = connection.createStatement();
-            ResultSet rs =stm.executeQuery(GET_ALL_CAROWNER);
-            while(rs.next()){
+            ResultSet rs = stm.executeQuery(GET_ALL_CAROWNER);
+            while (rs.next()) {
                 String cmtNhaXe = rs.getString(COLUMN_CMT_CAROWNER);
                 String nhaXe = rs.getString(COLUMN_NHAXE_CAROWNER);
                 PreparedStatement pstm = connection.prepareCall(GET_ALL_CAR_BY_CAROWNER);
                 pstm.setString(1, cmtNhaXe);
                 ResultSet rs1 = pstm.executeQuery();
                 List<Car> listCars = new ArrayList<>();
-                while(rs1.next()){
+                while (rs1.next()) {
                     int id = rs1.getInt("id");
                     String bienSoXe = rs1.getString("BienSoXe");
                     int soGhe = rs1.getInt("SoGhe");
@@ -107,7 +108,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 }
                 CarOwner carOwner = new CarOwner(cmtNhaXe, nhaXe, listCars);
                 listCarOwners.add(carOwner);
-            }         
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,6 +118,31 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     @Override
     public List<CarOwner> searchCarOwner() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<CarOwner> getAllInforCarOwner() {
+        List<CarOwner> listCarOwners = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            Statement stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery(GET_ALL_CAROWNER);
+            while (rs.next()) {
+                String cmtNhaXe = rs.getString(COLUMN_CMT_CAROWNER);
+                String ten = rs.getString(COLUMN_NAME_CAROWNER);
+                String nhaXe = rs.getString(COLUMN_NHAXE_CAROWNER);
+                String sdt = rs.getString(COLUMN_SDT_CAROWNER);
+                String email = rs.getString(COLUMN_EMAIL_CAROWNER);
+                String gioiTinh = rs.getString(COLUMN_GIOITINH_CAROWNER);
+                Date ngaySinh = rs.getDate(COLUMN_NGAYSINH_CAROWNER);
+                String diaChi = rs.getString(COLUMN_DIACHI_CAROWNER);
+                CarOwner carOwner = new CarOwner(cmtNhaXe, ten, nhaXe, sdt, email, gioiTinh, ngaySinh, diaChi);
+                listCarOwners.add(carOwner);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarOwners;
     }
 
 }

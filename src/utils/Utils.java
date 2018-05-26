@@ -26,7 +26,7 @@ public class Utils {
 
     public static boolean isCmt(String cmt) {
         String cmt_pattern1 = "^[0-9]{9}";
-        String cmt_pattern2 = "^[0-9]{13}";
+        String cmt_pattern2 = "^[0-9]{12}";
         if (cmt.matches(cmt_pattern1) == false && cmt.matches(cmt_pattern2) == false) {
             return false;
         } else {
@@ -60,5 +60,6 @@ public class Utils {
     public static void main(String[] args) {
         Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
         System.out.println(generateCarTravelId("17M2-1234", dateNow));
+        System.out.println(isCmt("034097001988"));
     }
 }

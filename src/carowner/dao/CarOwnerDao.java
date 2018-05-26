@@ -18,4 +18,6 @@ public interface CarOwnerDao {
     List<CarOwner> getAllListCarOwner();
     
     List<CarOwner> searchCarOwner();
+    
+    List<CarOwner> getAllInforCarOwner();
 }
