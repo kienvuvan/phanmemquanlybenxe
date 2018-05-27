@@ -8,6 +8,7 @@ package information.model;
 import information.dao.InformationDao;
 import information.dao.MysqlInformationDao;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class Information {
     private int id;
-    private Date ngayDang;
+    private Timestamp ngayDang;
     private String tieuDe;
     private String noiDung;
     private String cmtAdmin;
@@ -24,7 +25,7 @@ public class Information {
     public Information() {
     }
 
-    public Information(int id, Date ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
+    public Information(int id, Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
         this.id = id;
         this.ngayDang = ngayDang;
         this.tieuDe = tieuDe;
@@ -40,11 +41,11 @@ public class Information {
         this.id = id;
     }
 
-    public Date getNgayDang() {
+    public Timestamp getNgayDang() {
         return ngayDang;
     }
 
-    public void setNgayDang(Date ngayDang) {
+    public void setNgayDang(Timestamp ngayDang) {
         this.ngayDang = ngayDang;
     }
 

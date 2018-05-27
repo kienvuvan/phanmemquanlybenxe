@@ -133,4 +133,16 @@ public class CarOwner {
     public List<CarOwner> getAllInforCarOwner() {
         return carOwnerDao().getAllInforCarOwner();
     }
+    
+    public List<String> getAllIdCarOwner() {
+        return carOwnerDao().getAllIdCarOwner();
+    }
+    
+    public String getNameByIdCarOwner(String id) {
+        return carOwnerDao().getNameByIdCarOwner(id);
+    }
+    
+    public List<Car> getAllCarByIdCarOwner(String id) {
+        return carOwnerDao().getAllCarByIdCarOwner(id);
+    }
 }

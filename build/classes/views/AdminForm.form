@@ -71,7 +71,7 @@
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -247,13 +247,15 @@
                               <Component id="jButton2" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel5" linkSize="1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="jTextField_email" linkSize="1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="jLabel6" linkSize="1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="jRadioButton_nam" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton_nu" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jButton5" alignment="1" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel5" linkSize="1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="jTextField_email" linkSize="1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" linkSize="1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="jRadioButton_nam" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButton_nu" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -505,8 +507,8 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField_bsx" linkSize="6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField_email1" linkSize="6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jComboBox1" linkSize="6" max="32767" attributes="0"/>
+                                  <Component id="jTextField_chuXe" linkSize="6" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jComboBox_cmtChuXe" linkSize="6" max="32767" attributes="0"/>
                                   <Component id="jSpinner1" linkSize="6" pref="120" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
@@ -568,7 +570,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jComboBox1" linkSize="5" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBox_cmtChuXe" linkSize="5" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel11" linkSize="5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="jLabel12" linkSize="5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
@@ -581,7 +583,7 @@
                                   <Component id="jLabel20" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel13" linkSize="5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Component id="jTextField_email1" linkSize="5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="jTextField_chuXe" linkSize="5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="jLabel14" linkSize="5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="jComboBox3" linkSize="5" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel17" linkSize="5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -636,7 +638,10 @@
                         <Property name="text" type="java.lang.String" value="Ch&#x1ee7; xe :"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField_email1">
+                    <Component class="javax.swing.JTextField" name="jTextField_chuXe">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel14">
                       <Properties>
@@ -661,19 +666,30 @@
                         <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                    <Component class="javax.swing.JComboBox" name="jComboBox_cmtChuXe">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_cmtChuXeActionPerformed"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JSpinner" name="jSpinner1">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(spinnerModel)"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SpinnerModel spinnerModel =new SpinnerNumberModel(50,0,200,5);"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JSpinner" name="jSpinner2">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(spinnerModel1)"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SpinnerModel spinnerModel1 =new SpinnerNumberModel(50000,0,3000000,10000);"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="jComboBox2">
                       <Properties>
@@ -975,7 +991,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable2">
+                    <Component class="javax.swing.JTable" name="jTable_managerCar">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="6" rowCount="0">

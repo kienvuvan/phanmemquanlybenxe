@@ -5,7 +5,7 @@
  */
 package information.view;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 /**
@@ -17,11 +17,11 @@ public class InforPanel extends javax.swing.JPanel {
     /**
      * Creates new form Information
      */
-    public InforPanel(String stt, String tieuDe, Date ngayDang, String nguoiDang, String noiDung) {
+    public InforPanel(String stt, String tieuDe, Timestamp ngayDang, String nguoiDang, String noiDung) {
         initComponents();
         jLabel_stt.setText(stt);
         jLabel_tieuDe.setText(tieuDe);
-        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat simple = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         jLabel_ngayDang.setText(tieuDe);
         if(ngayDang == null){
             jLabel_ngayDang.setText("");
@@ -57,6 +57,7 @@ public class InforPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Người đăng :");
 
+        jTextArea_noiDung.setEditable(false);
         jTextArea_noiDung.setColumns(20);
         jTextArea_noiDung.setRows(5);
         jScrollPane1.setViewportView(jTextArea_noiDung);

@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +24,7 @@ import mysql.Mysql;
  */
 public class MysqlInformationDao implements InformationDao{
     
-    private static final String GET_ALL_INFOR = "SELECT * FROM thongbao";
+    private static final String GET_ALL_INFOR = "SELECT * FROM thongbao ORDER BY Ngay DESC";
 
     @Override
     public List<Information> getAllInfor() {
@@ -34,7 +35,7 @@ public class MysqlInformationDao implements InformationDao{
             ResultSet rs = stm.executeQuery(GET_ALL_INFOR);
             while(rs.next()){
                 int id = rs.getInt("id");
-                Date ngayDang = rs.getDate("Ngay");
+                Timestamp ngayDang = rs.getTimestamp("Ngay");
                 String tieuDe = rs.getString("TieuDe");
                 String noiDung = rs.getString("NoiDung");
                 String cmt = rs.getString("CmtNhanVien");
