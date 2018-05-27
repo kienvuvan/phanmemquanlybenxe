@@ -5,6 +5,9 @@
  */
 package views;
 
+import car.controller.CarController;
+import car.dao.MysqlCarDao;
+import car.model.Car;
 import carowner.controller.CarOwnerController;
 import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
@@ -22,6 +25,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 public class AdminForm extends javax.swing.JFrame {
 
     private CarOwnerController coc;
+    private CarController carController;
 
     /**
      * Creates new form AdminForm
@@ -29,6 +33,7 @@ public class AdminForm extends javax.swing.JFrame {
     public AdminForm() {
         initComponents();
         coc = new CarOwnerController();
+        carController = new CarController();
         setVisiableManagerCarOwner();
         coc.displayInforCarOwner(jTable_inforCarOwner);
         coc.displayIdCarOwnerToComboBox(jComboBox_cmtChuXe);
@@ -173,9 +178,9 @@ public class AdminForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_cmt)
-                    .addComponent(jTextField_nhaXe, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jTextField_email, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jXDatePicker_ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextField_nhaXe)
+                    .addComponent(jTextField_email)
+                    .addComponent(jXDatePicker_ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addGap(99, 99, 99)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,7 +200,7 @@ public class AdminForm extends javax.swing.JFrame {
                                 .addComponent(jRadioButton_nam)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jRadioButton_nu)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -270,7 +275,7 @@ public class AdminForm extends javax.swing.JFrame {
             .addGroup(jPanel_managerCarOwnerLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -308,7 +313,7 @@ public class AdminForm extends javax.swing.JFrame {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái", "Phú Yên", "Cần Thơ", "Đà Nẵng", "Hải Phòng", "Hà Nội", "TP HCM" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         jComboBox3.setSelectedIndex(7);
 
         jLabel17.setText("h");
@@ -317,7 +322,7 @@ public class AdminForm extends javax.swing.JFrame {
 
         jLabel18.setText("Giờ đi :");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         jComboBox5.setSelectedIndex(9);
 
         jLabel19.setText("h");
@@ -373,7 +378,7 @@ public class AdminForm extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -460,20 +465,20 @@ public class AdminForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_managerCarLayout = new javax.swing.GroupLayout(jPanel_managerCar);
         jPanel_managerCar.setLayout(jPanel_managerCarLayout);
         jPanel_managerCarLayout.setHorizontalGroup(
             jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 794, Short.MAX_VALUE)
+            .addGap(0, 814, Short.MAX_VALUE)
             .addGroup(jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_managerCarLayout.setVerticalGroup(
             jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 477, Short.MAX_VALUE)
             .addGroup(jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -482,11 +487,11 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_parkCar.setLayout(jPanel_parkCarLayout);
         jPanel_parkCarLayout.setHorizontalGroup(
             jPanel_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 794, Short.MAX_VALUE)
+            .addGap(0, 814, Short.MAX_VALUE)
         );
         jPanel_parkCarLayout.setVerticalGroup(
             jPanel_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 477, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel_managerCarOwner, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -497,37 +502,20 @@ public class AdminForm extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_managerCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel_managerCar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_parkCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel_parkCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel_managerCar, jPanel_managerCarOwner, jPanel_parkCar});
-
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_managerCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel_managerCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_parkCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel_parkCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel_managerCar, jPanel_managerCarOwner, jPanel_parkCar});
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/applications_system.png"))); // NOI18N
         jMenu1.setText("Hệ thống");
@@ -630,6 +618,42 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        String bsx = jTextField_bsx.getText();
+        String cmt = jComboBox_cmtChuXe.getSelectedItem().toString();
+        int soGhe = Integer.valueOf(jSpinner1.getValue().toString());
+        double giaVe = Double.valueOf(jSpinner2.getValue().toString());
+        String loTrinh = jComboBox2.getSelectedItem().toString() + " - Hà Nội";
+        String lichTrinh = jComboBox3.getSelectedItem().toString() + "h" + jComboBox4.getSelectedItem().toString() + "-"
+                + jComboBox5.getSelectedItem().toString() + "h" + jComboBox6.getSelectedItem().toString();
+        Car car = new Car(0, bsx, cmt, soGhe, giaVe, loTrinh, lichTrinh);
+        int result = carController.addCar(car);
+        switch (result) {
+            case MysqlCarDao.RESULT_EMPTY:
+                JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng nhập đầy đủ thông tin");
+                break;
+            case MysqlCarDao.RESULT_ERROR_BSX:
+                JOptionPane.showMessageDialog(this, "Định dạng biển số xe không đúng.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_ERROR_CMT:
+                JOptionPane.showMessageDialog(this, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_ERROR_SOGHE:
+                JOptionPane.showMessageDialog(this, "Số ghế nhập không đúng.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_ERROR_GIAVE:
+                JOptionPane.showMessageDialog(this, "Giá vé nhập không đúng.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_ERROR_TIME:
+                JOptionPane.showMessageDialog(this, "Thời gian đến nhập nhỏ hơn thời gian xuất phát.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_SUCCESS:
+                JOptionPane.showMessageDialog(this, "Thêm xe thành công");
+                displayInforCarByIdCarOwner();
+                break;
+            case MysqlCarDao.RESULT_ERROR_SQL:
+                JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                break;
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -653,16 +677,7 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jComboBox_cmtChuXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cmtChuXeActionPerformed
         // TODO add your handling code here:
-        if(jComboBox_cmtChuXe.getSelectedItem() == null){
-            jTextField_chuXe.setText("");
-            DefaultTableModel dtm = (DefaultTableModel) jTable_managerCar.getModel();
-            dtm.setRowCount(0);
-            jTable_managerCar.setModel(dtm);
-        }else{
-            String idCarOwner = jComboBox_cmtChuXe.getSelectedItem().toString();
-            jTextField_chuXe.setText(coc.getNameByIdCarOwner(idCarOwner));
-            coc.displayListCarToJTable(jTable_managerCar, idCarOwner);
-        }
+        displayInforCarByIdCarOwner();
     }//GEN-LAST:event_jComboBox_cmtChuXeActionPerformed
 
     /**
@@ -788,5 +803,18 @@ public class AdminForm extends javax.swing.JFrame {
         jRadioButton_nam.setSelected(true);
         jXDatePicker_ngaySinh.setDate(null);
         jTextField_diaChi.setText("");
+    }
+
+    private void displayInforCarByIdCarOwner() {
+        if (jComboBox_cmtChuXe.getSelectedItem() == null) {
+            jTextField_chuXe.setText("");
+            DefaultTableModel dtm = (DefaultTableModel) jTable_managerCar.getModel();
+            dtm.setRowCount(0);
+            jTable_managerCar.setModel(dtm);
+        } else {
+            String idCarOwner = jComboBox_cmtChuXe.getSelectedItem().toString();
+            jTextField_chuXe.setText(coc.getNameByIdCarOwner(idCarOwner));
+            coc.displayListCarToJTable(jTable_managerCar, idCarOwner);
+        }
     }
 }

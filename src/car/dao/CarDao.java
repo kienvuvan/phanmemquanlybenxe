@@ -14,4 +14,8 @@ import java.util.List;
  */
 public interface CarDao {
     List<Car> searchCarForBookTicket(String keySearch);
+    
+    int addCar(Car car);
+    
+    int getIdMax();
 }

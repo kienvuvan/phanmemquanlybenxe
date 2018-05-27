@@ -98,4 +98,8 @@ public class Car {
     public List<Car> searchCarForBookTicket(String keySearch) {
         return carDao().searchCarForBookTicket(keySearch);
     }
+    
+    public int addCar(Car car) {
+        return carDao().addCar(car);
+    }
 }

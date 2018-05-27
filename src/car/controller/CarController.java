@@ -35,4 +35,8 @@ public class CarController {
         }
         jtb.setModel(dtm);
     }
+    
+    public int addCar(Car carAdd) {
+        return car.addCar(carAdd);
+    }
 }
