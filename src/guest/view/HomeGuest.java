@@ -378,6 +378,7 @@ public class HomeGuest extends javax.swing.JFrame {
         jLabel18.setText("Email :");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Trang thông tin đăng ký vé xe online bến xe Hà Nội");
 
         jPanel4.setLayout(new java.awt.GridLayout(2, 3));
 

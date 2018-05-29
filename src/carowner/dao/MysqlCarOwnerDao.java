@@ -37,8 +37,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String COLUMN_NGAYSINH_CAROWNER = "NgaySinh";
     private static final String COLUMN_DIACHI_CAROWNER = "DiaChi";
 
-    private static final String ADD_CAROWNER = "INSERT INTO chuxe VALUES (?,?,?,?,?,?,?,?)";
-    private static final String ADD_ACCOUNT_CAROWNER = "INSERT INTO taikhoan VALUES (?,?)";
+    private static final String ADD_CAROWNER = "INSERT INTO chuxe VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String GET_ALL_CAROWNER = "SELECT * FROM chuxe";
     private static final String GET_ALL_CAR_BY_CAROWNER = "SELECT * FROM xe WHERE CmtNhaXe =?";
     private static final String GET_NAME_BY_ID_CAROWNER = "SELECT HoTen FROM chuxe WHERE Cmt =?";
@@ -75,12 +74,9 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 pstmt.setString(6, carOwner.getGioitinh());
                 pstmt.setDate(7, carOwner.getNgaySinh());
                 pstmt.setString(8, carOwner.getDiaChi());
-                PreparedStatement pstmt1 = connection.prepareStatement(ADD_ACCOUNT_CAROWNER);
-                pstmt1.setString(1, carOwner.getCmt());
-                pstmt1.setString(2, HashPassword.hashPass("1"));
+                pstmt.setString(9, HashPassword.hashPass("1"));
                 int check = pstmt.executeUpdate();
-                int check1 = pstmt1.executeUpdate();
-                if (check > 0 && check1 > 0) {
+                if (check > 0) {
                     return RESULT_SUCCESS;
                 }
             } catch (SQLException ex) {

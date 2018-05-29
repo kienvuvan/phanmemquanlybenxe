@@ -23,15 +23,16 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author kienanh2903
  */
 public class AdminForm extends javax.swing.JFrame {
-
+    private String idAdmin;
     private CarOwnerController coc;
     private CarController carController;
 
     /**
      * Creates new form AdminForm
      */
-    public AdminForm() {
+    public AdminForm(String idAdmin) {
         initComponents();
+        this.idAdmin = idAdmin;
         coc = new CarOwnerController();
         carController = new CarController();
         setVisiableManagerCarOwner();
@@ -105,7 +106,10 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_managerCar = new javax.swing.JTable();
-        jPanel_parkCar = new javax.swing.JPanel();
+        jPanel_managerParkCar = new javax.swing.JPanel();
+        jPanel_managerInformation = new javax.swing.JPanel();
+        jPanel_sortCar = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -114,7 +118,9 @@ public class AdminForm extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -483,39 +489,103 @@ public class AdminForm extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel_parkCarLayout = new javax.swing.GroupLayout(jPanel_parkCar);
-        jPanel_parkCar.setLayout(jPanel_parkCarLayout);
-        jPanel_parkCarLayout.setHorizontalGroup(
-            jPanel_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_managerParkCarLayout = new javax.swing.GroupLayout(jPanel_managerParkCar);
+        jPanel_managerParkCar.setLayout(jPanel_managerParkCarLayout);
+        jPanel_managerParkCarLayout.setHorizontalGroup(
+            jPanel_managerParkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 814, Short.MAX_VALUE)
         );
-        jPanel_parkCarLayout.setVerticalGroup(
-            jPanel_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel_managerParkCarLayout.setVerticalGroup(
+            jPanel_managerParkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 477, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel_managerInformationLayout = new javax.swing.GroupLayout(jPanel_managerInformation);
+        jPanel_managerInformation.setLayout(jPanel_managerInformationLayout);
+        jPanel_managerInformationLayout.setHorizontalGroup(
+            jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 814, Short.MAX_VALUE)
+        );
+        jPanel_managerInformationLayout.setVerticalGroup(
+            jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 477, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 802, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 208, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel_sortCarLayout = new javax.swing.GroupLayout(jPanel_sortCar);
+        jPanel_sortCar.setLayout(jPanel_sortCarLayout);
+        jPanel_sortCarLayout.setHorizontalGroup(
+            jPanel_sortCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_sortCarLayout.setVerticalGroup(
+            jPanel_sortCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_sortCarLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 243, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(jPanel_managerCarOwner, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel_managerCar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jPanel_parkCar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanel_managerParkCar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanel_managerInformation, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanel_sortCar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel_managerCar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_parkCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel_managerParkCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel_managerInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel_sortCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel_managerCarOwner, jPanel_managerInformation, jPanel_sortCar});
+
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_managerCarOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel_managerCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_parkCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel_managerParkCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel_managerInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel_sortCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel_managerCarOwner, jPanel_managerInformation, jPanel_sortCar});
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/applications_system.png"))); // NOI18N
         jMenu1.setText("Hệ thống");
@@ -550,8 +620,24 @@ public class AdminForm extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem8.setText("Đăng thông báo");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
         jMenuItem6.setText("Quản lý bãi xe");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("Sắp xếp xe");
+        jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
 
@@ -680,40 +766,20 @@ public class AdminForm extends javax.swing.JFrame {
         displayInforCarByIdCarOwner();
     }//GEN-LAST:event_jComboBox_cmtChuXeActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        setVisiableManagerInformation();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        setVisiableManagerParkCar();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminForm().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -758,12 +824,17 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel_managerCar;
     private javax.swing.JPanel jPanel_managerCarOwner;
-    private javax.swing.JPanel jPanel_parkCar;
+    private javax.swing.JPanel jPanel_managerInformation;
+    private javax.swing.JPanel jPanel_managerParkCar;
+    private javax.swing.JPanel jPanel_sortCar;
     private javax.swing.JRadioButton jRadioButton_nam;
     private javax.swing.JRadioButton jRadioButton_nu;
     private javax.swing.JScrollPane jScrollPane1;
@@ -786,12 +857,18 @@ public class AdminForm extends javax.swing.JFrame {
     private void setVisiableManagerCarOwner() {
         jPanel_managerCarOwner.setVisible(true);
         jPanel_managerCar.setVisible(false);
+        jPanel_managerParkCar.setVisible(false);
+        jPanel_managerInformation.setVisible(false);
+        jPanel_sortCar.setVisible(false);
     }
 
     private void setVisiableManagerCar() {
         jPanel_managerCarOwner.setVisible(false);
         jPanel_managerCar.setVisible(true);
         AutoCompleteDecorator.decorate(jComboBox2);
+        jPanel_managerParkCar.setVisible(false);
+        jPanel_managerInformation.setVisible(false);
+        jPanel_sortCar.setVisible(false);
     }
 
     private void deleteWords() {
@@ -816,5 +893,29 @@ public class AdminForm extends javax.swing.JFrame {
             jTextField_chuXe.setText(coc.getNameByIdCarOwner(idCarOwner));
             coc.displayListCarToJTable(jTable_managerCar, idCarOwner);
         }
+    }
+
+    private void setVisiableManagerInformation() {
+        jPanel_managerCarOwner.setVisible(false);
+        jPanel_managerCar.setVisible(false);
+        jPanel_managerParkCar.setVisible(false);
+        jPanel_managerInformation.setVisible(true);
+        jPanel_sortCar.setVisible(false);
+    }
+
+    private void setVisiableManagerParkCar() {
+        jPanel_managerCarOwner.setVisible(false);
+        jPanel_managerCar.setVisible(false);
+        jPanel_managerParkCar.setVisible(true);
+        jPanel_managerInformation.setVisible(false);
+        jPanel_sortCar.setVisible(false);
+    }
+    
+    private void setVisiableSortCar(){
+        jPanel_managerCarOwner.setVisible(false);
+        jPanel_managerCar.setVisible(false);
+        jPanel_managerParkCar.setVisible(false);
+        jPanel_managerInformation.setVisible(false);
+        jPanel_sortCar.setVisible(true);
     }
 }

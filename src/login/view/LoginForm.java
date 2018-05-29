@@ -164,7 +164,7 @@ public class LoginForm extends javax.swing.JFrame {
                 case MysqlAdminDao.RESULT_LOGIN_SUCCESS:
                     JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
                     this.dispose();
-                    AdminForm adminForm = new AdminForm();
+                    AdminForm adminForm = new AdminForm(userNameField.getText());
                     adminForm.setVisible(true);
                     break;
                 case MysqlAdminDao.RESULT_ACCOUNT_INCORECT:
@@ -174,6 +174,8 @@ public class LoginForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                     break;
             }
+        }else{
+            
         }
     }//GEN-LAST:event_doLogin
 
