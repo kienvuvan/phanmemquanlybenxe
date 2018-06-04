@@ -145,4 +145,12 @@ public class CarOwner {
     public List<Car> getAllCarByIdCarOwner(String id) {
         return carOwnerDao().getAllCarByIdCarOwner(id);
     }
+    
+    public int loginCarOwner(String user, String pass) {
+        return carOwnerDao().loginCarOwner(user, pass);
+    }
+    
+    public CarOwner getInforCarOwner (String cmt){
+        return carOwnerDao().getInforCarOwner(cmt);
+    }
 }

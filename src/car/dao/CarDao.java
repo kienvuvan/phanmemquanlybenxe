@@ -18,4 +18,6 @@ public interface CarDao {
     int addCar(Car car);
     
     int getIdMax();
+
+    public List<Car> getAllCarForOwner(String cmt);
 }

@@ -5,6 +5,9 @@
  */
 package carowner.dao;
 
+import admin.dao.MysqlAdminDao;
+import static admin.dao.MysqlAdminDao.RESULT_ACCOUNT_INCORECT;
+import static admin.dao.MysqlAdminDao.RESULT_LOGIN_SUCCESS;
 import car.model.Car;
 import mysql.Mysql;
 import carowner.model.CarOwner;
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import utils.HashPassword;
 import utils.Utils;
 
@@ -26,6 +30,7 @@ import utils.Utils;
  *
  * @author kienanh2903
  */
+
 public class MysqlCarOwnerDao implements CarOwnerDao {
 
     private static final String COLUMN_CMT_CAROWNER = "Chuxe.Cmt";
@@ -42,7 +47,10 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String GET_ALL_CAR_BY_CAROWNER = "SELECT * FROM xe WHERE CmtNhaXe =?";
     private static final String GET_NAME_BY_ID_CAROWNER = "SELECT HoTen FROM chuxe WHERE Cmt =?";
     private static final String GET_ALL_CAR_BY_ID_CAROWNER = "SELECT * FROM xe,chuxe WHERE xe.CmtNhaXe = chuxe.Cmt And CmtNhaXe = ?";
-
+    private static final String EDIT_CAR_OWNER = "UPDATE chuxe SET HoTen = ?, NhaXe = ?, Sdt = ?, Email = ?, GioiTinh = ?, NgaySinh = ?, DiaChi = ? WHERE Cmt = ?";
+    private static final String GET_CAR_OWNER = "SELECT * FROM chuxe WHERE Cmt = ?";
+    private static final String CHECK_ACCOUNT_CAROWNER = "SELECT Cmt, MatKhau FROM chuxe WHERE Cmt = ? AND MatKhau =?";
+    
     public static final int RESULT_EMPTY = 0;
     public static final int RESULT_ERROR_CMT = 1;
     public static final int RESULT_ERROR_SDT = 2;
@@ -207,4 +215,70 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
         return listCars;
     }
 
+    public void editCarOwner (CarOwner carOwner){
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(EDIT_CAR_OWNER);
+            pstm.setString(1, carOwner.getTen());
+            pstm.setString(2, carOwner.getNhaXe());
+            pstm.setString(3, carOwner.getSdt());
+            pstm.setString(4, carOwner.getEmail());
+            pstm.setString(5, carOwner.getGioitinh());
+            pstm.setDate(6, carOwner.getNgaySinh());
+            pstm.setString(7, carOwner.getDiaChi());
+            pstm.setString(8, carOwner.getCmt());
+            pstm.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Lỗi dữ liệu nhập vào.");
+        }
+    }
+
+    @Override
+    public CarOwner getInforCarOwner (String cmt){
+        CarOwner carOwner = new CarOwner();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(GET_CAR_OWNER);
+            pstm.setString(1, cmt);
+            ResultSet rs1 = pstm.executeQuery();
+            while(rs1.next()){
+                    String HoTen = rs1.getString("HoTen");
+                    String NhaXe = rs1.getString("NhaXe");
+                    String Sdt = rs1.getString("Sdt");
+                    String Email = rs1.getString("Email");
+                    String GioiTinh = rs1.getString("GioiTinh");
+                    Date NgaySinh = rs1.getDate("NgaySinh");
+                    String DiaChi = rs1.getString("DiaChi");
+                    carOwner = new CarOwner(cmt, HoTen, NhaXe,Sdt, Email, GioiTinh, NgaySinh, DiaChi );
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return carOwner;
+    }
+
+    @Override
+    public int loginCarOwner(String user, String pass) {
+        if (StringUtils.isNullOrEmpty(user) || StringUtils.isNullOrEmpty(pass)) {
+            return RESULT_EMPTY;
+        } else {
+            try {
+                Connection connection = Mysql.getInstance().getConnection();
+                PreparedStatement pstmt = connection.prepareStatement(CHECK_ACCOUNT_CAROWNER);
+                pstmt.setString(1, user);
+                pstmt.setString(2, HashPassword.hashPass(pass));
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return RESULT_LOGIN_SUCCESS;
+                }else{
+                    return RESULT_ACCOUNT_INCORECT;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MysqlAdminDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return RESULT_ERROR_SQL;
+    }
+
+    
 }

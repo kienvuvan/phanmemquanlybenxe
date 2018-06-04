@@ -21,7 +21,7 @@ import utils.HashPassword;
  */
 public class MysqlAdminDao implements AdminDao {
 
-    private static final String CHECK_ACCOUNT_ADMIN = "SELECT TaiKhoan, MatKhau FROM admin WHERE TaiKhoan = ? AND MatKhau =?";
+    private static final String CHECK_ACCOUNT_ADMIN = "SELECT Cmt, MatKhau FROM admin WHERE Cmt = ? AND MatKhau =?";
 
     public static final int RESULT_EMPTY = 0;
     public static final int RESULT_LOGIN_SUCCESS = 1;

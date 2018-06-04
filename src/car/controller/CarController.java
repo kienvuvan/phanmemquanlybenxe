@@ -39,4 +39,8 @@ public class CarController {
     public int addCar(Car carAdd) {
         return car.addCar(carAdd);
     }
+    
+    public List<Car> getAllCarForOwner(String cmt) {
+        return car.getAllCarForOwner(cmt);
+    }
 }

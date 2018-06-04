@@ -103,4 +103,13 @@ public class CarOwnerController {
         }
         jtb.setModel(dtm);
     }
+    
+    public int loginCarOwner(String user, String pass) {
+        return carOwner.loginCarOwner(user, pass);
+    }
+    
+    public CarOwner getInforCarOwner (String cmt){
+        return carOwner.getInforCarOwner(cmt);
+    }
+    
 }

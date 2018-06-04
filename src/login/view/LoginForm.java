@@ -7,6 +7,8 @@ package login.view;
 
 import admin.controller.AdminController;
 import admin.dao.MysqlAdminDao;
+import carowner.controller.CarOwnerController;
+import carowner.view.CarOwnerForm;
 import javax.swing.JOptionPane;
 import views.AdminForm;
 
@@ -17,12 +19,15 @@ import views.AdminForm;
 public class LoginForm extends javax.swing.JFrame {
 
     private AdminController ac;
+    private CarOwnerController coc;
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
         initComponents();
         ac = new AdminController();
+        coc = new CarOwnerController();
     }
 
     /**
@@ -89,9 +94,6 @@ public class LoginForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(286, 286, 286)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -112,6 +114,7 @@ public class LoginForm extends javax.swing.JFrame {
                                     .addComponent(jRadioButton_carOwner))
                                 .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,15 +149,10 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void doLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doLogin
         // TODO add your handling code here:
-        if(jRadioButton_admin.isSelected()){
-            char[] password = passField.getPassword();
-            String pass ="";
-            for(int i =0 ;i< password.length; i++){
-                pass +=password[i];
-            }
+        if (jRadioButton_admin.isSelected()) {
+            String pass = new String(passField.getPassword());
             int result = ac.loginAdmin(userNameField.getText(), pass);
-            System.out.println(pass);
-            switch(result){
+            switch (result) {
                 case MysqlAdminDao.RESULT_EMPTY:
                     JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng nhập lại");
                     break;
@@ -171,14 +169,31 @@ public class LoginForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                     break;
             }
-        }else{
-            
+        } else {
+            String pass = new String(passField.getPassword());
+            int result = coc.loginCarOwner(userNameField.getText(), pass);
+            switch (result) {
+                case MysqlAdminDao.RESULT_EMPTY:
+                    JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng nhập lại");
+                    break;
+                case MysqlAdminDao.RESULT_LOGIN_SUCCESS:
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                    this.dispose();
+                    new CarOwnerForm(userNameField.getText()).setVisible(true);
+                    break;
+                case MysqlAdminDao.RESULT_ACCOUNT_INCORECT:
+                    JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
+                    break;
+                case MysqlAdminDao.RESULT_ERROR_SQL:
+                    JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                    break;
+            }
         }
     }//GEN-LAST:event_doLogin
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jLabel1MouseClicked
 
 

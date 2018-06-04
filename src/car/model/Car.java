@@ -14,6 +14,22 @@ import java.util.List;
  * @author kienanh2903
  */
 public class Car {
+
+    public String getViTri() {
+        return viTri;
+    }
+
+    public void setViTri(String viTri) {
+        this.viTri = viTri;
+    }
+
+    public String getThoiGianDo() {
+        return thoiGianDo;
+    }
+
+    public void setThoiGianDo(String thoiGianDo) {
+        this.thoiGianDo = thoiGianDo;
+    }
     private int id; 
     private String bsx;
     private String cmtNhaXe;
@@ -21,6 +37,8 @@ public class Car {
     private Double giaVe;
     private String loTrinh;
     private String lichTrinh;
+    private String viTri;
+    private String thoiGianDo;
 
     public Car(int id, String bsx, String cmtNhaXe, int soGhe, Double giaVe, String loTrinh, String lichTrinh) {
         this.id = id;
@@ -32,6 +50,20 @@ public class Car {
         this.lichTrinh = lichTrinh;
     }
 
+    public Car(int id, String bsx, String cmtNhaXe, int soGhe, Double giaVe, String loTrinh, String lichTrinh, String viTri, String thoiGianDo) {
+        this.id = id;
+        this.bsx = bsx;
+        this.cmtNhaXe = cmtNhaXe;
+        this.soGhe = soGhe;
+        this.giaVe = giaVe;
+        this.loTrinh = loTrinh;
+        this.lichTrinh = lichTrinh;
+        this.viTri = viTri;
+        this.thoiGianDo = thoiGianDo;
+    }
+
+    
+    
     public Car() {
     }
 
@@ -101,5 +133,9 @@ public class Car {
     
     public int addCar(Car car) {
         return carDao().addCar(car);
+    }
+    
+    public List<Car> getAllCarForOwner(String cmt) {
+        return carDao().getAllCarForOwner(cmt);
     }
 }

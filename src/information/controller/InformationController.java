@@ -8,6 +8,7 @@ package information.controller;
 import information.model.Information;
 import information.view.InforPanel;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -27,11 +28,16 @@ public class InformationController {
     }
 
     public void displayInformation(JPanel jPanel, JPanel jPanel1, List<Information> list, int stt) {
-        if (list.size() < stt*4) {
-            for (int i = stt*4-4; i < stt*4; i++) {
+        if (list.isEmpty()) {
+            JLabel jLabel = new JLabel("Hiện tại hệ thống không có tin tức cập nhật!!!");
+            jLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+            jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jPanel.add(jLabel);
+        } else if (list.size() < stt * 4) {
+            for (int i = stt * 4 - 4; i < stt * 4; i++) {
                 if (i < list.size()) {
                     Information infor = list.get(i);
-                    InforPanel inforPanel = new InforPanel(infor.getId()+"", infor.getTieuDe(), infor.getNgayDang(), infor.getCmtAdmin(), infor.getNoiDung());
+                    InforPanel inforPanel = new InforPanel(infor.getId() + "", infor.getTieuDe(), infor.getNgayDang(), infor.getCmtAdmin(), infor.getNoiDung());
                     jPanel.add(inforPanel);
                 } else {
                     InforPanel inforPanel = new InforPanel("", "", null, "", "");
@@ -39,9 +45,9 @@ public class InformationController {
                 }
             }
         } else {
-            for (int j = stt*4-4; j < stt*4; j++) {
+            for (int j = stt * 4 - 4; j < stt * 4; j++) {
                 Information infor = list.get(j);
-                InforPanel inforPanel = new InforPanel(infor.getId()+"", infor.getTieuDe(), infor.getNgayDang(), infor.getCmtAdmin(), infor.getNoiDung());
+                InforPanel inforPanel = new InforPanel(infor.getId() + "", infor.getTieuDe(), infor.getNgayDang(), infor.getCmtAdmin(), infor.getNoiDung());
                 jPanel.add(inforPanel);
             }
         }

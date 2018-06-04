@@ -12,6 +12,10 @@ import carowner.controller.CarOwnerController;
 import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -265,6 +269,11 @@ public class AdminForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable_inforCarOwner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_inforCarOwnerMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable_inforCarOwner);
@@ -776,6 +785,28 @@ public class AdminForm extends javax.swing.JFrame {
         setVisiableManagerParkCar();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jTable_inforCarOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_inforCarOwnerMouseClicked
+        // TODO add your handling code here:
+        int index = jTable_inforCarOwner.getSelectedRow();
+        jTextField_cmt.setText(jTable_inforCarOwner.getValueAt(index, 0).toString());
+        jTextField_cmt.setEditable(false);
+        jTextField_ten.setText(jTable_inforCarOwner.getValueAt(index, 1).toString());
+        jTextField_nhaXe.setText(jTable_inforCarOwner.getValueAt(index, 3).toString());
+        jTextField_sdt.setText(jTable_inforCarOwner.getValueAt(index, 4).toString());
+        jTextField_email.setText(jTable_inforCarOwner.getValueAt(index, 5).toString());
+        if(jTable_inforCarOwner.getValueAt(index, 2).toString().equalsIgnoreCase("Nam")){
+            jRadioButton_nam.setSelected(true);
+        } jRadioButton_nu.setSelected(true);
+        String ngaySinh = jTable_inforCarOwner.getValueAt(index, 6).toString();
+        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");   
+        try {
+            jXDatePicker_ngaySinh.setDate(simple.parse(ngaySinh));
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextField_diaChi.setText(jTable_inforCarOwner.getValueAt(index, 7).toString());
+    }//GEN-LAST:event_jTable_inforCarOwnerMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -872,6 +903,7 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     private void deleteWords() {
+        jTextField_cmt.setEditable(true);
         jTextField_cmt.setText("");
         jTextField_ten.setText("");
         jTextField_nhaXe.setText("");

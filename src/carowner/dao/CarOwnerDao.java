@@ -28,4 +28,8 @@ public interface CarOwnerDao {
     String getNameByIdCarOwner(String id);
     
     List<Car> getAllCarByIdCarOwner(String id);
+    
+    int loginCarOwner(String user, String pass);
+    
+    public CarOwner getInforCarOwner (String cmt);
 }
