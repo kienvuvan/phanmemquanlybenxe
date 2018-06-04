@@ -5,12 +5,15 @@
  */
 package views;
 
+import admin.controller.AdminController;
 import car.controller.CarController;
 import car.dao.MysqlCarDao;
 import car.model.Car;
 import carowner.controller.CarOwnerController;
 import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
+import carowner.view.InforAccount;
+import guest.view.HomeGuestForm;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,9 +30,11 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author kienanh2903
  */
 public class AdminForm extends javax.swing.JFrame {
+    
     private String idAdmin;
     private CarOwnerController coc;
     private CarController carController;
+    private AdminController adminController;
 
     /**
      * Creates new form AdminForm
@@ -39,6 +44,7 @@ public class AdminForm extends javax.swing.JFrame {
         this.idAdmin = idAdmin;
         coc = new CarOwnerController();
         carController = new CarController();
+        adminController = new AdminController();
         setVisiableManagerCarOwner();
         coc.displayInforCarOwner(jTable_inforCarOwner);
         coc.displayIdCarOwnerToComboBox(jComboBox_cmtChuXe);
@@ -600,12 +606,27 @@ public class AdminForm extends javax.swing.JFrame {
         jMenu1.setText("Hệ thống");
 
         jMenuItem1.setText("Thông tin tài khoản");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Đăng xuất");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Thoát");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -763,6 +784,48 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String cmt = jTextField_cmt.getText();
+        String ten = jTextField_ten.getText();
+        String nhaXe = jTextField_nhaXe.getText();
+        String sdt = jTextField_sdt.getText();
+        String email = jTextField_email.getText();
+        String gioiTinh = "";
+        if (jRadioButton_nam.isSelected()) {
+            gioiTinh = "Nam";
+        } else {
+            gioiTinh = "Nữ";
+        }
+        if (jXDatePicker_ngaySinh.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống.Vui lòng điền đầy đủ thông tin");
+        } else {
+            Date ngaySinh = new Date(jXDatePicker_ngaySinh.getDate().getTime());
+            String diaChi = jTextField_diaChi.getText();
+            CarOwner carOwnerUpdate = new CarOwner(cmt, ten, nhaXe, sdt, email, gioiTinh, ngaySinh, diaChi);
+            int result = coc.updateInforCarOwner(carOwnerUpdate);
+            switch (result) {
+                case MysqlCarOwnerDao.RESULT_EMPTY:
+                    JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng nhập đầy đủ thông tin");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_CMT:
+                    JOptionPane.showMessageDialog(this, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại!");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_SDT:
+                    JOptionPane.showMessageDialog(this, "Định dạng số điện thoại không đúng.Vui lòng nhập lại!");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_EMAIL:
+                    JOptionPane.showMessageDialog(this, "Định dạng email không đúng.Vui lòng nhập lại!");
+                    break;
+                case MysqlCarOwnerDao.RESULT_SUCCESS:
+                    JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công");
+                    DefaultTableModel model = (DefaultTableModel) jTable_inforCarOwner.getModel();
+                    model.setRowCount(0);
+                    coc.displayInforCarOwner(jTable_inforCarOwner);
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_SQL:
+                    JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                    break;
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -794,11 +857,12 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField_nhaXe.setText(jTable_inforCarOwner.getValueAt(index, 3).toString());
         jTextField_sdt.setText(jTable_inforCarOwner.getValueAt(index, 4).toString());
         jTextField_email.setText(jTable_inforCarOwner.getValueAt(index, 5).toString());
-        if(jTable_inforCarOwner.getValueAt(index, 2).toString().equalsIgnoreCase("Nam")){
+        if (jTable_inforCarOwner.getValueAt(index, 2).toString().equalsIgnoreCase("Nam")) {
             jRadioButton_nam.setSelected(true);
-        } jRadioButton_nu.setSelected(true);
+        }
+        jRadioButton_nu.setSelected(true);
         String ngaySinh = jTable_inforCarOwner.getValueAt(index, 6).toString();
-        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");   
+        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
         try {
             jXDatePicker_ngaySinh.setDate(simple.parse(ngaySinh));
         } catch (ParseException ex) {
@@ -807,10 +871,29 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField_diaChi.setText(jTable_inforCarOwner.getValueAt(index, 7).toString());
     }//GEN-LAST:event_jTable_inforCarOwnerMouseClicked
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        HomeGuestForm homeGuestForm = new HomeGuestForm();
+        homeGuestForm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        InforAccount inforAccount = new InforAccount();
+        inforAccount.setVisible(true);
+        inforAccount.setVisiableWithAdmin();
+        inforAccount.setInforAccountWithAdmin(adminController.getInforAdmin(idAdmin));
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -892,7 +975,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_managerInformation.setVisible(false);
         jPanel_sortCar.setVisible(false);
     }
-
+    
     private void setVisiableManagerCar() {
         jPanel_managerCarOwner.setVisible(false);
         jPanel_managerCar.setVisible(true);
@@ -901,7 +984,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_managerInformation.setVisible(false);
         jPanel_sortCar.setVisible(false);
     }
-
+    
     private void deleteWords() {
         jTextField_cmt.setEditable(true);
         jTextField_cmt.setText("");
@@ -913,7 +996,7 @@ public class AdminForm extends javax.swing.JFrame {
         jXDatePicker_ngaySinh.setDate(null);
         jTextField_diaChi.setText("");
     }
-
+    
     private void displayInforCarByIdCarOwner() {
         if (jComboBox_cmtChuXe.getSelectedItem() == null) {
             jTextField_chuXe.setText("");
@@ -926,7 +1009,7 @@ public class AdminForm extends javax.swing.JFrame {
             coc.displayListCarToJTable(jTable_managerCar, idCarOwner);
         }
     }
-
+    
     private void setVisiableManagerInformation() {
         jPanel_managerCarOwner.setVisible(false);
         jPanel_managerCar.setVisible(false);
@@ -934,7 +1017,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_managerInformation.setVisible(true);
         jPanel_sortCar.setVisible(false);
     }
-
+    
     private void setVisiableManagerParkCar() {
         jPanel_managerCarOwner.setVisible(false);
         jPanel_managerCar.setVisible(false);
@@ -943,7 +1026,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_sortCar.setVisible(false);
     }
     
-    private void setVisiableSortCar(){
+    private void setVisiableSortCar() {
         jPanel_managerCarOwner.setVisible(false);
         jPanel_managerCar.setVisible(false);
         jPanel_managerParkCar.setVisible(false);

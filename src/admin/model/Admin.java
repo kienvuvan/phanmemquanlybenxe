@@ -21,13 +21,12 @@ public class Admin {
     private String sdt;
     private String email;
     private String diaChi;
-    private String taiKhoan;
     private String matKhau;
 
     public Admin() {
     }
 
-    public Admin(String cmt, String ten, String gioiTinh, Date ngaySinh, String sdt, String email, String diaChi, String taiKhoan) {
+    public Admin(String cmt, String ten, String gioiTinh, Date ngaySinh, String sdt, String email, String diaChi) {
         this.cmt = cmt;
         this.ten = ten;
         this.gioiTinh = gioiTinh;
@@ -35,11 +34,10 @@ public class Admin {
         this.sdt = sdt;
         this.email = email;
         this.diaChi = diaChi;
-        this.taiKhoan = taiKhoan;
     }
 
-    public Admin(String taiKhoan, String matKhau) {
-        this.taiKhoan = taiKhoan;
+    public Admin(String cmt, String matKhau) {
+        this.cmt = cmt;
         this.matKhau = matKhau;
     }
 
@@ -99,14 +97,6 @@ public class Admin {
         this.diaChi = diaChi;
     }
 
-    public String getTaiKhoan() {
-        return taiKhoan;
-    }
-
-    public void setTaiKhoan(String taiKhoan) {
-        this.taiKhoan = taiKhoan;
-    }
-
     public String getMatKhau() {
         return matKhau;
     }
@@ -121,5 +111,9 @@ public class Admin {
     
     public int loginAdmin(String user, String pass) {
         return adminDao().loginAdmin(user, pass);
+    }
+    
+    public Admin getInforAdmin(String cmt) {
+        return adminDao().getInforAdmin(cmt);
     }
 }

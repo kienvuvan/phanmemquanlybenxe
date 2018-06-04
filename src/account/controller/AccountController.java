@@ -54,4 +54,8 @@ public class AccountController {
     public int setOwnerPass(Account acc, String passNew, String passAgain) {
         return accDao.setOwnerPass(acc, passNew, passAgain);
     }
+    
+    public int setAdminPass(Account acc, String passNew, String passAgain) {
+        return accDao.setAdminPass(acc, passNew, passAgain);
+    }
 }

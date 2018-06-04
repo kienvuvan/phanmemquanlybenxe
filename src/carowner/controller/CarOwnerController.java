@@ -29,6 +29,10 @@ public class CarOwnerController {
         return this.carOwner.addCarOwner(carOwner);
     }
     
+    public int updateInforCarOwner(CarOwner carOwnerUpdate) {
+        return carOwner.updateInforCarOwner(carOwnerUpdate);
+    }
+    
     public List<CarOwner> getAllListCarOwner() {
         return carOwner.getAllListCarOwner();
     }

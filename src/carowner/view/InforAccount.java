@@ -8,9 +8,9 @@ package carowner.view;
 import account.controller.AccountController;
 import account.dao.AccountDao;
 import account.model.Account;
+import admin.model.Admin;
 import carowner.model.CarOwner;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,19 +45,19 @@ public class InforAccount extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel_sdt = new javax.swing.JLabel();
+        jLabel_email = new javax.swing.JLabel();
+        jLabel_gioiTinh = new javax.swing.JLabel();
+        jLabel_ngaySinh = new javax.swing.JLabel();
         jTextField_cmt = new javax.swing.JTextField();
         jTextField_ten = new javax.swing.JTextField();
         jTextField_sdt = new javax.swing.JTextField();
         jTextField_email = new javax.swing.JTextField();
         jTextField_ngaySinh = new javax.swing.JTextField();
         jTextField_gioiTinh = new javax.swing.JTextField();
-        jLabel_studentId = new javax.swing.JLabel();
+        jLabel_nhaXe = new javax.swing.JLabel();
         jTextField_nhaXe = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel_diaChi = new javax.swing.JLabel();
         jTextField_diaChi = new javax.swing.JTextField();
         jPanel_changePass = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -82,13 +82,13 @@ public class InforAccount extends javax.swing.JFrame {
 
         jLabel2.setText("Họ tên : ");
 
-        jLabel3.setText("Số điện thoại :");
+        jLabel_sdt.setText("Số điện thoại :");
 
-        jLabel4.setText("Email : ");
+        jLabel_email.setText("Email : ");
 
-        jLabel5.setText("Giới tính :");
+        jLabel_gioiTinh.setText("Giới tính :");
 
-        jLabel6.setText("Ngày sinh :");
+        jLabel_ngaySinh.setText("Ngày sinh :");
 
         jTextField_cmt.setEditable(false);
 
@@ -102,11 +102,11 @@ public class InforAccount extends javax.swing.JFrame {
 
         jTextField_gioiTinh.setEditable(false);
 
-        jLabel_studentId.setText("Nhà xe :");
+        jLabel_nhaXe.setText("Nhà xe :");
 
         jTextField_nhaXe.setEditable(false);
 
-        jLabel7.setText("Địa chỉ :");
+        jLabel_diaChi.setText("Địa chỉ :");
 
         jTextField_diaChi.setEditable(false);
 
@@ -117,14 +117,14 @@ public class InforAccount extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_sdt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_studentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_gioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_nhaXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_diaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField_gioiTinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
@@ -150,32 +150,32 @@ public class InforAccount extends javax.swing.JFrame {
                     .addComponent(jTextField_ten))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_studentId, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jTextField_nhaXe))
+                    .addComponent(jLabel_nhaXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_nhaXe, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_email, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_gioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_gioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jTextField_email, jTextField_gioiTinh, jTextField_ngaySinh, jTextField_sdt});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel_diaChi, jLabel_email, jLabel_gioiTinh, jLabel_ngaySinh, jLabel_sdt, jTextField_email, jTextField_gioiTinh, jTextField_ngaySinh, jTextField_sdt});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jTextField_cmt});
 
@@ -187,9 +187,7 @@ public class InforAccount extends javax.swing.JFrame {
         );
         jPanel_InforAccountLayout.setVerticalGroup(
             jPanel_InforAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_InforAccountLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
@@ -286,6 +284,7 @@ public class InforAccount extends javax.swing.JFrame {
                 .addComponent(jPanel_changePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jMenu_inforAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/applications_system.png"))); // NOI18N
         jMenu_inforAccount.setText("Hệ thống");
 
         jMenuItem1.setText("Thông tin tài khoản");
@@ -334,7 +333,11 @@ public class InforAccount extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        changePass();
+        if(jTextField_diaChi.isVisible() == false){
+            changePassWithAdmin();
+        }else{
+            changePassWithCarOwner();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void setInforAccount(CarOwner carOwner) {
@@ -349,6 +352,17 @@ public class InforAccount extends javax.swing.JFrame {
         jTextField_diaChi.setText(carOwner.getDiaChi());
     }
 
+    public void setInforAccountWithAdmin(Admin admin) {
+        jTextField_cmt.setText(admin.getCmt());
+        jTextField_ten.setText(admin.getTen());
+        jTextField_nhaXe.setText(admin.getGioiTinh());
+        jTextField_email.setText(admin.getSdt());
+        jTextField_gioiTinh.setText(admin.getEmail());
+        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
+        jTextField_sdt.setText(simple.format(admin.getNgaySinh()));
+        jTextField_ngaySinh.setText(admin.getDiaChi());
+    }
+    
     private void setVisiableInforAccountPanel() {
         jPanel_InforAccount.setVisible(true);
         jPanel_changePass.setVisible(false);
@@ -359,6 +373,16 @@ public class InforAccount extends javax.swing.JFrame {
         jPanel_changePass.setVisible(true);
     }
 
+    public void setVisiableWithAdmin(){
+        jLabel_diaChi.setVisible(false);
+        jTextField_diaChi.setVisible(false);
+        jLabel_nhaXe.setText("Giới tính :");
+        jLabel_sdt.setText("Ngày sinh");
+        jLabel_email.setText("Số điện thoại");
+        jLabel_gioiTinh.setText("Email");
+        jLabel_ngaySinh.setText("Địa chỉ");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -405,12 +429,12 @@ public class InforAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel_studentId;
+    private javax.swing.JLabel jLabel_diaChi;
+    private javax.swing.JLabel jLabel_email;
+    private javax.swing.JLabel jLabel_gioiTinh;
+    private javax.swing.JLabel jLabel_ngaySinh;
+    private javax.swing.JLabel jLabel_nhaXe;
+    private javax.swing.JLabel jLabel_sdt;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -432,14 +456,39 @@ public class InforAccount extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_ten;
     // End of variables declaration//GEN-END:variables
 
-    private void changePass() {
+    private void changePassWithCarOwner() {
         String cmt = jTextField_cmt.getText();
-//        System.out.println(cmt);
         String passOld = new String(jPasswordField_PassOld.getPassword());
         String passNew = new String(jPasswordField_PassNew.getPassword());
         String passAgain = new String(jPasswordField_PassAgain.getPassword());
         Account acc = new Account(cmt, passOld, "Chủ xe");
         int result = ac.setOwnerPass(acc, passNew, passAgain);
+        switch (result) {
+            case AccountDao.RESULT_EMPTY:
+                JOptionPane.showMessageDialog(this, "Bạn phải điền đầy đủ thông tin");
+                break;
+            case AccountDao.RESULT_ACCOUNT_INCORRECT:
+                JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác.Vui lòng thử lại!!");
+                break;
+            case AccountDao.RESULT_PASSAGAIN_NOT_SAME:
+                JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp.Vui lòng nhập lại!!");
+                break;
+            case AccountDao.RESULT_SUCCESS:
+                JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công!!");
+                break;
+            case AccountDao.RESULT_SQL_ERROR:
+                JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại!!");
+                break;
+        }
+    }
+
+    private void changePassWithAdmin() {
+        String cmt = jTextField_cmt.getText();
+        String passOld = new String(jPasswordField_PassOld.getPassword());
+        String passNew = new String(jPasswordField_PassNew.getPassword());
+        String passAgain = new String(jPasswordField_PassAgain.getPassword());
+        Account acc = new Account(cmt, passOld, "Admin");
+        int result = ac.setAdminPass(acc, passNew, passAgain);
         switch (result) {
             case AccountDao.RESULT_EMPTY:
                 JOptionPane.showMessageDialog(this, "Bạn phải điền đầy đủ thông tin");

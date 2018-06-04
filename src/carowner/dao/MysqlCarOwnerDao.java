@@ -30,7 +30,6 @@ import utils.Utils;
  *
  * @author kienanh2903
  */
-
 public class MysqlCarOwnerDao implements CarOwnerDao {
 
     private static final String COLUMN_CMT_CAROWNER = "Chuxe.Cmt";
@@ -43,6 +42,8 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String COLUMN_DIACHI_CAROWNER = "DiaChi";
 
     private static final String ADD_CAROWNER = "INSERT INTO chuxe VALUES (?,?,?,?,?,?,?,?,?)";
+    private static final String UPDATE_INFOR_CAROWNER = "UPDATE chuxe SET HoTen = ?, NhaXe = ?, Sdt = ?, Email = ?, GioiTinh = ?, NgaySinh =?, DiaChi =? "
+            + "WHERE Cmt = ?";
     private static final String GET_ALL_CAROWNER = "SELECT * FROM chuxe";
     private static final String GET_ALL_CAR_BY_CAROWNER = "SELECT * FROM xe WHERE CmtNhaXe =?";
     private static final String GET_NAME_BY_ID_CAROWNER = "SELECT HoTen FROM chuxe WHERE Cmt =?";
@@ -50,7 +51,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String EDIT_CAR_OWNER = "UPDATE chuxe SET HoTen = ?, NhaXe = ?, Sdt = ?, Email = ?, GioiTinh = ?, NgaySinh = ?, DiaChi = ? WHERE Cmt = ?";
     private static final String GET_CAR_OWNER = "SELECT * FROM chuxe WHERE Cmt = ?";
     private static final String CHECK_ACCOUNT_CAROWNER = "SELECT Cmt, MatKhau FROM chuxe WHERE Cmt = ? AND MatKhau =?";
-    
+
     public static final int RESULT_EMPTY = 0;
     public static final int RESULT_ERROR_CMT = 1;
     public static final int RESULT_ERROR_SDT = 2;
@@ -83,6 +84,41 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 pstmt.setDate(7, carOwner.getNgaySinh());
                 pstmt.setString(8, carOwner.getDiaChi());
                 pstmt.setString(9, HashPassword.hashPass("1"));
+                int check = pstmt.executeUpdate();
+                if (check > 0) {
+                    return RESULT_SUCCESS;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return RESULT_ERROR_SQL;
+    }
+
+    @Override
+    public int updateInforCarOwner(CarOwner carOwnerUpdate) {
+        if (StringUtils.isNullOrEmpty(carOwnerUpdate.getTen()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getNhaXe())
+                || StringUtils.isNullOrEmpty(carOwnerUpdate.getSdt()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getEmail()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getGioitinh())
+                || StringUtils.isNullOrEmpty(carOwnerUpdate.getDiaChi()) || carOwnerUpdate.getNgaySinh() == null) {
+            return RESULT_EMPTY;
+        } else if (Utils.isCmt(carOwnerUpdate.getCmt()) == false) {
+            return RESULT_ERROR_CMT;
+        } else if (Utils.isPhoneNumber(carOwnerUpdate.getSdt()) == false) {
+            return RESULT_ERROR_SDT;
+        } else if (Utils.isAdressEmail(carOwnerUpdate.getEmail()) == false) {
+            return RESULT_ERROR_EMAIL;
+        } else {
+            try {
+                Connection connection = Mysql.getInstance().getConnection();
+                PreparedStatement pstmt = connection.prepareStatement(UPDATE_INFOR_CAROWNER);
+                pstmt.setString(1, carOwnerUpdate.getTen());
+                pstmt.setString(2, carOwnerUpdate.getNhaXe());
+                pstmt.setString(3, carOwnerUpdate.getSdt());
+                pstmt.setString(4, carOwnerUpdate.getEmail());
+                pstmt.setString(5, carOwnerUpdate.getGioitinh());
+                pstmt.setDate(6, carOwnerUpdate.getNgaySinh());
+                pstmt.setString(7, carOwnerUpdate.getDiaChi());
+                pstmt.setString(8, carOwnerUpdate.getCmt());
                 int check = pstmt.executeUpdate();
                 if (check > 0) {
                     return RESULT_SUCCESS;
@@ -215,7 +251,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
         return listCars;
     }
 
-    public void editCarOwner (CarOwner carOwner){
+    public void editCarOwner(CarOwner carOwner) {
         try {
             Connection connection = Mysql.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement(EDIT_CAR_OWNER);
@@ -229,28 +265,28 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
             pstm.setString(8, carOwner.getCmt());
             pstm.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Lỗi dữ liệu nhập vào.");
+            JOptionPane.showMessageDialog(null, "Lỗi dữ liệu nhập vào.");
         }
     }
 
     @Override
-    public CarOwner getInforCarOwner (String cmt){
+    public CarOwner getInforCarOwner(String cmt) {
         CarOwner carOwner = new CarOwner();
         try {
             Connection connection = Mysql.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement(GET_CAR_OWNER);
             pstm.setString(1, cmt);
             ResultSet rs1 = pstm.executeQuery();
-            while(rs1.next()){
-                    String HoTen = rs1.getString("HoTen");
-                    String NhaXe = rs1.getString("NhaXe");
-                    String Sdt = rs1.getString("Sdt");
-                    String Email = rs1.getString("Email");
-                    String GioiTinh = rs1.getString("GioiTinh");
-                    Date NgaySinh = rs1.getDate("NgaySinh");
-                    String DiaChi = rs1.getString("DiaChi");
-                    carOwner = new CarOwner(cmt, HoTen, NhaXe,Sdt, Email, GioiTinh, NgaySinh, DiaChi );
-                }
+            while (rs1.next()) {
+                String HoTen = rs1.getString("HoTen");
+                String NhaXe = rs1.getString("NhaXe");
+                String Sdt = rs1.getString("Sdt");
+                String Email = rs1.getString("Email");
+                String GioiTinh = rs1.getString("GioiTinh");
+                Date NgaySinh = rs1.getDate("NgaySinh");
+                String DiaChi = rs1.getString("DiaChi");
+                carOwner = new CarOwner(cmt, HoTen, NhaXe, Sdt, Email, GioiTinh, NgaySinh, DiaChi);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -270,7 +306,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
                     return RESULT_LOGIN_SUCCESS;
-                }else{
+                } else {
                     return RESULT_ACCOUNT_INCORECT;
                 }
             } catch (SQLException ex) {
@@ -280,5 +316,4 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
         return RESULT_ERROR_SQL;
     }
 
-    
 }

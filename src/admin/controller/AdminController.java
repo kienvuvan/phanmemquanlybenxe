@@ -22,4 +22,7 @@ public class AdminController {
         return admin.loginAdmin(user, pass);
     }
     
+    public Admin getInforAdmin(String cmt) {
+        return admin.getInforAdmin(cmt);
+    }
 }

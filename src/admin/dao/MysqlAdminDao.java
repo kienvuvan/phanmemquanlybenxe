@@ -5,8 +5,10 @@
  */
 package admin.dao;
 
+import admin.model.Admin;
 import com.mysql.cj.util.StringUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +24,7 @@ import utils.HashPassword;
 public class MysqlAdminDao implements AdminDao {
 
     private static final String CHECK_ACCOUNT_ADMIN = "SELECT Cmt, MatKhau FROM admin WHERE Cmt = ? AND MatKhau =?";
+    private static final String GET_INFOR_ACCOUNT_ADMIN = "SELECT * FROM admin WHERE Cmt = ?";
 
     public static final int RESULT_EMPTY = 0;
     public static final int RESULT_LOGIN_SUCCESS = 1;
@@ -41,7 +44,7 @@ public class MysqlAdminDao implements AdminDao {
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
                     return RESULT_LOGIN_SUCCESS;
-                }else{
+                } else {
                     return RESULT_ACCOUNT_INCORECT;
                 }
             } catch (SQLException ex) {
@@ -54,5 +57,28 @@ public class MysqlAdminDao implements AdminDao {
     public static void main(String[] args) {
         MysqlAdminDao mad = new MysqlAdminDao();
         System.out.println(mad.loginAdmin("tuyen1997", "2"));
+    }
+
+    @Override
+    public Admin getInforAdmin(String cmt) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(GET_INFOR_ACCOUNT_ADMIN);
+            pstmt.setString(1, cmt);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                String ten = rs.getString("HoTen");
+                String gioiTinh = rs.getString("GioiTinh");
+                Date ngaySinh = rs.getDate("NgaySinh");
+                String sdt = rs.getString("Sdt");
+                String email = rs.getString("Email");
+                String diaChi = rs.getString("DiaChi");
+                Admin admin = new Admin(cmt, ten, gioiTinh, ngaySinh, sdt, email, diaChi);
+                return admin;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlAdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new Admin(cmt, "", "", null, "", "", "");
     }
 }

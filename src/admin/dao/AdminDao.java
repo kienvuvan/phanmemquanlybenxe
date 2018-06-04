@@ -5,10 +5,14 @@
  */
 package admin.dao;
 
+import admin.model.Admin;
+
 /**
  *
  * @author kienanh2903
  */
 public interface AdminDao {
     int loginAdmin(String user, String pass);
+    
+    Admin getInforAdmin(String cmt);
 }

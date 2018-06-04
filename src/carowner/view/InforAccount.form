@@ -6,6 +6,9 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu_inforAccount">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/image/applications_system.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="H&#x1ec7; th&#x1ed1;ng"/>
           </Properties>
           <SubComponents>
@@ -95,10 +98,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -121,14 +121,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_sdt" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel1" alignment="0" pref="85" max="32767" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel_studentId" max="32767" attributes="0"/>
-                              <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_email" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_gioiTinh" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_ngaySinh" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_nhaXe" max="32767" attributes="0"/>
+                              <Component id="jLabel_diaChi" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -160,35 +160,35 @@
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel_studentId" pref="28" max="32767" attributes="0"/>
-                              <Component id="jTextField_nhaXe" max="32767" attributes="0"/>
+                              <Component id="jLabel_nhaXe" max="32767" attributes="0"/>
+                              <Component id="jTextField_nhaXe" pref="28" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel3" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel_sdt" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jTextField_sdt" linkSize="8" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel_email" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jTextField_email" linkSize="8" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel5" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel_gioiTinh" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jTextField_gioiTinh" linkSize="8" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel6" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel_ngaySinh" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jTextField_ngaySinh" linkSize="8" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel7" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel_diaChi" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jTextField_diaChi" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -204,22 +204,22 @@
                     <Property name="text" type="java.lang.String" value="H&#x1ecd; t&#xea;n : "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="jLabel_sdt">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel4">
+                <Component class="javax.swing.JLabel" name="jLabel_email">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Email : "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel5">
+                <Component class="javax.swing.JLabel" name="jLabel_gioiTinh">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gi&#x1edb;i t&#xed;nh :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel6">
+                <Component class="javax.swing.JLabel" name="jLabel_ngaySinh">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ng&#xe0;y sinh :"/>
                   </Properties>
@@ -254,7 +254,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel_studentId">
+                <Component class="javax.swing.JLabel" name="jLabel_nhaXe">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nh&#xe0; xe :"/>
                   </Properties>
@@ -264,7 +264,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel7">
+                <Component class="javax.swing.JLabel" name="jLabel_diaChi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9; :"/>
                   </Properties>

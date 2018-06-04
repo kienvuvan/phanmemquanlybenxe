@@ -126,6 +126,10 @@ public class CarOwner {
         return carOwnerDao().addCarOwner(carOwner);
     }
     
+    public int updateInforCarOwner(CarOwner carOwnerUpdate) {
+        return carOwnerDao().updateInforCarOwner(carOwnerUpdate);
+    }
+    
     public List<CarOwner> getAllListCarOwner() {
         return carOwnerDao().getAllListCarOwner();
     }
