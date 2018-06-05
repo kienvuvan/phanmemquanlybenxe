@@ -145,6 +145,15 @@ public class Utils {
         return bienSoXe + dayStr + monthStr + yearStr;
     }
 
+    public static List<String> cutRoute(String loTrinh){
+        StringTokenizer stk = new StringTokenizer(loTrinh, "-");
+        List<String> listToken = new ArrayList<>();
+        while (stk.hasMoreTokens()) {
+            listToken.add(stk.nextToken());
+        }
+        return listToken;
+    }
+    
     public static void main(String[] args) {
 //        Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
 //        System.out.println(generateCarTravelId("17M2-1234", dateNow));

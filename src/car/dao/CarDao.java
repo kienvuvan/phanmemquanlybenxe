@@ -20,4 +20,18 @@ public interface CarDao {
     int getIdMax();
 
     public List<Car> getAllCarForOwner(String cmt);
+    
+    List<String> getAllCarIdNoSort();
+    
+    List<String> getAllParkLocation();
+    
+    List<String> generateTimePark(String bsx);
+    
+    List<Car> getAllCarParked();
+    
+    boolean checkParkLocation(String viTriDo, String thoiGianDo);
+    
+    boolean checkCarParked(String bsx, String thoiGianDo);
+    
+    int sortCarInPark(Car car);
 }

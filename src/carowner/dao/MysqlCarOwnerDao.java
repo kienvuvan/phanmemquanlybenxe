@@ -51,7 +51,8 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String EDIT_CAR_OWNER = "UPDATE chuxe SET HoTen = ?, NhaXe = ?, Sdt = ?, Email = ?, GioiTinh = ?, NgaySinh = ?, DiaChi = ? WHERE Cmt = ?";
     private static final String GET_CAR_OWNER = "SELECT * FROM chuxe WHERE Cmt = ?";
     private static final String CHECK_ACCOUNT_CAROWNER = "SELECT Cmt, MatKhau FROM chuxe WHERE Cmt = ? AND MatKhau =?";
-
+    private static final String GET_GRAGE_BY_CMT = "SELECT DISTINCT chuxe.NhaXe FROM chuxe, xe WHERE xe.CmtNhaXe = chuxe.Cmt AND xe.BienSoXe = ?";
+    
     public static final int RESULT_EMPTY = 0;
     public static final int RESULT_ERROR_CMT = 1;
     public static final int RESULT_ERROR_SDT = 2;
@@ -314,6 +315,22 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
             }
         }
         return RESULT_ERROR_SQL;
+    }
+
+    @Override
+    public String getGarageByBsx(String bsx) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(GET_GRAGE_BY_CMT);
+            pstm.setString(1, bsx);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                return rs.getString("NhaXe");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 
 }

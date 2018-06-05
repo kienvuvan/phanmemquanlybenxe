@@ -67,6 +67,12 @@ public class Car {
     public Car() {
     }
 
+    public Car(String bsx, String viTri, String thoiGianDo) {
+        this.bsx = bsx;
+        this.viTri = viTri;
+        this.thoiGianDo = thoiGianDo;
+    }
+
     public int getId() {
         return id;
     }
@@ -137,5 +143,25 @@ public class Car {
     
     public List<Car> getAllCarForOwner(String cmt) {
         return carDao().getAllCarForOwner(cmt);
+    }
+    
+    public List<String> getAllCarIdNoSort() {
+        return carDao().getAllCarIdNoSort();
+    }
+    
+    public List<String> getAllParkLocation() {
+        return carDao().getAllParkLocation();
+    }
+    
+    public List<String> generateTimePark(String bsx) {
+        return carDao().generateTimePark(bsx);
+    }
+    
+    public List<Car> getAllCarParked() {
+        return carDao().getAllCarParked();
+    }
+    
+    public int sortCarInPark(Car car) {
+        return carDao().sortCarInPark(car);
     }
 }

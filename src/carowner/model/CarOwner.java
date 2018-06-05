@@ -157,4 +157,8 @@ public class CarOwner {
     public CarOwner getInforCarOwner (String cmt){
         return carOwnerDao().getInforCarOwner(cmt);
     }
+    
+    public String getGarageByBsx(String bsx) {
+        return carOwnerDao().getGarageByBsx(bsx);
+    }
 }

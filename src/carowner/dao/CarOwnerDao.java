@@ -34,4 +34,6 @@ public interface CarOwnerDao {
     int loginCarOwner(String user, String pass);
     
     public CarOwner getInforCarOwner (String cmt);
+    
+    String getGarageByBsx(String bsx);
 }

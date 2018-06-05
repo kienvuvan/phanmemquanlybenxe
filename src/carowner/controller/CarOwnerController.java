@@ -116,4 +116,7 @@ public class CarOwnerController {
         return carOwner.getInforCarOwner(cmt);
     }
     
+    public String getGarageByBsx(String bsx) {
+        return carOwner.getGarageByBsx(bsx);
+    }
 }
