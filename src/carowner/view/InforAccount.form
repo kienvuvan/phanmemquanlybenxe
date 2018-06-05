@@ -2,6 +2,8 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu_inforAccount">
@@ -131,17 +133,26 @@
                               <Component id="jLabel_diaChi" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jTextField_gioiTinh" alignment="0" pref="305" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jRadioButton_nam" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jRadioButton_nu" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="jTextField_email" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextField_sdt" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextField_ten" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField_cmt" max="32767" attributes="0"/>
-                              <Component id="jTextField_ngaySinh" max="32767" attributes="0"/>
-                              <Component id="jTextField_nhaXe" max="32767" attributes="0"/>
-                              <Component id="jTextField_diaChi" max="32767" attributes="0"/>
+                              <Component id="jTextField_cmt" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jTextField_nhaXe" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jTextField_diaChi" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jXDatePicker_ngaySinh" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="183" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -176,19 +187,22 @@
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel_gioiTinh" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jTextField_gioiTinh" linkSize="8" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="jRadioButton_nam" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButton_nu" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel_ngaySinh" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jTextField_ngaySinh" linkSize="8" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jXDatePicker_ngaySinh" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel_diaChi" linkSize="8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jTextField_diaChi" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="23" max="32767" attributes="0"/>
+                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -230,29 +244,10 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ten">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_sdt">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_email">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextField_ngaySinh">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextField_gioiTinh">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel_nhaXe">
                   <Properties>
@@ -260,9 +255,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_nhaXe">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel_diaChi">
                   <Properties>
@@ -270,9 +262,39 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_diaChi">
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton3">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButton_nam">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="default"/>
+                    </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup1"/>
+                    </Property>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Nam"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButton_nu">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="default"/>
+                    </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="N&#x1eef;"/>
+                  </Properties>
+                </Component>
+                <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker_ngaySinh">
                 </Component>
               </SubComponents>
             </Container>

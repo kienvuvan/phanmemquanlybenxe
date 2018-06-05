@@ -25,4 +25,8 @@ public class AdminController {
     public Admin getInforAdmin(String cmt) {
         return admin.getInforAdmin(cmt);
     }
+    
+    public int updateInforAdmin(Admin adminUpdate) {
+        return admin.updateInforAdmin(adminUpdate);
+    }
 }

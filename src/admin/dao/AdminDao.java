@@ -15,4 +15,6 @@ public interface AdminDao {
     int loginAdmin(String user, String pass);
     
     Admin getInforAdmin(String cmt);
+    
+    int updateInforAdmin(Admin adminUpdate);
 }

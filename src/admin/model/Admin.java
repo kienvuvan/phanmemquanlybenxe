@@ -14,6 +14,7 @@ import java.sql.Date;
  * @author kienanh2903
  */
 public class Admin {
+
     private String cmt;
     private String ten;
     private String gioiTinh;
@@ -104,16 +105,21 @@ public class Admin {
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
     }
-    
-    public AdminDao adminDao(){
+
+    public AdminDao adminDao() {
         return new MysqlAdminDao();
     }
-    
+
     public int loginAdmin(String user, String pass) {
         return adminDao().loginAdmin(user, pass);
     }
-    
+
     public Admin getInforAdmin(String cmt) {
         return adminDao().getInforAdmin(cmt);
     }
+
+    public int updateInforAdmin(Admin adminUpdate) {
+        return adminDao().updateInforAdmin(adminUpdate);
+    }
+
 }

@@ -8,9 +8,13 @@ package carowner.view;
 import account.controller.AccountController;
 import account.dao.AccountDao;
 import account.model.Account;
+import admin.controller.AdminController;
+import admin.dao.MysqlAdminDao;
 import admin.model.Admin;
+import carowner.controller.CarOwnerController;
+import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
-import java.text.SimpleDateFormat;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +24,8 @@ import javax.swing.JOptionPane;
 public class InforAccount extends javax.swing.JFrame {
 
     AccountController ac;
+    AdminController adminController;
+    CarOwnerController coc;
 
     /**
      * Creates new form InforAccount
@@ -29,6 +35,8 @@ public class InforAccount extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisiableInforAccountPanel();
         ac = new AccountController();
+        adminController = new AdminController();
+        coc = new CarOwnerController();
     }
 
     /**
@@ -40,6 +48,7 @@ public class InforAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_InforAccount = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -53,12 +62,14 @@ public class InforAccount extends javax.swing.JFrame {
         jTextField_ten = new javax.swing.JTextField();
         jTextField_sdt = new javax.swing.JTextField();
         jTextField_email = new javax.swing.JTextField();
-        jTextField_ngaySinh = new javax.swing.JTextField();
-        jTextField_gioiTinh = new javax.swing.JTextField();
         jLabel_nhaXe = new javax.swing.JLabel();
         jTextField_nhaXe = new javax.swing.JTextField();
         jLabel_diaChi = new javax.swing.JLabel();
         jTextField_diaChi = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jRadioButton_nam = new javax.swing.JRadioButton();
+        jRadioButton_nu = new javax.swing.JRadioButton();
+        jXDatePicker_ngaySinh = new org.jdesktop.swingx.JXDatePicker();
         jPanel_changePass = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -92,23 +103,23 @@ public class InforAccount extends javax.swing.JFrame {
 
         jTextField_cmt.setEditable(false);
 
-        jTextField_ten.setEditable(false);
-
-        jTextField_sdt.setEditable(false);
-
-        jTextField_email.setEditable(false);
-
-        jTextField_ngaySinh.setEditable(false);
-
-        jTextField_gioiTinh.setEditable(false);
-
         jLabel_nhaXe.setText("Nhà xe :");
-
-        jTextField_nhaXe.setEditable(false);
 
         jLabel_diaChi.setText("Địa chỉ :");
 
-        jTextField_diaChi.setEditable(false);
+        jButton3.setText("Cập nhật");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton_nam);
+        jRadioButton_nam.setSelected(true);
+        jRadioButton_nam.setText("Nam");
+
+        buttonGroup1.add(jRadioButton_nu);
+        jRadioButton_nu.setText("Nữ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -126,16 +137,23 @@ public class InforAccount extends javax.swing.JFrame {
                     .addComponent(jLabel_nhaXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_diaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField_gioiTinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                    .addComponent(jTextField_email, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_sdt, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_ten, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_cmt)
-                    .addComponent(jTextField_ngaySinh)
-                    .addComponent(jTextField_nhaXe)
-                    .addComponent(jTextField_diaChi))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jRadioButton_nam)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jRadioButton_nu))
+                    .addComponent(jTextField_email)
+                    .addComponent(jTextField_sdt)
+                    .addComponent(jTextField_ten)
+                    .addComponent(jTextField_cmt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField_nhaXe, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField_diaChi, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXDatePicker_ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(jButton3)
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,19 +181,22 @@ public class InforAccount extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_gioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_gioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButton_nam)
+                    .addComponent(jRadioButton_nu))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(jXDatePicker_ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel_diaChi, jLabel_email, jLabel_gioiTinh, jLabel_ngaySinh, jLabel_sdt, jTextField_email, jTextField_gioiTinh, jTextField_ngaySinh, jTextField_sdt});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel_diaChi, jLabel_email, jLabel_gioiTinh, jLabel_ngaySinh, jLabel_sdt, jRadioButton_nam, jRadioButton_nu, jTextField_email, jTextField_sdt, jXDatePicker_ngaySinh});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jTextField_cmt});
 
@@ -333,12 +354,21 @@ public class InforAccount extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField_diaChi.isVisible() == false){
+        if (jTextField_diaChi.isVisible() == false) {
             changePassWithAdmin();
-        }else{
+        } else {
             changePassWithCarOwner();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (jTextField_diaChi.isVisible() == false) {
+            updateInforAdmin();
+        } else {
+            updateInforCarOwner();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void setInforAccount(CarOwner carOwner) {
         jTextField_cmt.setText(carOwner.getCmt());
@@ -346,23 +376,30 @@ public class InforAccount extends javax.swing.JFrame {
         jTextField_nhaXe.setText(carOwner.getNhaXe());
         jTextField_sdt.setText(carOwner.getSdt());
         jTextField_email.setText(carOwner.getEmail());
-        jTextField_gioiTinh.setText(carOwner.getGioitinh());
-        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
-        jTextField_ngaySinh.setText(simple.format(carOwner.getNgaySinh()));
+        if (carOwner.getGioitinh().equalsIgnoreCase("Nam")) {
+            jRadioButton_nam.setSelected(true);
+        } else {
+            jRadioButton_nu.setSelected(true);
+        }
+        jXDatePicker_ngaySinh.setDate(carOwner.getNgaySinh());
         jTextField_diaChi.setText(carOwner.getDiaChi());
     }
 
     public void setInforAccountWithAdmin(Admin admin) {
         jTextField_cmt.setText(admin.getCmt());
         jTextField_ten.setText(admin.getTen());
-        jTextField_nhaXe.setText(admin.getGioiTinh());
-        jTextField_email.setText(admin.getSdt());
-        jTextField_gioiTinh.setText(admin.getEmail());
-        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
-        jTextField_sdt.setText(simple.format(admin.getNgaySinh()));
-        jTextField_ngaySinh.setText(admin.getDiaChi());
+        jTextField_nhaXe.setText(admin.getSdt());
+        jTextField_sdt.setText(admin.getEmail());
+        jTextField_email.setText(admin.getDiaChi());
+        jXDatePicker_ngaySinh.setDate(admin.getNgaySinh());
+        if (admin.getGioiTinh().equalsIgnoreCase("Nam")) {
+            jRadioButton_nam.setSelected(true);
+        } else {
+            jRadioButton_nu.setSelected(true);
+        }
+
     }
-    
+
     private void setVisiableInforAccountPanel() {
         jPanel_InforAccount.setVisible(true);
         jPanel_changePass.setVisible(false);
@@ -373,16 +410,14 @@ public class InforAccount extends javax.swing.JFrame {
         jPanel_changePass.setVisible(true);
     }
 
-    public void setVisiableWithAdmin(){
+    public void setVisiableWithAdmin() {
         jLabel_diaChi.setVisible(false);
         jTextField_diaChi.setVisible(false);
-        jLabel_nhaXe.setText("Giới tính :");
-        jLabel_sdt.setText("Ngày sinh");
-        jLabel_email.setText("Số điện thoại");
-        jLabel_gioiTinh.setText("Email");
-        jLabel_ngaySinh.setText("Địa chỉ");
+        jLabel_nhaXe.setText("Số điện thoại :");
+        jLabel_sdt.setText("Email :");
+        jLabel_email.setText("Địa chỉ :");
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -422,7 +457,9 @@ public class InforAccount extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
@@ -446,14 +483,15 @@ public class InforAccount extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField_PassAgain;
     private javax.swing.JPasswordField jPasswordField_PassNew;
     private javax.swing.JPasswordField jPasswordField_PassOld;
+    private javax.swing.JRadioButton jRadioButton_nam;
+    private javax.swing.JRadioButton jRadioButton_nu;
     private javax.swing.JTextField jTextField_cmt;
     private javax.swing.JTextField jTextField_diaChi;
     private javax.swing.JTextField jTextField_email;
-    private javax.swing.JTextField jTextField_gioiTinh;
-    private javax.swing.JTextField jTextField_ngaySinh;
     private javax.swing.JTextField jTextField_nhaXe;
     private javax.swing.JTextField jTextField_sdt;
     private javax.swing.JTextField jTextField_ten;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker_ngaySinh;
     // End of variables declaration//GEN-END:variables
 
     private void changePassWithCarOwner() {
@@ -505,6 +543,86 @@ public class InforAccount extends javax.swing.JFrame {
             case AccountDao.RESULT_SQL_ERROR:
                 JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại!!");
                 break;
+        }
+    }
+
+    private void updateInforAdmin() {
+        String cmt = jTextField_cmt.getText();
+        String ten = jTextField_ten.getText();
+        String sdt = jTextField_nhaXe.getText();
+        String email = jTextField_sdt.getText();
+        String diaChi = jTextField_email.getText();
+        String gioiTinh = "";
+        if (jRadioButton_nam.isSelected()) {
+            gioiTinh = "Nam";
+        } else {
+            gioiTinh = "Nữ";
+        }
+        if (jXDatePicker_ngaySinh.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh");
+        } else {
+            Date ngaySinh = new Date(jXDatePicker_ngaySinh.getDate().getTime());
+            Admin adminUpdate = new Admin(cmt, ten, gioiTinh, ngaySinh, sdt, email, diaChi);
+            int result = adminController.updateInforAdmin(adminUpdate);
+            switch (result) {
+                case MysqlAdminDao.RESULT_EMPTY:
+                    JOptionPane.showMessageDialog(this, "Bạn phải điền đầy đủ thông tin");
+                    break;
+                case MysqlAdminDao.RESULT_ERROR_SDT:
+                    JOptionPane.showMessageDialog(this, "Định dạng số điện thoại không đúng.Vui lòng nhập lại");
+                    break;
+                case MysqlAdminDao.RESULT_ERROR_EMAIL:
+                    JOptionPane.showMessageDialog(this, "Định dạng email không đúng.Vui lòng nhập lại");
+                    break;
+                case MysqlAdminDao.RESULT_SUCCESS:
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                    break;
+                case MysqlAdminDao.RESULT_ERROR_SQL:
+                    JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                    break;
+            }
+        }
+    }
+
+    private void updateInforCarOwner() {
+        String cmt = jTextField_cmt.getText();
+        String ten = jTextField_ten.getText();
+        String nhaXe = jTextField_nhaXe.getText();
+        String sdt = jTextField_sdt.getText();
+        String email = jTextField_email.getText();
+        String gioiTinh = "";
+        if (jRadioButton_nam.isSelected()) {
+            gioiTinh = "Nam";
+        } else {
+            gioiTinh = "Nữ";
+        }
+        if (jXDatePicker_ngaySinh.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh");
+        } else {
+            Date ngaySinh = new Date(jXDatePicker_ngaySinh.getDate().getTime());
+            String diaChi = jTextField_diaChi.getText();
+            CarOwner carOwnerUpdate = new CarOwner(cmt, ten, nhaXe, sdt, email, gioiTinh, ngaySinh, diaChi);
+            int result = coc.updateInforCarOwner(carOwnerUpdate);
+            switch (result) {
+                case MysqlCarOwnerDao.RESULT_EMPTY:
+                    JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng nhập đầy đủ thông tin");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_CMT:
+                    JOptionPane.showMessageDialog(this, "Định dạng chứng minh thư không đúng.Vui lòng nhập lại!");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_SDT:
+                    JOptionPane.showMessageDialog(this, "Định dạng số điện thoại không đúng.Vui lòng nhập lại!");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_EMAIL:
+                    JOptionPane.showMessageDialog(this, "Định dạng email không đúng.Vui lòng nhập lại!");
+                    break;
+                case MysqlCarOwnerDao.RESULT_SUCCESS:
+                    JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công");
+                    break;
+                case MysqlCarOwnerDao.RESULT_ERROR_SQL:
+                    JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                    break;
+            }
         }
     }
 }
