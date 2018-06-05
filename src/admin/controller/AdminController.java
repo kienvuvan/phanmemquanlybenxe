@@ -29,4 +29,8 @@ public class AdminController {
     public int updateInforAdmin(Admin adminUpdate) {
         return admin.updateInforAdmin(adminUpdate);
     }
+    
+    public String getNameAdmin(String cmt) {
+        return admin.getNameAdmin(cmt);
+    }
 }

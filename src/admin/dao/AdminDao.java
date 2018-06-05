@@ -17,4 +17,6 @@ public interface AdminDao {
     Admin getInforAdmin(String cmt);
     
     int updateInforAdmin(Admin adminUpdate);
+    
+    String getNameAdmin(String cmt);
 }

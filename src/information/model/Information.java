@@ -25,6 +25,13 @@ public class Information {
     public Information() {
     }
 
+    public Information(Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
+        this.ngayDang = ngayDang;
+        this.tieuDe = tieuDe;
+        this.noiDung = noiDung;
+        this.cmtAdmin = cmtAdmin;
+    }
+
     public Information(int id, Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
         this.id = id;
         this.ngayDang = ngayDang;
@@ -79,5 +86,9 @@ public class Information {
     
     public List<Information> getAllInfor() {
         return informationDao().getAllInfor();
+    }
+    
+    public int postNew(Information information) {
+        return informationDao().postNew(information);
     }
 }

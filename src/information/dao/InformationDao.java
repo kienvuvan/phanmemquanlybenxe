@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface InformationDao {
     List<Information> getAllInfor();
+    
+    int postNew(Information information);
 }

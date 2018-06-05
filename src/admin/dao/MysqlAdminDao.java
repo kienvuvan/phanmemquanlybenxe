@@ -112,4 +112,20 @@ public class MysqlAdminDao implements AdminDao {
             return RESULT_ERROR_SQL;
         }
     }
+
+    @Override
+    public String getNameAdmin(String cmt) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(GET_INFOR_ACCOUNT_ADMIN);
+            pstmt.setString(1, cmt);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("HoTen");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlAdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
 }

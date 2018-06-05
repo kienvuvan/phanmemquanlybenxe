@@ -14,9 +14,14 @@ import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
 import carowner.view.InforAccount;
 import guest.view.HomeGuestForm;
+import information.controller.InformationController;
+import information.dao.MysqlInformationDao;
+import information.model.Information;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -35,6 +40,7 @@ public class AdminForm extends javax.swing.JFrame {
     private final CarOwnerController coc;
     private final CarController carController;
     private final AdminController adminController;
+    private final InformationController informationController;
 
     /**
      * Creates new form AdminForm
@@ -47,6 +53,7 @@ public class AdminForm extends javax.swing.JFrame {
         coc = new CarOwnerController();
         carController = new CarController();
         adminController = new AdminController();
+        informationController = new InformationController();
         setVisiableManagerCarOwner();
         coc.displayInforCarOwner(jTable_inforCarOwner);
         coc.displayIdCarOwnerToComboBox(jComboBox_cmtChuXe);
@@ -60,6 +67,7 @@ public class AdminForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPopupMenu_utilsParkCar = new javax.swing.JPopupMenu();
@@ -150,6 +158,16 @@ public class AdminForm extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_inforPark = new javax.swing.JTable();
         jPanel_managerInformation = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jTextField_tieuDe = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane_noiDung = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable_infor = new javax.swing.JTable();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -160,7 +178,6 @@ public class AdminForm extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
 
         jMenuItem_updatePark.setText("Cập nhật");
         jMenuItem_updatePark.addActionListener(new java.awt.event.ActionListener() {
@@ -412,7 +429,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(120, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -450,7 +467,7 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -676,7 +693,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_managerCar.setLayout(jPanel_managerCarLayout);
         jPanel_managerCarLayout.setHorizontalGroup(
             jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 852, Short.MAX_VALUE)
+            .addGap(0, 890, Short.MAX_VALUE)
             .addGroup(jPanel_managerCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -744,7 +761,7 @@ public class AdminForm extends javax.swing.JFrame {
                         .addComponent(jTextField_chuNhaXe)
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox_thoiGianDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox_bsxNoSort, jLabel16});
@@ -754,30 +771,23 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel7Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox_thoiGianDo, jComboBox_viTriDoXe, jLabel23});
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel8.setLayout(new java.awt.GridBagLayout());
 
         jButton7.setText("Xếp xe vào bãi");
+        jButton7.setAlignmentY(0.0F);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton7)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(89, 71, 73, 69);
+        jPanel8.add(jButton7, gridBagConstraints);
 
         jTable_inforPark.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -815,19 +825,93 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
         );
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel29.setText("Tiêu đề thông báo : ");
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel30.setText("Nội dung thông báo : ");
+
+        jScrollPane4.setViewportView(jTextPane_noiDung);
+
+        jTable_infor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Tiêu đề", "Nội dung", "Ngày đăng", "Người đăng"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable_infor);
+
+        jButton8.setText("Đăng thông báo");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Cập nhật");
+
+        jButton10.setText("Xóa thông báo");
 
         javax.swing.GroupLayout jPanel_managerInformationLayout = new javax.swing.GroupLayout(jPanel_managerInformation);
         jPanel_managerInformation.setLayout(jPanel_managerInformationLayout);
         jPanel_managerInformationLayout.setHorizontalGroup(
             jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 852, Short.MAX_VALUE)
+            .addGroup(jPanel_managerInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel_managerInformationLayout.createSequentialGroup()
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4))
+                    .addGroup(jPanel_managerInformationLayout.createSequentialGroup()
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField_tieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
+            .addComponent(jScrollPane5)
         );
         jPanel_managerInformationLayout.setVerticalGroup(
             jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGroup(jPanel_managerInformationLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_tieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8))
+                .addGroup(jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_managerInformationLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel_managerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel_managerInformationLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton9)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
         );
+
+        jPanel_managerInformationLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton10, jButton8, jButton9, jLabel29, jTextField_tieuDe});
 
         jLayeredPane1.setLayer(jPanel_managerCarOwner, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel_managerCar, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -920,9 +1004,6 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem6);
-
-        jMenuItem7.setText("Sắp xếp xe");
-        jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
 
@@ -1238,20 +1319,43 @@ public class AdminForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe hủy vị trí đỗ");
         } else {
             if (JOptionPane.showConfirmDialog(null, "Bạn có hủy vị trí đỗ xe của xe này không ??", "Thông báo ",
-                JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+                    JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
                 String bsx = jTable_inforPark.getValueAt(index, 0).toString();
                 String viTriDo = jTable_inforPark.getValueAt(index, 1).toString();
                 String thoiGianDo = jTable_inforPark.getValueAt(index, 2).toString();
                 Car car = new Car(bsx, viTriDo, thoiGianDo);
-                if(carController.destroyParkCar(car)){
+                if (carController.destroyParkCar(car)) {
                     JOptionPane.showMessageDialog(this, "Hủy vị trí đỗ thành công");
                     setVisiableManagerParkCar();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                 }
             }
         }
     }//GEN-LAST:event_jMenuItem_deleteParkActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        String tieuDe = jTextField_tieuDe.getText();
+        String noiDung = jTextPane_noiDung.getText();
+        Information information = new Information(new Timestamp(Calendar.getInstance().getTimeInMillis()), tieuDe, noiDung, idAdmin);
+        int result = informationController.postNew(information);
+        switch (result) {
+            case MysqlInformationDao.RESULT_EMPTY:
+                JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng điền đầy đủ");
+                break;
+            case MysqlInformationDao.RESULT_POST_SAME:
+                JOptionPane.showMessageDialog(this, "Bài viết tương tự đã tồn tại");
+                break;
+            case MysqlInformationDao.RESULT_POST_SUCCESS:
+                JOptionPane.showMessageDialog(this, "Đăng thông báo thành công");
+                setVisiableManagerInformation();
+                break;
+            case MysqlInformationDao.RESULT_SQL_ERROR:
+                JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                break;
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1260,12 +1364,15 @@ public class AdminForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_updatePark;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -1300,7 +1407,9 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1317,7 +1426,6 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem_deletePark;
     private javax.swing.JMenuItem jMenuItem_updatePark;
@@ -1339,8 +1447,11 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JTable jTable_infor;
     private javax.swing.JTable jTable_inforCarOwner;
     private javax.swing.JTable jTable_inforPark;
     private javax.swing.JTable jTable_managerCar;
@@ -1355,6 +1466,8 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_nhaXeUpdate;
     private javax.swing.JTextField jTextField_sdt;
     private javax.swing.JTextField jTextField_ten;
+    private javax.swing.JTextField jTextField_tieuDe;
+    private javax.swing.JTextPane jTextPane_noiDung;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker_ngaySinh;
     // End of variables declaration//GEN-END:variables
 
@@ -1403,6 +1516,8 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_managerCar.setVisible(false);
         jPanel_managerParkCar.setVisible(false);
         jPanel_managerInformation.setVisible(true);
+        informationController.displayInformationToTable(jTable_infor);
+
     }
 
     private void setVisiableManagerParkCar() {

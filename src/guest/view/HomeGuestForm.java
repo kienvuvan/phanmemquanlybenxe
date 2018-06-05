@@ -380,7 +380,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trang thông tin đăng ký vé xe online bến xe Hà Nội");
 
-        jPanel_information.setLayout(new java.awt.GridLayout(2, 3));
+        jPanel_information.setLayout(new java.awt.GridLayout(1, 1));
 
         jLabel2.setText("Đầu ");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -886,10 +886,10 @@ public class HomeGuestForm extends javax.swing.JFrame {
         setVisiablePrevious();
         setVisiableNext();
         int checkStt = 0;
-        if ((float) listInformations.size() / 4 == listInformations.size() / 4) {
-            checkStt = listInformations.size() / 4;
+        if ((float) listInformations.size() == listInformations.size()) {
+            checkStt = listInformations.size();
         } else {
-            checkStt = listInformations.size() / 4 + 1;
+            checkStt = listInformations.size() + 1;
         }
         if (stt <= checkStt) {
             jPanel_information.removeAll();
@@ -942,15 +942,15 @@ public class HomeGuestForm extends javax.swing.JFrame {
 
     private void setVisiableNext() {
         int checkStt = 0;
-        if ((float) listInformations.size() / 4 == listInformations.size() / 4) {
-            checkStt = listInformations.size() / 4;
+        if ((float) listInformations.size()== listInformations.size()) {
+            checkStt = listInformations.size();
         } else {
-            checkStt = (int) (listInformations.size() / 4) + 1;
+            checkStt = (int) (listInformations.size()) + 1;
         }
         if (stt == checkStt) {
             jLabel_next.setVisible(false);
             System.out.println(stt + " " + checkStt);
-            System.out.println((float) listInformations.size() / 4);
+            System.out.println((float) listInformations.size());
         } else {
             jLabel_next.setVisible(true);
         }

@@ -122,4 +122,8 @@ public class Admin {
         return adminDao().updateInforAdmin(adminUpdate);
     }
 
+    public String getNameAdmin(String cmt) {
+        return adminDao().getNameAdmin(cmt);
+    }
+    
 }
