@@ -50,6 +50,8 @@ public class MysqlCarDao implements CarDao {
     private static final String CHECK_PARK_LOCATION = "SELECT COUNT(*) FROM vitrido WHERE ViTriDoXe = ? AND ThoiGianDo = ?";
     private static final String CHECK_CAR_PARKED = "SELECT COUNT(*) FROM vitrido WHERE BienSoXe = ? AND ThoiGianDo = ?";
     private static final String SORT_CAR_IN_PARK = "INSERT INTO vitrido VALUES(?,?,?)";
+    private static final String UPDATE_PARK = "UPDATE vitrido SET ViTriDoXe = ? WHERE BienSoXe =? AND ThoiGianDo = ?";
+    private static final String DESTROY_PARK_CAR = "DELETE FROM vitrido WHERE BienSoXe =? AND ViTriDoXe = ? AND ThoiGianDo = ?";
 
     private static MysqlCarDao mysqlCarDao;
 
@@ -255,6 +257,28 @@ public class MysqlCarDao implements CarDao {
     }
 
     @Override
+    public List<String> getTimeParked(String bsx) {
+        List<String> list = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(GET_ROUTE_BY_BSX);
+            pstm.setString(1, bsx);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String carRun = rs.getString("LichTrinh");
+                String arrivalTime = Utils.cutRoute(carRun).get(1);
+                rs.next();
+                String carOn = rs.getString("LichTrinh");
+                String timeOn = Utils.cutRoute(carOn).get(0);
+                list.add(arrivalTime + "-" + timeOn);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    @Override
     public List<Car> getAllCarParked() {
         List<Car> list = new ArrayList<>();
         try {
@@ -336,4 +360,45 @@ public class MysqlCarDao implements CarDao {
         return true;
     }
 
+    @Override
+    public int updatePark(Car carUpdate) {
+        if (StringUtils.isNullOrEmpty(carUpdate.getBsx()) || StringUtils.isNullOrEmpty(carUpdate.getViTri()) || StringUtils.isNullOrEmpty(carUpdate.getThoiGianDo())) {
+            return RESULT_EMPTY;
+        } else if (checkParkLocation(carUpdate.getViTri(), carUpdate.getThoiGianDo()) == false) {
+            return RESULT_PARKED;
+        } else {
+            try {
+                Connection connection = Mysql.getInstance().getConnection();
+                PreparedStatement pstm = connection.prepareCall(UPDATE_PARK);
+                pstm.setString(1, carUpdate.getViTri());
+                pstm.setString(2, carUpdate.getBsx());
+                pstm.setString(3, carUpdate.getThoiGianDo());
+                int check = pstm.executeUpdate();
+                if (check > 0) {
+                    return RESULT_SUCCESS;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return RESULT_ERROR_SQL;
+    }
+
+    @Override
+    public boolean destroyParkCar(Car car) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(DESTROY_PARK_CAR);
+            pstm.setString(1, car.getBsx());
+            pstm.setString(2, car.getViTri());
+            pstm.setString(3, car.getThoiGianDo());
+            int check = pstm.executeUpdate();
+            if (check > 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

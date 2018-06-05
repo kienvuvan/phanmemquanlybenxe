@@ -27,6 +27,8 @@ public interface CarDao {
     
     List<String> generateTimePark(String bsx);
     
+    List<String> getTimeParked(String bsx);
+    
     List<Car> getAllCarParked();
     
     boolean checkParkLocation(String viTriDo, String thoiGianDo);
@@ -34,4 +36,8 @@ public interface CarDao {
     boolean checkCarParked(String bsx, String thoiGianDo);
     
     int sortCarInPark(Car car);
+    
+    int updatePark(Car carUpdate);
+    
+    boolean destroyParkCar(Car car);
 }

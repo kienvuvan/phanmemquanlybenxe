@@ -53,7 +53,6 @@ public class CarController {
     public void addListItemToJCombobox(JComboBox jcb, List<String> list) {
         jcb.removeAllItems();
         if (list.isEmpty()) {
-
         } else {
             for (int i = 0; i < list.size(); i++) {
                 jcb.addItem(list.get(i));
@@ -61,35 +60,47 @@ public class CarController {
             jcb.setSelectedIndex(0);
         }
     }
-    
+
     public List<String> getAllParkLocation() {
         return car.getAllParkLocation();
     }
-    
+
     public List<String> generateTimePark(String bsx) {
         return car.generateTimePark(bsx);
     }
-    
+
+    public List<String> getTimeParked(String bsx) {
+        return car.getTimeParked(bsx);
+    }
+
     public List<Car> getAllCarParked() {
         return car.getAllCarParked();
     }
-    
-    public void displayInforCarParkedToTable(JTable jtb){
-        DefaultTableModel model = (DefaultTableModel)jtb.getModel();
+
+    public void displayInforCarParkedToTable(JTable jtb) {
+        DefaultTableModel model = (DefaultTableModel) jtb.getModel();
         model.setRowCount(0);
         List<Car> list = getAllCarParked();
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             model.addRow(new Object[]{"", "No data to display", ""});
-        }else{
-            for(int i =0;i<list.size(); i++){
+        } else {
+            for (int i = 0; i < list.size(); i++) {
                 Car car = list.get(i);
                 model.addRow(new Object[]{car.getBsx(), car.getViTri(), car.getThoiGianDo()});
             }
         }
         jtb.setModel(model);
     }
-    
+
     public int sortCarInPark(Car car) {
         return car.sortCarInPark(car);
+    }
+    
+    public int updatePark(Car carUpdate) {
+        return car.updatePark(carUpdate);
+    }
+    
+    public boolean destroyParkCar(Car car) {
+        return car.destroyParkCar(car);
     }
 }

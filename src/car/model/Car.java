@@ -157,6 +157,10 @@ public class Car {
         return carDao().generateTimePark(bsx);
     }
     
+    public List<String> getTimeParked(String bsx) {
+        return carDao().getTimeParked(bsx);
+    }
+    
     public List<Car> getAllCarParked() {
         return carDao().getAllCarParked();
     }
@@ -164,4 +168,13 @@ public class Car {
     public int sortCarInPark(Car car) {
         return carDao().sortCarInPark(car);
     }
+    
+    public int updatePark(Car carUpdate) {
+        return carDao().updatePark(carUpdate);
+    }
+    
+    public boolean destroyParkCar(Car car) {
+        return carDao().destroyParkCar(car);
+    }
+    
 }
