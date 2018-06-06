@@ -103,4 +103,25 @@ public class CarController {
     public boolean destroyParkCar(Car car) {
         return car.destroyParkCar(car);
     }
+    
+    public List<Car> getAllInforCarForOwner(String cmt) {
+        return car.getAllInforCarForOwner(cmt);
+    }
+    
+    public void displayInforCarForOwner(JTable jtb , List<Car> listCar){
+        DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
+        dtm.setRowCount(0);
+        if (listCar.size() > 0) {
+            for (int i = 0; i < listCar.size(); i++) {
+                Car car = listCar.get(i);
+                dtm.addRow(new Object[]{car.getId(), car.getBsx(), car.getSoGhe(), car.getGiaVe(), car.getLoTrinh(), car.getLichTrinh(), car.getViTri(), car.getThoiGianDo()});
+            }
+        }
+        jtb.setModel(dtm);
+    }
+    
+    public List<Car> searchInforCarForOwner(String cmt, String keySearch) {
+        return car.searchInforCarForOwner(cmt, keySearch);
+    }
+    
 }

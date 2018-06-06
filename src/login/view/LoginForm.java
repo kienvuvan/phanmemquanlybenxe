@@ -10,7 +10,7 @@ import admin.dao.MysqlAdminDao;
 import carowner.controller.CarOwnerController;
 import carowner.view.CarOwnerForm;
 import javax.swing.JOptionPane;
-import views.AdminForm;
+import admin.view.AdminForm;
 
 /**
  *

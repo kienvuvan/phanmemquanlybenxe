@@ -40,4 +40,8 @@ public interface CarDao {
     int updatePark(Car carUpdate);
     
     boolean destroyParkCar(Car car);
+    
+    List<Car> getAllInforCarForOwner(String cmt);
+    
+    List<Car> searchInforCarForOwner(String cmt, String keySearch);
 }

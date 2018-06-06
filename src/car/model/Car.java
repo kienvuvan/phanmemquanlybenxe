@@ -177,4 +177,11 @@ public class Car {
         return carDao().destroyParkCar(car);
     }
     
+    public List<Car> getAllInforCarForOwner(String cmt) {
+        return carDao().getAllInforCarForOwner(cmt);
+    }
+    
+    public List<Car> searchInforCarForOwner(String cmt, String keySearch) {
+        return carDao().searchInforCarForOwner(cmt, keySearch);
+    }
 }

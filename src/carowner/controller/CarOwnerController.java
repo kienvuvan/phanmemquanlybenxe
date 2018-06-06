@@ -18,25 +18,25 @@ import javax.swing.table.DefaultTableModel;
  * @author kienanh2903
  */
 public class CarOwnerController {
-    
+
     private CarOwner carOwner;
-    
+
     public CarOwnerController() {
         carOwner = new CarOwner();
     }
-    
+
     public int addCarOwner(CarOwner carOwner) {
         return this.carOwner.addCarOwner(carOwner);
     }
-    
+
     public int updateInforCarOwner(CarOwner carOwnerUpdate) {
         return carOwner.updateInforCarOwner(carOwnerUpdate);
     }
-    
+
     public List<CarOwner> getAllListCarOwner() {
         return carOwner.getAllListCarOwner();
     }
-    
+
     public void displayInforCarOwnerToJTable(JTable jtb) {
         List<CarOwner> listCarOwners = getAllListCarOwner();
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
@@ -50,11 +50,11 @@ public class CarOwnerController {
         }
         jtb.setModel(dtm);
     }
-    
+
     public List<CarOwner> getAllInforCarOwner() {
         return carOwner.getAllInforCarOwner();
     }
-    
+
     public void displayInforCarOwner(JTable jtb) {
         List<CarOwner> listCarOwners = getAllInforCarOwner();
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
@@ -66,7 +66,7 @@ public class CarOwnerController {
         }
         jtb.setModel(dtm);
     }
-    
+
     public void addCarOwnerToJTable(CarOwner co, JTable jtb) {
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
         SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
@@ -74,11 +74,11 @@ public class CarOwnerController {
             simple.format(co.getNgaySinh()), co.getDiaChi()});
         jtb.setModel(dtm);
     }
-    
+
     public List<String> getAllIdCarOwner() {
         return carOwner.getAllIdCarOwner();
     }
-    
+
     public void displayIdCarOwnerToComboBox(JComboBox jcb) {
         jcb.removeAllItems();
         List<String> listIdCarOwner = getAllIdCarOwner();
@@ -86,15 +86,15 @@ public class CarOwnerController {
             jcb.addItem(listIdCarOwner.get(i));
         }
     }
-    
+
     public String getNameByIdCarOwner(String id) {
         return carOwner.getNameByIdCarOwner(id);
     }
-    
+
     public List<Car> getAllCarByIdCarOwner(String id) {
         return carOwner.getAllCarByIdCarOwner(id);
     }
-    
+
     public void displayListCarToJTable(JTable jtb, String id) {
         List<Car> listCar = getAllCarByIdCarOwner(id);
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
@@ -107,16 +107,17 @@ public class CarOwnerController {
         }
         jtb.setModel(dtm);
     }
-    
+
     public int loginCarOwner(String user, String pass) {
         return carOwner.loginCarOwner(user, pass);
     }
-    
-    public CarOwner getInforCarOwner (String cmt){
+
+    public CarOwner getInforCarOwner(String cmt) {
         return carOwner.getInforCarOwner(cmt);
     }
-    
+
     public String getGarageByBsx(String bsx) {
         return carOwner.getGarageByBsx(bsx);
     }
+
 }

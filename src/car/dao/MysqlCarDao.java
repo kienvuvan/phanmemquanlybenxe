@@ -42,6 +42,17 @@ public class MysqlCarDao implements CarDao {
     private static final String ADD_CAR = "INSERT INTO xe VALUES(?,?,?,?,?,?,?)";
     private static final String GET_ID_MAX = "SELECT MAX(Id) FROM xe";
     private static final String GET_CAR_BY_OWNER = " SELECT * FROM xe, chuxe, vitrido WHERE xe.CmtNhaXe = chuxe.Cmt AND xe.BienSoXe = vitrido.BienSoXe AND chuxe.Cmt = ? ";
+    private static final String GET_ALL_INFOR_CAR_FOR_OWNER = "SELECT * FROM xe, vitrido WHERE xe.BienSoXe = vitrido.BienSoXe AND xe.CmtNhaXe = ? "
+            + "AND (LEFT(ThoiGianDo,5) = RIGHT(xe.LichTrinh,5) "
+            + "OR LEFT(ThoiGianDo,4) = RIGHT(xe.LichTrinh,4) "
+            + "OR RIGHT(ThoiGianDo,5) = LEFT(xe.LichTrinh,5) "
+            + "OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) ";
+    private static final String SEARCH_INFOR_CAR_FOR_OWNER = "SELECT * FROM xe, vitrido WHERE xe.BienSoXe = vitrido.BienSoXe AND xe.CmtNhaXe = ? "
+            + "AND (LEFT(ThoiGianDo,5) = RIGHT(xe.LichTrinh,5) "
+            + "OR LEFT(ThoiGianDo,4) = RIGHT(xe.LichTrinh,4) "
+            + "OR RIGHT(ThoiGianDo,5) = LEFT(xe.LichTrinh,5) "
+            + "OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) AND (Id LIKE ? OR xe.BienSoXe LIKE ? OR SoGhe LIKE ? OR GiaVe LIKE ? OR LoTrinh LIKE ? "
+            + "OR LichTrinh LIKE ? OR ViTriDoXe LIKE ? OR ThoiGianDo LIKE ?)";
     private static final String GET_BSX = "SELECT BienSoXe,COUNT(BienSoXe) FROM xe GROUP BY BienSoXe";
     private static final String GET_BSX_PARKED = "SELECT BienSoXe, COUNT(BienSoXe) FROM vitrido GROUP BY BienSoXe";
     private static final String GET_ALL_PARK_LOCATION = "SELECT ViTriDoXe FROM baixe";
@@ -400,5 +411,67 @@ public class MysqlCarDao implements CarDao {
             Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public List<Car> getAllInforCarForOwner(String cmt) {
+        List<Car> listCars = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(GET_ALL_INFOR_CAR_FOR_OWNER);
+            pstm.setString(1, cmt);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String bienSoXe = rs.getString("BienSoXe");
+                String nhaXe = rs.getString("CmtNhaXe");
+                int soGhe = rs.getInt("SoGhe");
+                String loTrinh = rs.getString("LoTrinh");
+                String lichTrinh = rs.getString("LichTrinh");
+                Double giaVe = rs.getDouble("GiaVe");
+                String vitri = rs.getString("ViTriDoXe");
+                String thoiGianDo = rs.getString("ThoiGianDo");
+                Car car = new Car(id, bienSoXe, nhaXe, soGhe, giaVe, loTrinh, lichTrinh, vitri, thoiGianDo);
+                listCars.add(car);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCars;
+    }
+
+    @Override
+    public List<Car> searchInforCarForOwner(String cmt, String keySearch) {
+        List<Car> listCars = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(SEARCH_INFOR_CAR_FOR_OWNER);
+            pstm.setString(1, cmt);
+            pstm.setString(2, "%" + keySearch + "%");
+            pstm.setString(3, "%" + keySearch + "%");
+            pstm.setString(4, "%" + keySearch + "%");
+            pstm.setString(5, "%" + keySearch + "%");
+            pstm.setString(6, "%" + keySearch + "%");
+            pstm.setString(7, "%" + keySearch + "%");
+            pstm.setString(8, "%" + keySearch + "%");
+            pstm.setString(9, "%" + keySearch + "%");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String bienSoXe = rs.getString("BienSoXe");
+                String nhaXe = rs.getString("CmtNhaXe");
+                int soGhe = rs.getInt("SoGhe");
+                String loTrinh = rs.getString("LoTrinh");
+                String lichTrinh = rs.getString("LichTrinh");
+                Double giaVe = rs.getDouble("GiaVe");
+                String vitri = rs.getString("ViTriDoXe");
+                String thoiGianDo = rs.getString("ThoiGianDo");
+                Car car = new Car(id, bienSoXe, nhaXe, soGhe, giaVe, loTrinh, lichTrinh, vitri, thoiGianDo);
+                listCars.add(car);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCars;
     }
 }
