@@ -41,6 +41,7 @@ public class AdminForm extends javax.swing.JFrame {
     private final CarController carController;
     private final AdminController adminController;
     private final InformationController informationController;
+    private int id = 0;
 
     /**
      * Creates new form AdminForm
@@ -852,6 +853,11 @@ public class AdminForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable_infor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_inforMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable_infor);
 
         jButton8.setText("Đăng thông báo");
@@ -862,8 +868,18 @@ public class AdminForm extends javax.swing.JFrame {
         });
 
         jButton9.setText("Cập nhật");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Xóa thông báo");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_managerInformationLayout = new javax.swing.GroupLayout(jPanel_managerInformation);
         jPanel_managerInformation.setLayout(jPanel_managerInformationLayout);
@@ -1356,6 +1372,64 @@ public class AdminForm extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTable_inforMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_inforMouseClicked
+        // TODO add your handling code here:
+        int index = jTable_infor.getSelectedRow();
+        jTextField_tieuDe.setText(jTable_infor.getValueAt(index, 1).toString());
+        jTextPane_noiDung.setText(jTable_infor.getValueAt(index, 2).toString());
+        id = Integer.parseInt(jTable_infor.getValueAt(index, 0).toString());
+    }//GEN-LAST:event_jTable_inforMouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        String tieuDe = jTextField_tieuDe.getText();
+        String noiDung = jTextPane_noiDung.getText();
+        int index = jTable_infor.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn thông báo cần cập nhật");
+        } else {
+            Information information = new Information(id, new Timestamp(Calendar.getInstance().getTimeInMillis()), tieuDe, noiDung, idAdmin);
+            if (JOptionPane.showConfirmDialog(null, "Bạn có cập nhật thông báo này không ??", "Thông báo ",
+                    JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+                int result = informationController.updateNew(information);
+                switch (result) {
+                    case MysqlInformationDao.RESULT_EMPTY:
+                        JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng điền đầy đủ");
+                        break;
+                    case MysqlInformationDao.RESULT_POST_SAME:
+                        JOptionPane.showMessageDialog(this, "Bài viết tương tự đã tồn tại");
+                        break;
+                    case MysqlInformationDao.RESULT_POST_SUCCESS:
+                        JOptionPane.showMessageDialog(this, "Cập nhật thông báo thành công");
+                        setVisiableManagerInformation();
+                        break;
+                    case MysqlInformationDao.RESULT_SQL_ERROR:
+                        JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                        break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        int index = jTable_infor.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn thông báo cần xóa");
+        } else {
+            if (JOptionPane.showConfirmDialog(null, "Bạn có xoá thông báo này không ??", "Thông báo ",
+                    JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+                boolean result = informationController.deleteNew(id);
+                if(result){
+                    JOptionPane.showMessageDialog(this, "Xóa thông báo thành công");
+                    setVisiableManagerInformation();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments

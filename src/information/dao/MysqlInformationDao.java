@@ -27,6 +27,8 @@ public class MysqlInformationDao implements InformationDao {
 
     private static final String GET_ALL_INFOR = "SELECT * FROM thongbao ORDER BY Ngay DESC";
     private static final String POST_NEW = "INSERT INTO thongbao VALUES(?,?,?,?,?)";
+    private static final String UPDATE_NEW = "UPDATE thongbao SET TieuDe = ? , NoiDung = ?, CmtNhanVien = ? WHERE Id = ?";
+    private static final String DELETE_NEW = "DELETE FROM thongbao WHERE Id = ?";
     private static final String GET_MAX_ID = "SELECT MAX(id) FROM thongbao";
     private static final String CHECK_POST = "SELECT COUNT(*) FROM thongbao WHERE TieuDe =? AND NoiDung = ?";
 
@@ -108,6 +110,47 @@ public class MysqlInformationDao implements InformationDao {
                 if (rs.getInt(1) > 0) {
                     return true;
                 }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public int updateNew(Information information) {
+        if (StringUtils.isNullOrEmpty(information.getTieuDe()) || StringUtils.isNullOrEmpty(information.getNoiDung())) {
+            return RESULT_EMPTY;
+        } else if (checkPost(information)) {
+            return RESULT_POST_SAME;
+        } else {
+            try {
+                Connection connection = Mysql.getInstance().getConnection();
+                PreparedStatement pstm = connection.prepareCall(UPDATE_NEW);
+                pstm.setString(1, information.getTieuDe());
+                pstm.setString(2, information.getNoiDung());
+                pstm.setString(3, information.getCmtAdmin());
+                pstm.setInt(4, information.getId());
+                int check = pstm.executeUpdate();
+                if (check > 0) {
+                    return RESULT_POST_SUCCESS;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return RESULT_SQL_ERROR;
+        }
+    }
+
+    @Override
+    public boolean deleteNew(int id) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(DELETE_NEW);
+            pstm.setInt(1, id);
+            int check = pstm.executeUpdate();
+            if(check > 0){
+                return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -68,7 +68,15 @@ public class InformationController {
        jtb.setModel(model);
     }
     
-    public int postNew(Information information) {
-        return information.postNew(information);
+    public int postNew(Information infor) {
+        return information.postNew(infor);
+    }
+    
+    public int updateNew(Information infor) {
+        return information.updateNew(infor);
+    }
+    
+    public boolean deleteNew(int id) {
+        return information.deleteNew(id);
     }
 }

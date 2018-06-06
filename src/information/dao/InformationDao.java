@@ -16,4 +16,8 @@ public interface InformationDao {
     List<Information> getAllInfor();
     
     int postNew(Information information);
+    
+    int updateNew(Information information);
+    
+    boolean deleteNew(int id);
 }

@@ -91,4 +91,12 @@ public class Information {
     public int postNew(Information information) {
         return informationDao().postNew(information);
     }
+    
+    public int updateNew(Information information) {
+        return informationDao().updateNew(information);
+    }
+    
+    public boolean deleteNew(int id) {
+        return informationDao().deleteNew(id);
+    }
 }
