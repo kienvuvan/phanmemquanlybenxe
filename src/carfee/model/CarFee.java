@@ -5,37 +5,67 @@
  */
 package carfee.model;
 
+import carfee.dao.MysqlCarFeeDao;
+import java.sql.Date;
+import java.util.List;
+
 /**
  *
  * @author DELL
  */
 public class CarFee {
-    private String carID;
-    private String time;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCmtAdmin() {
+        return cmtAdmin;
+    }
+
+    public void setCmtAdmin(String cmtAdmin) {
+        this.cmtAdmin = cmtAdmin;
+    }
+    private String idCarOwner;
+    private String name;
+    private Date time;
     private double fee;
+    private String cmtAdmin;
 
     public CarFee() {
     }
 
-    public CarFee(String carID, String time, double fee) {
-        this.carID = carID;
+    public CarFee(String idCarOwner, Date time, double fee) {
+        this.idCarOwner = idCarOwner;
         this.time = time;
         this.fee = fee;
     }
 
-    public String getCarID() {
-        return carID;
+    public CarFee(String idCarOwner, String name, Date time, double fee, String cmtAdmin) {
+        this.idCarOwner = idCarOwner;
+        this.name = name;
+        this.time = time;
+        this.fee = fee;
+        this.cmtAdmin = cmtAdmin;
     }
 
-    public void setCarID(String carID) {
-        this.carID = carID;
+    public String getIdCarOwner() {
+        return idCarOwner;
     }
 
-    public String getTime() {
+    public void setIdCarOwner(String idCarOwner) {
+        this.idCarOwner = idCarOwner;
+    }
+
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -47,5 +77,15 @@ public class CarFee {
         this.fee = fee;
     }
     
+    public List<CarFee> getAllInforCarFee() {
+        return new MysqlCarFeeDao().getAllInforCarFee();
+    }
     
+    public boolean parkingFeeCar(String cmtAdmin) {
+        return new MysqlCarFeeDao().parkingFeeCar(cmtAdmin);
+    }
+    
+    public int checkDateParkingFee(Date date) {
+        return new MysqlCarFeeDao().checkDateParkingFee(date);
+    }
 }

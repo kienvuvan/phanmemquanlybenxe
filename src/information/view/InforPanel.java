@@ -59,6 +59,7 @@ public class InforPanel extends javax.swing.JPanel {
 
         jLabel_stt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        jTextPane_noiDung.setEditable(false);
         jScrollPane2.setViewportView(jTextPane_noiDung);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
