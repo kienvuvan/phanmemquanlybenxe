@@ -5,9 +5,11 @@
  */
 package cartravel.controller;
 
+import cartravel.dao.MysqlCarTravelDao;
 import cartravel.model.CarTravel;
 import guest.model.Guest;
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -28,16 +30,20 @@ public class CarTravelController {
     public boolean checkCarTravelIdExit(String maChuyenXe) {
         return carTravel.checkCarTravelIdExit(maChuyenXe);
     }
-    
+
     public int bookTicket(CarTravel carTravel, Guest guest) {
         return this.carTravel.bookTicket(carTravel, guest);
     }
-    
-    public boolean checkTicketForDestroy(String maChuyenXe, String cmt){
+
+    public boolean checkTicketForDestroy(String maChuyenXe, String cmt) {
         return carTravel.checkTicketForDestroy(maChuyenXe, cmt);
     }
-    
+
     public int unbookTicket(String maChuyenXe, String cmt) {
         return carTravel.unbookTicket(maChuyenXe, cmt);
+    }
+
+    public boolean creatCarTravel() {
+        return carTravel.creatCarTravel();
     }
 }

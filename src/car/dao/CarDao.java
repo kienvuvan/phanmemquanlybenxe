@@ -44,4 +44,6 @@ public interface CarDao {
     List<Car> getAllInforCarForOwner(String cmt);
     
     List<Car> searchInforCarForOwner(String cmt, String keySearch);
+    
+    List<Car> getAllCar();
 }

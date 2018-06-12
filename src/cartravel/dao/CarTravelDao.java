@@ -17,6 +17,12 @@ public interface CarTravelDao {
 
     String generateCarTravelId(String bienSoXe, Date ngayDi, String thoiGian);
     
+    boolean creatCarTravel();
+    
+    int getMaxIdCarTravel(String bsx, Date ngayDi);
+    
+    boolean checkExitCarTravel(String bsx, Date ngayDi, String thoiGian);
+    
     int bookTicket(CarTravel carTravel, Guest guest);
     
     boolean checkCarTravelIdExit(String maChuyenXe);

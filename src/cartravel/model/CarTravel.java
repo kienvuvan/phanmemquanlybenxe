@@ -103,4 +103,8 @@ public class CarTravel {
     public int unbookTicket(String maChuyenXe, String cmt) {
         return carTravelDao().unbookTicket(maChuyenXe, cmt);
     }
+    
+    public boolean creatCarTravel() {
+        return carTravelDao().creatCarTravel();
+    }
 }

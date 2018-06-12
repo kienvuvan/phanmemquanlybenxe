@@ -155,11 +155,11 @@ public class Utils {
     }
     
     public static void main(String[] args) {
-//        Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
-//        System.out.println(generateCarTravelId("17M2-1234", dateNow));
+        Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
+        System.out.println(generateCarTravelId("17M2-1234", dateNow));
 ////        System.out.println(isCmt("034097001988"));
 //        System.out.println(isBsx("17M2-12345"));
 //        System.out.println(reverseRoute("Hà Nội - Thái Bình"));
-        System.out.println(generateCarReturn("6h31-9h00"));
+//        System.out.println(generateCarReturn("6h31-9h00"));
     }
 }

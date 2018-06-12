@@ -5,6 +5,8 @@
  */
 package cartravel.dao;
 
+import car.controller.CarController;
+import car.model.Car;
 import cartravel.controller.CarTravelController;
 import cartravel.model.CarTravel;
 import com.mysql.cj.util.StringUtils;
@@ -16,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mysql.Mysql;
@@ -34,7 +37,9 @@ public class MysqlCarTravelDao implements CarTravelDao {
     private static final String ADD_INFOR_CAR_TRAVEL = "INSERT INTO chuyenxe VALUES(?,?,?,?)";
     private static final String CHECK_TICKET_FOR_DESTROY = "SELECT COUNT(*) FROM chitietchuyenxe WHERE MaChuyenXe = ?  AND MaHanhKhach = ?";
     private static final String UN_BOOKTICKET = "DELETE FROM chitietchuyenxe WHERE MaChuyenXe = ? AND MaHanhKhach = ?";
-    
+    private static final String CHECK_EXIT_CAR_TRAVEL = "SELECT COUNT(*) FROM chuyenxe WHERE BienSoXe =? AND Ngay =? AND ThoiGian =?";
+    private static final String GET_MAX_ID_CAR_TRAVEL = "SELECT MAX(MaChuyenXe) FROM `chuyenxe` WHERE Ngay = ? AND BienSoXe = ?";
+
     public static final int RESULT_DATE_NULL = 0;
     public static final int RESULT_DATE_BORN_NULL = 1;
     public static final int RESULT_EMPTY = 2;
@@ -251,5 +256,87 @@ public class MysqlCarTravelDao implements CarTravelDao {
             }
             return RESULT_EXCEPTION;
         }
+    }
+
+    @Override
+    public boolean creatCarTravel() {
+        int checkCount = 0;
+        int checkCountExit = 0;
+        try {
+            Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
+            CarController carController = new CarController();
+            List<Car> listCars = carController.getAllCar();
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(ADD_INFOR_CAR_TRAVEL);
+            for (Car car : listCars) {
+                String bsx = car.getBsx();
+                String thoiGian = car.getLichTrinh();
+                if (checkExitCarTravel(bsx, dateNow, thoiGian) == false) {
+                    int maxIdCarTravel = getMaxIdCarTravel(bsx, dateNow);
+                    String idCarTravel = Utils.generateCarTravelId(bsx, dateNow) + maxIdCarTravel;
+                    pstm.setString(1, idCarTravel);
+                    pstm.setString(2, bsx);
+                    pstm.setDate(3, dateNow);
+                    pstm.setString(4, thoiGian);
+                    int check = pstm.executeUpdate();
+                    if (check > 0) {
+                        checkCount++;
+                    }
+                } else {
+                    checkCountExit++;
+                }
+            }
+            if (checkCount + checkCountExit == listCars.size()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkExitCarTravel(String bsx, Date ngayDi, String thoiGian) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(CHECK_EXIT_CAR_TRAVEL);
+            pstm.setString(1, bsx);
+            pstm.setDate(2, ngayDi);
+            pstm.setString(3, thoiGian);
+            ResultSet rs = pstm.executeQuery();
+            int count = 0;
+            if (rs.next()) {
+                count = rs.getInt(1);
+                if (count > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public int getMaxIdCarTravel(String bsx, Date ngayDi) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(GET_MAX_ID_CAR_TRAVEL);
+            pstm.setDate(1, ngayDi);
+            pstm.setString(2, bsx);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                if (rs.getString(1) == null) {
+                    return 1;
+                } else {
+                    String idCarTravel = rs.getString(1);
+                    String mcx = Utils.generateCarTravelId(bsx, ngayDi);
+                    return Integer.parseInt(idCarTravel.substring(mcx.length(), idCarTravel.length())) + 1;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
     }
 }

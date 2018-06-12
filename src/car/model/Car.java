@@ -67,6 +67,11 @@ public class Car {
     public Car() {
     }
 
+    public Car(String bsx, String lichTrinh) {
+        this.bsx = bsx;
+        this.lichTrinh = lichTrinh;
+    }
+
     public Car(String bsx, String viTri, String thoiGianDo) {
         this.bsx = bsx;
         this.viTri = viTri;
@@ -183,5 +188,9 @@ public class Car {
     
     public List<Car> searchInforCarForOwner(String cmt, String keySearch) {
         return carDao().searchInforCarForOwner(cmt, keySearch);
+    }
+    
+    public List<Car> getAllCar() {
+        return carDao().getAllCar();
     }
 }

@@ -5,6 +5,8 @@
  */
 package carfee.model;
 
+import car.dao.MysqlCarDao;
+import carfee.dao.CarFeeDao;
 import carfee.dao.MysqlCarFeeDao;
 import java.sql.Date;
 import java.util.List;
@@ -77,15 +79,23 @@ public class CarFee {
         this.fee = fee;
     }
     
+    public CarFeeDao carFeeDao() {
+        return new MysqlCarFeeDao();
+    }
+    
     public List<CarFee> getAllInforCarFee() {
-        return new MysqlCarFeeDao().getAllInforCarFee();
+        return carFeeDao().getAllInforCarFee();
     }
     
     public boolean parkingFeeCar(String cmtAdmin) {
-        return new MysqlCarFeeDao().parkingFeeCar(cmtAdmin);
+        return carFeeDao().parkingFeeCar(cmtAdmin);
     }
     
     public int checkDateParkingFee(Date date) {
-        return new MysqlCarFeeDao().checkDateParkingFee(date);
+        return carFeeDao().checkDateParkingFee(date);
+    }
+    
+    public List<CarFee> searchInforCarFee(String keySearch) {
+        return carFeeDao().searchInforCarFee(keySearch);
     }
 }

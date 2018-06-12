@@ -14,9 +14,13 @@ import java.util.List;
  * @author kienanh2903
  */
 public interface CarFeeDao {
+
     boolean parkingFeeCar(String cmtAdmin);
-    
+
     List<CarFee> getAllInforCarFee();
-    
+
+    List<CarFee> searchInforCarFee(String keySearch);
+
     int checkDateParkingFee(Date date);
+
 }

@@ -124,4 +124,8 @@ public class CarController {
         return car.searchInforCarForOwner(cmt, keySearch);
     }
     
+    public List<Car> getAllCar() {
+        return car.getAllCar();
+    }
+    
 }

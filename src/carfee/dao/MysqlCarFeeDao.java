@@ -26,14 +26,18 @@ import mysql.Mysql;
  */
 public class MysqlCarFeeDao implements CarFeeDao {
 
-    private static final String GET_ALL_CAR_FOR_OWNER = "SELECT DISTINCT xe.BienSoXe,xe.SoGhe,ThoiGianDo FROM xe, vitrido WHERE xe.BienSoXe = vitrido.BienSoXe AND xe.CmtNhaXe = ? "
-            + "AND (LEFT(ThoiGianDo,5) = RIGHT(xe.LichTrinh,5) "
-            + "OR LEFT(ThoiGianDo,4) = RIGHT(xe.LichTrinh,4) "
-            + "OR RIGHT(ThoiGianDo,5) = LEFT(xe.LichTrinh,5) "
-            + "OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) ";
+    private static final String GET_ALL_CAR_FOR_OWNER = "SELECT DISTINCT xe.BienSoXe,xe.SoGhe,ThoiGianDo , COUNT(xe.BienSoXe) FROM xe,vitrido WHERE xe.BienSoXe = vitrido.BienSoXe AND xe.CmtNhaXe =? \n"
+            + "AND (LEFT(ThoiGianDo,5) = RIGHT(xe.LichTrinh,5) \n"
+            + "OR LEFT(ThoiGianDo,4) = RIGHT(xe.LichTrinh,4) \n"
+            + "OR RIGHT(ThoiGianDo,5) = LEFT(xe.LichTrinh,5) \n"
+            + "OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) GROUP BY xe.BienSoXe";
+    private static final String INSERT_FEE_CAR_DETAIL = "INSERT INTO chitietchiphi VALUES(?,?,?,?,?)";
     private static final String PARKING_FEE_CAR = "INSERT INTO chiphi VALUES(?,?,?,?)";
     private static final String GET_ALL_INFOR_CAR_FEE = "SELECT CmtChuXe, chuxe.HoTen, Phi, Ngay, admin.HoTen FROM chiphi,chuxe,admin "
             + "WHERE chiphi.CmtChuXe = chuxe.Cmt AND admin.Cmt = chiphi.CmtAdmin ORDER BY Ngay DESC";
+    private static final String SEARCH_INFOR_CAR_FEE = "SELECT CmtChuXe, chuxe.HoTen, Phi, Ngay, admin.HoTen FROM chiphi,chuxe,admin "
+            + "WHERE chiphi.CmtChuXe = chuxe.Cmt AND admin.Cmt = chiphi.CmtAdmin AND (CmtChuXe LIKE ? OR chuxe.HoTen LIKE ? "
+            + "OR Phi LIKE ? OR Ngay LIKE ? OR admin.HoTen LIKE ? )ORDER BY Ngay DESC";
     private static final String CHECK_DATE_PARKING_FEE = "SELECT MAX(Ngay), MIN(Ngay) FROM chiphi";
 
     public static final int NOT_ENOUGH_DAY = 0;
@@ -54,23 +58,34 @@ public class MysqlCarFeeDao implements CarFeeDao {
                 PreparedStatement pstm = connection.prepareCall(GET_ALL_CAR_FOR_OWNER);
                 pstm.setString(1, listIdCarOwner.get(i));
                 ResultSet rs = pstm.executeQuery();
-                double feePark = 0;
+                double feeParkOwner = 0;
                 while (rs.next()) {
+                    String bsx = rs.getString("BienSoXe");
                     int soGhe = rs.getInt("SoGhe");
+                    int soChuyen = rs.getInt(4) / 2;
+                    double feeCar = 0;
                     if (soGhe < 30) {
-                        feePark += 40000 * 30;
+                        feeCar = 40000 * 30;
                     } else if (soGhe <= 50) {
-                        feePark += 60000 * 30;
+                        feeCar = 60000 * 30;
                     } else {
-                        feePark += 80000 * 30;
+                        feeCar = 80000 * 30;
                     }
+                    feeParkOwner += feeCar * soChuyen;
+                    PreparedStatement pstm1 = connection.prepareCall(INSERT_FEE_CAR_DETAIL);
+                    pstm1.setString(1, listIdCarOwner.get(i));
+                    pstm1.setString(2, bsx);
+                    pstm1.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
+                    pstm1.setInt(4, soChuyen);
+                    pstm1.setDouble(5, feeCar);
+                    pstm1.executeUpdate();
                 }
-                PreparedStatement pstm1 = connection.prepareCall(PARKING_FEE_CAR);
-                pstm1.setString(1, listIdCarOwner.get(i));
-                pstm1.setDouble(2, feePark);
-                pstm1.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
-                pstm1.setString(4, cmtAdmin);
-                int check = pstm1.executeUpdate();
+                PreparedStatement pstm2 = connection.prepareCall(PARKING_FEE_CAR);
+                pstm2.setString(1, listIdCarOwner.get(i));
+                pstm2.setDouble(2, feeParkOwner);
+                pstm2.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
+                pstm2.setString(4, cmtAdmin);
+                int check = pstm2.executeUpdate();
                 if (check > 0) {
                     checkCount++;
                 }
@@ -118,18 +133,22 @@ public class MysqlCarFeeDao implements CarFeeDao {
                 Statement stm = connection.createStatement();
                 ResultSet rs = stm.executeQuery(CHECK_DATE_PARKING_FEE);
                 if (rs.next()) {
-                    Date dateMax = rs.getDate(1);
-                    Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(dateMax);
-                    Date dateMin = rs.getDate(2);
-                    if (date.before(dateMin)) {
-                        return NGAY_THU_NHO_HON_NGAY_MIN;
-                    } else if (date.after(dateMin) && date.before(dateMax)) {
-                        return NGAY_THU_DA_TON_TAI;
-                    } else if (calendar1.get(Calendar.MONTH) +1 < calendar.get(Calendar.MONTH)) {
-                        return NGAY_THU_LON_HON_QUA_NGAY_MAX;
-                    } else {
+                    if (rs.getDate(1) == null) {
                         return NGAY_THU_HOP_LE;
+                    } else {
+                        Date dateMax = rs.getDate(1);
+                        Calendar calendar1 = Calendar.getInstance();
+                        calendar1.setTime(dateMax);
+                        Date dateMin = rs.getDate(2);
+                        if (date.before(dateMin)) {
+                            return NGAY_THU_NHO_HON_NGAY_MIN;
+                        } else if (date.after(dateMin) && date.before(dateMax)) {
+                            return NGAY_THU_DA_TON_TAI;
+                        } else if (calendar1.get(Calendar.MONTH) + 1 < calendar.get(Calendar.MONTH)) {
+                            return NGAY_THU_LON_HON_QUA_NGAY_MAX;
+                        } else {
+                            return NGAY_THU_HOP_LE;
+                        }
                     }
                 }
             } catch (SQLException ex) {
@@ -137,5 +156,32 @@ public class MysqlCarFeeDao implements CarFeeDao {
             }
         }
         return ERROR_SQL;
+    }
+
+    @Override
+    public List<CarFee> searchInforCarFee(String keySearch) {
+        List<CarFee> listCarFee = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(SEARCH_INFOR_CAR_FEE);
+            pstm.setString(1, "%" + keySearch + "%");
+            pstm.setString(2, "%" + keySearch + "%");
+            pstm.setString(3, "%" + keySearch + "%");
+            pstm.setString(4, "%" + keySearch + "%");
+            pstm.setString(5, "%" + keySearch + "%");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String cmtChuXe = rs.getString("CmtChuXe");
+                String ten = rs.getString("chuxe.HoTen");
+                double phi = rs.getDouble("Phi");
+                Date ngay = rs.getDate("Ngay");
+                String tenAdmin = rs.getString("admin.HoTen");
+                CarFee carFee = new CarFee(cmtChuXe, ten, ngay, phi, tenAdmin);
+                listCarFee.add(carFee);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarFeeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarFee;
     }
 }

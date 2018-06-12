@@ -53,6 +53,8 @@ public class MysqlCarDao implements CarDao {
             + "OR RIGHT(ThoiGianDo,5) = LEFT(xe.LichTrinh,5) "
             + "OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) AND (Id LIKE ? OR xe.BienSoXe LIKE ? OR SoGhe LIKE ? OR GiaVe LIKE ? OR LoTrinh LIKE ? "
             + "OR LichTrinh LIKE ? OR ViTriDoXe LIKE ? OR ThoiGianDo LIKE ?)";
+    private static final String GET_ALL_CAR = "SELECT xe.BienSoXe, xe.LichTrinh FROM xe";
+    
     private static final String GET_BSX = "SELECT BienSoXe,COUNT(BienSoXe) FROM xe GROUP BY BienSoXe";
     private static final String GET_BSX_PARKED = "SELECT BienSoXe, COUNT(BienSoXe) FROM vitrido GROUP BY BienSoXe";
     private static final String GET_ALL_PARK_LOCATION = "SELECT ViTriDoXe FROM baixe";
@@ -467,6 +469,25 @@ public class MysqlCarDao implements CarDao {
                 String vitri = rs.getString("ViTriDoXe");
                 String thoiGianDo = rs.getString("ThoiGianDo");
                 Car car = new Car(id, bienSoXe, nhaXe, soGhe, giaVe, loTrinh, lichTrinh, vitri, thoiGianDo);
+                listCars.add(car);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCars;
+    }
+
+    @Override
+    public List<Car> getAllCar() {
+        List<Car> listCars = new ArrayList();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            Statement stm = connection.createStatement();
+            ResultSet rs  = stm.executeQuery(GET_ALL_CAR);
+            while(rs.next()){
+                String bsx = rs.getString("xe.BienSoXe");
+                String lichTrinh = rs.getString("xe.LichTrinh");
+                Car car = new Car(bsx, lichTrinh);
                 listCars.add(car);
             }
         } catch (SQLException ex) {

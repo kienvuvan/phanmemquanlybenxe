@@ -10,11 +10,13 @@ import car.controller.CarController;
 import car.dao.MysqlCarDao;
 import car.model.Car;
 import carfee.controller.CarFeeController;
+import carfee.controller.CarFeeDetailController;
 import carfee.dao.MysqlCarFeeDao;
 import carowner.controller.CarOwnerController;
 import carowner.dao.MysqlCarOwnerDao;
 import carowner.model.CarOwner;
 import carowner.view.InforAccount;
+import cartravel.controller.CarTravelController;
 import guest.view.HomeGuestForm;
 import information.controller.InformationController;
 import information.dao.MysqlInformationDao;
@@ -44,6 +46,7 @@ public class AdminForm extends javax.swing.JFrame {
     private final AdminController adminController;
     private final InformationController informationController;
     private final CarFeeController carFeeController;
+    private final CarTravelController carTravelController;
     private int id = 0;
 
     /**
@@ -62,6 +65,7 @@ public class AdminForm extends javax.swing.JFrame {
         setVisiableManagerCarOwner();
         coc.displayInforCarOwner(jTable_inforCarOwner);
         coc.displayIdCarOwnerToComboBox(jComboBox_cmtChuXe);
+        carTravelController = new CarTravelController();
     }
 
     /**
@@ -89,6 +93,30 @@ public class AdminForm extends javax.swing.JFrame {
         jComboBox_thoiGianDoUpdate = new javax.swing.JComboBox<>();
         jTextField_bsxUpdate = new javax.swing.JTextField();
         jButton_updatePark = new javax.swing.JButton();
+        jPopupMenu_feeCar = new javax.swing.JPopupMenu();
+        jMenuItem_viewDetail = new javax.swing.JMenuItem();
+        jDialog_viewDetail = new javax.swing.JDialog();
+        jLabel32 = new javax.swing.JLabel();
+        jTextField_id = new javax.swing.JTextField();
+        jTextField_name = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jTextField_carOwner = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jTextField_phone = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        jTextField_email1 = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jTextField_sex = new javax.swing.JTextField();
+        jTextField_adress = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jTextField_born = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel_date = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jTextField_idAdmin = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable_carFeeDetail = new javax.swing.JTable();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_managerCarOwner = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -176,8 +204,8 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel_carFee = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton12 = new javax.swing.JButton();
+        jTextField_searchFeeCar = new javax.swing.JTextField();
+        jButton_searchFeeCar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -193,6 +221,7 @@ public class AdminForm extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         jMenuItem_updatePark.setText("Cập nhật");
         jMenuItem_updatePark.addActionListener(new java.awt.event.ActionListener() {
@@ -296,6 +325,152 @@ public class AdminForm extends javax.swing.JFrame {
             jDialog_updateParkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        jMenuItem_viewDetail.setText("Xem thông tin chi tiết");
+        jMenuItem_viewDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_viewDetailActionPerformed(evt);
+            }
+        });
+        jPopupMenu_feeCar.add(jMenuItem_viewDetail);
+
+        jDialog_viewDetail.setTitle("Thông tin chi tiết chi phí đỗ xe");
+
+        jLabel32.setText("Chứng minh thư : ");
+
+        jTextField_id.setEditable(false);
+
+        jTextField_name.setEditable(false);
+
+        jLabel33.setText("Họ tên : ");
+
+        jTextField_carOwner.setEditable(false);
+
+        jLabel34.setText("Nhà xe : ");
+
+        jLabel35.setText("Số điện thoại : ");
+
+        jTextField_phone.setEditable(false);
+
+        jLabel36.setText("Email : ");
+
+        jTextField_email1.setEditable(false);
+
+        jLabel37.setText("Giới tính : ");
+
+        jTextField_sex.setEditable(false);
+
+        jTextField_adress.setEditable(false);
+
+        jLabel38.setText("Địa chỉ : ");
+
+        jTextField_born.setEditable(false);
+
+        jLabel39.setText("Ngày sinh : ");
+
+        jLabel_date.setText("Thông tin chi phí đỗ xe chi tiết ngày : ");
+
+        jLabel41.setText("Admin tính phí : ");
+
+        jTextField_idAdmin.setEditable(false);
+
+        jTable_carFeeDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Biển số xe", "Số lượt đỗ trong ngày", "Tiền phí đỗ xe"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jTable_carFeeDetail);
+
+        javax.swing.GroupLayout jDialog_viewDetailLayout = new javax.swing.GroupLayout(jDialog_viewDetail.getContentPane());
+        jDialog_viewDetail.getContentPane().setLayout(jDialog_viewDetailLayout);
+        jDialog_viewDetailLayout.setHorizontalGroup(
+            jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_viewDetailLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jDialog_viewDetailLayout.createSequentialGroup()
+                        .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_id, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addComponent(jTextField_carOwner)
+                            .addComponent(jTextField_email1)
+                            .addComponent(jTextField_born)))
+                    .addComponent(jLabel_date, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                                .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField_sex)
+                        .addComponent(jTextField_phone)
+                        .addComponent(jTextField_name)
+                        .addComponent(jTextField_adress, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
+                    .addComponent(jTextField_idAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
+            .addComponent(jScrollPane7)
+        );
+        jDialog_viewDetailLayout.setVerticalGroup(
+            jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_viewDetailLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_id, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_name, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_carOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_email1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_sex, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_born, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_adress, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jDialog_viewDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField_idAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+        );
+
+        jDialog_viewDetailLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel32, jLabel33, jLabel34, jLabel35, jLabel36, jLabel37, jLabel38, jLabel39, jLabel41, jLabel_date, jTextField_adress, jTextField_born, jTextField_carOwner, jTextField_email1, jTextField_id, jTextField_idAdmin, jTextField_name, jTextField_phone, jTextField_sex});
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -956,7 +1131,12 @@ public class AdminForm extends javax.swing.JFrame {
 
         jLabel31.setText("Nhập thông tin cần tin kiếm : ");
 
-        jButton12.setText("Tìm kiếm");
+        jButton_searchFeeCar.setText("Tìm kiếm");
+        jButton_searchFeeCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_searchFeeCarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -966,9 +1146,9 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_searchFeeCar, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton_searchFeeCar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -977,8 +1157,8 @@ public class AdminForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_searchFeeCar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_searchFeeCar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(83, 83, 83))
         );
 
@@ -1024,6 +1204,7 @@ public class AdminForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable_carFee.setComponentPopupMenu(jPopupMenu_feeCar);
         jScrollPane6.setViewportView(jTable_carFee);
 
         javax.swing.GroupLayout jPanel_carFeeLayout = new javax.swing.GroupLayout(jPanel_carFee);
@@ -1161,6 +1342,14 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem7);
+
+        jMenuItem9.setText("Tạo chuyến xe");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
 
@@ -1608,6 +1797,55 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton_searchFeeCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_searchFeeCarActionPerformed
+        // TODO add your handling code here:
+        String keySearch = jTextField_searchFeeCar.getText().trim();
+        carFeeController.displayParkFeeCar(jTable_carFee, carFeeController.searchInforCarFee(keySearch));
+    }//GEN-LAST:event_jButton_searchFeeCarActionPerformed
+
+    private void jMenuItem_viewDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_viewDetailActionPerformed
+        // TODO add your handling code here:
+        int index = jTable_carFee.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn chủ xe cần xem chi tiết");
+        } else {
+            jTextField_id.setText(jTable_carFee.getValueAt(index, 0).toString());
+            CarOwner carOwner = coc.getInforCarOwner(jTable_carFee.getValueAt(index, 0).toString());
+            jTextField_name.setText(carOwner.getTen());
+            jTextField_carOwner.setText(carOwner.getNhaXe());
+            jTextField_phone.setText(carOwner.getSdt());
+            jTextField_email1.setText(carOwner.getEmail());
+            jTextField_sex.setText(carOwner.getGioitinh());
+            SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
+            jTextField_born.setText(simple.format(carOwner.getNgaySinh()));
+            jTextField_adress.setText(carOwner.getDiaChi());
+            jLabel_date.setText("Thông tin chi phí đỗ xe chi tiết ngày : " + jTable_carFee.getValueAt(index, 3).toString());
+            jTextField_idAdmin.setText(jTable_carFee.getValueAt(index, 4).toString());
+            jDialog_viewDetail.setVisible(true);
+            jDialog_viewDetail.setSize(642, 523);
+            jDialog_viewDetail.setLocationRelativeTo(null);
+            CarFeeDetailController carFeeDetailController = new CarFeeDetailController();
+            String ngayThu = jTable_carFee.getValueAt(index, 3).toString();
+            Date ngayThuPhi;
+            try {
+                ngayThuPhi = new Date(simple.parse(ngayThu).getTime());
+                carFeeDetailController.displayCarFeeDetail(jTable_carFeeDetail, carFeeDetailController.getCarFeeDetailByCarOwner(jTable_carFee.getValueAt(index, 0).toString(), ngayThuPhi));
+            } catch (ParseException ex) {
+                Logger.getLogger(AdminForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem_viewDetailActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        boolean result = carTravelController.creatCarTravel();
+        if (result) {
+            JOptionPane.showMessageDialog(this, "Tạo chuyến xe thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy.Vui lòng thử lại sau");
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1617,7 +1855,6 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1626,6 +1863,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton_searchFeeCar;
     private javax.swing.JButton jButton_updatePark;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -1639,6 +1877,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox_viTriDoXe;
     private javax.swing.JComboBox<String> jComboBox_viTriDoXeUpdate;
     private javax.swing.JDialog jDialog_updatePark;
+    private javax.swing.JDialog jDialog_viewDetail;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1664,12 +1903,22 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_date;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -1682,8 +1931,10 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_deletePark;
     private javax.swing.JMenuItem jMenuItem_updatePark;
+    private javax.swing.JMenuItem jMenuItem_viewDetail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -1699,6 +1950,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_managerCarOwner;
     private javax.swing.JPanel jPanel_managerInformation;
     private javax.swing.JPanel jPanel_managerParkCar;
+    private javax.swing.JPopupMenu jPopupMenu_feeCar;
     private javax.swing.JPopupMenu jPopupMenu_utilsParkCar;
     private javax.swing.JRadioButton jRadioButton_nam;
     private javax.swing.JRadioButton jRadioButton_nu;
@@ -1708,24 +1960,35 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable_carFee;
+    private javax.swing.JTable jTable_carFeeDetail;
     private javax.swing.JTable jTable_infor;
     private javax.swing.JTable jTable_inforCarOwner;
     private javax.swing.JTable jTable_inforPark;
     private javax.swing.JTable jTable_managerCar;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField_adress;
+    private javax.swing.JTextField jTextField_born;
     private javax.swing.JTextField jTextField_bsx;
     private javax.swing.JTextField jTextField_bsxUpdate;
+    private javax.swing.JTextField jTextField_carOwner;
     private javax.swing.JTextField jTextField_chuNhaXe;
     private javax.swing.JTextField jTextField_chuXe;
     private javax.swing.JTextField jTextField_cmt;
     private javax.swing.JTextField jTextField_diaChi;
     private javax.swing.JTextField jTextField_email;
+    private javax.swing.JTextField jTextField_email1;
+    private javax.swing.JTextField jTextField_id;
+    private javax.swing.JTextField jTextField_idAdmin;
+    private javax.swing.JTextField jTextField_name;
     private javax.swing.JTextField jTextField_nhaXe;
     private javax.swing.JTextField jTextField_nhaXeUpdate;
+    private javax.swing.JTextField jTextField_phone;
     private javax.swing.JTextField jTextField_sdt;
+    private javax.swing.JTextField jTextField_searchFeeCar;
+    private javax.swing.JTextField jTextField_sex;
     private javax.swing.JTextField jTextField_ten;
     private javax.swing.JTextField jTextField_tieuDe;
     private javax.swing.JTextPane jTextPane_noiDung;

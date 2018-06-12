@@ -47,4 +47,8 @@ public class CarFeeController {
     public int checkDateParkingFee(Date date) {
         return carFeeDao.checkDateParkingFee(date);
     }
+    
+    public List<CarFee> searchInforCarFee(String keySearch) {
+        return carFeeDao.searchInforCarFee(keySearch);
+    }
 }
