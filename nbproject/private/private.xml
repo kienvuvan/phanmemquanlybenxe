@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/cartravel/controller/CarTravelController.java</file>
             <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carowner/view/CarOwnerForm.java</file>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carfee/controller/CarFeeDetailController.java</file>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/cartravel/dao/CarTravelDao.java</file>
             <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/admin/view/AdminForm.java</file>
             <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carfee/dao/MysqlCarFeeDao.java</file>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carfee/model/CarFeeDetail.java</file>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carfee/dao/MysqlCarFeeDetailDao.java</file>
             <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/guest/view/HomeGuestForm.java</file>
         </group>
     </open-files>

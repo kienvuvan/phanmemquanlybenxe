@@ -193,4 +193,16 @@ public class Car {
     public List<Car> getAllCar() {
         return carDao().getAllCar();
     }
+    
+    public int sendRequesttUpdateCar(String maXe, String bsx, String cmt, double gia, String lichTrinh) {
+        return carDao().sendRequesttUpdateCar(maXe, bsx, cmt, gia, lichTrinh);
+    }
+    
+    public int updateSentRequest(String maXe, String bsx, String cmt, double gia, String lichTrinh) {
+        return carDao().updateSentRequest(maXe, bsx, cmt, gia, lichTrinh);
+    }
+    
+    public List<CarUpdate> getAllRequest() {
+        return carDao().getAllRequest();
+    }
 }

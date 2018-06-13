@@ -6,6 +6,7 @@
 package car.dao;
 
 import car.model.Car;
+import car.model.CarUpdate;
 import java.util.List;
 
 /**
@@ -46,4 +47,12 @@ public interface CarDao {
     List<Car> searchInforCarForOwner(String cmt, String keySearch);
     
     List<Car> getAllCar();
+    
+    boolean checkSentRequest(String maXe, String bsx);
+    
+    int updateSentRequest(String maXe, String bsx, String cmt, double giaVe, String lichTrinh);
+    
+    int sendRequesttUpdateCar(String maXe, String bsx, String cmt, double giaVe, String lichTrinh);
+    
+    List<CarUpdate> getAllRequest();
 }

@@ -6,13 +6,16 @@
 package car.dao;
 
 import car.model.Car;
+import car.model.CarUpdate;
 import com.mysql.cj.util.StringUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,6 +38,7 @@ public class MysqlCarDao implements CarDao {
     public static final int RESULT_SUCCESS = 6;
     public static final int RESULT_ERROR_SQL = 7;
     public static final int RESULT_PARKED = 8;
+    public static final int RESULT_SENT_REQUEST = 9;
 
     private static final String SEARCH_CAR_FOR_BOOKTICKET = "SELECT * FROM xe, chuxe WHERE xe.CmtNhaXe = chuxe.Cmt AND "
             + "(chuxe.NhaXe LIKE ? OR BienSoXe LIKE ? OR SoGhe LIKE ? \n"
@@ -54,7 +58,7 @@ public class MysqlCarDao implements CarDao {
             + "OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) AND (Id LIKE ? OR xe.BienSoXe LIKE ? OR SoGhe LIKE ? OR GiaVe LIKE ? OR LoTrinh LIKE ? "
             + "OR LichTrinh LIKE ? OR ViTriDoXe LIKE ? OR ThoiGianDo LIKE ?)";
     private static final String GET_ALL_CAR = "SELECT xe.BienSoXe, xe.LichTrinh FROM xe";
-    
+
     private static final String GET_BSX = "SELECT BienSoXe,COUNT(BienSoXe) FROM xe GROUP BY BienSoXe";
     private static final String GET_BSX_PARKED = "SELECT BienSoXe, COUNT(BienSoXe) FROM vitrido GROUP BY BienSoXe";
     private static final String GET_ALL_PARK_LOCATION = "SELECT ViTriDoXe FROM baixe";
@@ -65,6 +69,10 @@ public class MysqlCarDao implements CarDao {
     private static final String SORT_CAR_IN_PARK = "INSERT INTO vitrido VALUES(?,?,?)";
     private static final String UPDATE_PARK = "UPDATE vitrido SET ViTriDoXe = ? WHERE BienSoXe =? AND ThoiGianDo = ?";
     private static final String DESTROY_PARK_CAR = "DELETE FROM vitrido WHERE BienSoXe =? AND ViTriDoXe = ? AND ThoiGianDo = ?";
+    private static final String SEND_REQUEST_UPDATE_CAR = "INSERT INTO xechocapnhat VALUES(?,?,?,?,?,?,?)";
+    private static final String CHECK_SENT_REQUEST = "SELECT COUNT(*) FROM xechocapnhat WHERE ID = ? AND BienSoXe = ?";
+    private static final String UPDATE_SENT_REQUEST = "UPDATE xechocapnhat SET GiaVe = ?, LichTrinh = ? WHERE Id = ? AND BienSoXe = ?";
+    private static final String GET_ALL_REQUEST_UPDATE_CAR = "SELECT * FROM xechocapnhat";
 
     private static MysqlCarDao mysqlCarDao;
 
@@ -483,8 +491,8 @@ public class MysqlCarDao implements CarDao {
         try {
             Connection connection = Mysql.getInstance().getConnection();
             Statement stm = connection.createStatement();
-            ResultSet rs  = stm.executeQuery(GET_ALL_CAR);
-            while(rs.next()){
+            ResultSet rs = stm.executeQuery(GET_ALL_CAR);
+            while (rs.next()) {
                 String bsx = rs.getString("xe.BienSoXe");
                 String lichTrinh = rs.getString("xe.LichTrinh");
                 Car car = new Car(bsx, lichTrinh);
@@ -494,5 +502,100 @@ public class MysqlCarDao implements CarDao {
             Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCars;
+    }
+
+    @Override
+    public int sendRequesttUpdateCar(String maXe, String bsx, String cmt, double giaVe, String lichTrinh) {
+        if (StringUtils.isNullOrEmpty(maXe) || StringUtils.isNullOrEmpty(bsx) || StringUtils.isNullOrEmpty(giaVe + "") || StringUtils.isNullOrEmpty(lichTrinh)) {
+            return RESULT_EMPTY;
+        } else if (Utils.isBsx(bsx) == false) {
+            return RESULT_ERROR_BSX;
+        } else if (giaVe <= 0) {
+            return RESULT_ERROR_GIAVE;
+        } else if (Utils.invalidTime(lichTrinh) == false) {
+            return RESULT_ERROR_TIME;
+        } else if (checkSentRequest(maXe, bsx)) {
+            return RESULT_SENT_REQUEST;
+        } else {
+            try {
+                Connection connection = Mysql.getInstance().getConnection();
+                PreparedStatement pstm = connection.prepareCall(SEND_REQUEST_UPDATE_CAR);
+                pstm.setString(1, maXe);
+                pstm.setString(2, bsx);
+                pstm.setString(3, cmt);
+                pstm.setDouble(4, giaVe);
+                pstm.setString(5, lichTrinh);
+                pstm.setTimestamp(6, new Timestamp(Calendar.getInstance().getTimeInMillis()));
+                pstm.setInt(7, 0);
+                int check = pstm.executeUpdate();
+                if (check > 0) {
+                    return RESULT_SUCCESS;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return RESULT_ERROR_SQL;
+    }
+
+    @Override
+    public boolean checkSentRequest(String maXe, String bsx) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(CHECK_SENT_REQUEST);
+            pstm.setString(1, maXe);
+            pstm.setString(2, bsx);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public int updateSentRequest(String maXe, String bsx, String cmt, double giaVe, String lichTrinh) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(UPDATE_SENT_REQUEST);
+            pstm.setDouble(1, giaVe);
+            pstm.setString(2, lichTrinh);
+            pstm.setString(3, maXe);
+            pstm.setString(4, bsx);
+            int check = pstm.executeUpdate();
+            if (check > 0) {
+                return RESULT_SUCCESS;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return RESULT_ERROR_SQL;
+    }
+
+    @Override
+    public List<CarUpdate> getAllRequest() {
+        List<CarUpdate> listCarUpdates = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            Statement stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery(GET_ALL_REQUEST_UPDATE_CAR);
+            while(rs.next()){
+                String maXe = rs.getString("Id");
+                String bsx = rs.getString("BienSoXe");
+                double giaVe = rs.getDouble("GiaVe");
+                String lichTrinh = rs.getString("LichTrinh");
+                Timestamp ngayGui = rs.getTimestamp("NgayGui");
+                int tinhTrang = rs.getInt("TinhTrang");
+                CarUpdate carUpdate = new CarUpdate(maXe, bsx, giaVe, lichTrinh, ngayGui, tinhTrang);
+                listCarUpdates.add(carUpdate);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarUpdates;
     }
 }

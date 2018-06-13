@@ -6,6 +6,7 @@
 package car.controller;
 
 import car.model.Car;
+import car.model.CarUpdate;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -126,6 +127,18 @@ public class CarController {
     
     public List<Car> getAllCar() {
         return car.getAllCar();
+    }
+    
+    public int sendRequesttUpdateCar(String maXe, String bsx, String cmt, double gia, String lichTrinh) {
+        return car.sendRequesttUpdateCar(maXe, bsx, cmt, gia, lichTrinh);
+    }
+    
+    public int updateSentRequest(String maXe, String bsx, String cmt, double gia, String lichTrinh) {
+        return car.updateSentRequest(maXe, bsx, cmt, gia, lichTrinh);
+    }
+    
+    public List<CarUpdate> getAllRequest() {
+        return car.getAllRequest();
     }
     
 }

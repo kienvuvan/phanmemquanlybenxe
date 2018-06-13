@@ -6,12 +6,15 @@
 package carowner.view;
 
 import car.controller.CarController;
+import car.dao.MysqlCarDao;
 import carfee.controller.CarFeeDetailController;
 import carowner.controller.CarOwnerController;
 import carowner.model.CarOwner;
 import cartravel.controller.CarTravelController;
 import guest.view.HomeGuestForm;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -64,6 +67,27 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_inforGuestInCarTravel = new javax.swing.JTable();
+        jPopupMenu_updateInforCar = new javax.swing.JPopupMenu();
+        jMenuItem_updateInforCar = new javax.swing.JMenuItem();
+        jDialog_updateInforCar = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField_bsx = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel20 = new javax.swing.JLabel();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField_maXe = new javax.swing.JTextField();
+        SpinnerModel spinnerModel1 =new SpinnerNumberModel(50000,0,3000000,10000);
+        jSpinner2 = new javax.swing.JSpinner(spinnerModel1);
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_inforCar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -202,6 +226,132 @@ public class CarOwnerForm extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jMenuItem_updateInforCar.setText("Cập nhật thông tin xe");
+        jMenuItem_updateInforCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_updateInforCarActionPerformed(evt);
+            }
+        });
+        jPopupMenu_updateInforCar.add(jMenuItem_updateInforCar);
+
+        jDialog_updateInforCar.setTitle("Cập nhật thông tin xe");
+        jDialog_updateInforCar.setResizable(false);
+
+        jLabel7.setText("Biển số xe : ");
+
+        jTextField_bsx.setEditable(false);
+
+        jLabel8.setText("Giá vé : ");
+
+        jLabel18.setText("Giờ đến :");
+
+        jLabel14.setText("Giờ khởi hành :");
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        jComboBox3.setSelectedIndex(7);
+
+        jLabel17.setText("h");
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+
+        jLabel20.setText("p");
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        jComboBox5.setSelectedIndex(9);
+
+        jLabel22.setText("h");
+
+        jLabel23.setText("p");
+
+        jButton1.setText("Gửi yêu cầu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Mã xe : ");
+
+        jTextField_maXe.setEditable(false);
+
+        javax.swing.GroupLayout jDialog_updateInforCarLayout = new javax.swing.GroupLayout(jDialog_updateInforCar.getContentPane());
+        jDialog_updateInforCar.getContentPane().setLayout(jDialog_updateInforCarLayout);
+        jDialog_updateInforCarLayout.setHorizontalGroup(
+            jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                    .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1)
+                    .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
+                        .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
+                                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jTextField_bsx)
+                    .addComponent(jTextField_maXe)
+                    .addComponent(jSpinner2))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jDialog_updateInforCarLayout.setVerticalGroup(
+            jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(jTextField_maXe))
+                .addGap(21, 21, 21)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_bsx))
+                .addGap(21, 21, 21)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSpinner2))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jDialog_updateInforCarLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel14, jLabel18, jLabel7, jLabel8, jLabel9});
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -221,13 +371,13 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+                .addGap(129, 129, 129)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField_searchInforCar, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton_search, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +408,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable_inforCar.setComponentPopupMenu(jPopupMenu_updateInforCar);
         jScrollPane1.setViewportView(jTable_inforCar);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -510,11 +661,6 @@ public class CarOwnerForm extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/applications_system.png"))); // NOI18N
         jMenu1.setText("Hệ thống");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
 
         jMenuItem1.setText("Thông tin cá nhân");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -595,11 +741,6 @@ public class CarOwnerForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -682,20 +823,100 @@ public class CarOwnerForm extends javax.swing.JFrame {
         setVisiableCarFee();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem_updateInforCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_updateInforCarActionPerformed
+        // TODO add your handling code here:
+        int index = jTable_inforCar.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe cần cập nhật thông tin");
+        } else {
+            jDialog_updateInforCar.setVisible(true);
+            jDialog_updateInforCar.setSize(327, 340);
+            jDialog_updateInforCar.setLocationRelativeTo(null);
+            jDialog_updateInforCar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            int maXe = Integer.parseInt(jTable_inforCar.getValueAt(index, 0).toString());
+            if (maXe % 2 == 1) {
+                jTextField_maXe.setText(maXe + "-" + (maXe + 1));
+            } else {
+                jTextField_maXe.setText((maXe - 1) + "-" + maXe);
+            }
+            jTextField_bsx.setText(jTable_inforCar.getValueAt(index, 1).toString());
+
+        }
+    }//GEN-LAST:event_jMenuItem_updateInforCarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String maXe = jTextField_maXe.getText();
+        String bsx = jTextField_bsx.getText();
+        double giaVe = Double.valueOf(jSpinner2.getValue().toString());
+        String lichTrinh = jComboBox3.getSelectedItem().toString() + "h" + jComboBox4.getSelectedItem().toString() + "-"
+                + jComboBox5.getSelectedItem().toString() + "h" + jComboBox6.getSelectedItem().toString();
+        int result = carController.sendRequesttUpdateCar(maXe, bsx, cmt, giaVe, lichTrinh);
+        switch (result) {
+            case MysqlCarDao.RESULT_EMPTY:
+                JOptionPane.showMessageDialog(jDialog_updateInforCar, "Các trường dữ liệu không được để trống.Vui lòng nhập đầy đủ thông tin");
+                break;
+            case MysqlCarDao.RESULT_ERROR_BSX:
+                JOptionPane.showMessageDialog(jDialog_updateInforCar, "Định dạng biển số xe không đúng.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_ERROR_GIAVE:
+                JOptionPane.showMessageDialog(jDialog_updateInforCar, "Giá vé nhập không đúng.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_ERROR_TIME:
+                JOptionPane.showMessageDialog(jDialog_updateInforCar, "Thời gian đến nhập nhỏ hơn thời gian xuất phát.Vui lòng nhập lại!");
+                break;
+            case MysqlCarDao.RESULT_SENT_REQUEST:
+                if (JOptionPane.showConfirmDialog(null, "Bạn đã gửi yêu cầu cập nhật xe này.Bạn có muốn cập nhật lại yêu cầu không ??", "Thông báo ",
+                        JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+                    int kqua = carController.updateSentRequest(maXe, bsx, cmt, giaVe, lichTrinh);
+                    switch (kqua) {
+                        case MysqlCarDao.RESULT_SUCCESS:
+                            JOptionPane.showMessageDialog(jDialog_updateInforCar, "Cập nhật yêu cầu thành công.Vui lòng chờ admin xử lý");
+                            break;
+                        case MysqlCarDao.RESULT_ERROR_SQL:
+                            JOptionPane.showMessageDialog(jDialog_updateInforCar, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                            break;
+                    }
+                }
+                break;
+            case MysqlCarDao.RESULT_SUCCESS:
+                JOptionPane.showMessageDialog(jDialog_updateInforCar, "Gửi yêu cầu thành công.Vui lòng chờ admin xử lý");
+                break;
+            case MysqlCarDao.RESULT_ERROR_SQL:
+                JOptionPane.showMessageDialog(jDialog_updateInforCar, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                break;
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_search;
     private javax.swing.JButton jButton_searchCarFee;
     private javax.swing.JButton jButton_searchFeeCar;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JDialog jDialog_inforCarTravel;
+    private javax.swing.JDialog jDialog_updateInforCar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -708,6 +929,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem_inforCarTravelDetail;
+    private javax.swing.JMenuItem jMenuItem_updateInforCar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -719,17 +941,21 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_inforCar;
     private javax.swing.JPanel jPanel_travelDetail;
     private javax.swing.JPopupMenu jPopupMenu_inforCarTravel;
+    private javax.swing.JPopupMenu jPopupMenu_updateInforCar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable_inforCar;
     private javax.swing.JTable jTable_inforCarFee;
     private javax.swing.JTable jTable_inforCarTravel;
     private javax.swing.JTable jTable_inforGuestInCarTravel;
+    private javax.swing.JTextField jTextField_bsx;
     private javax.swing.JTextField jTextField_date;
     private javax.swing.JTextField jTextField_idCar;
     private javax.swing.JTextField jTextField_idCarTravel;
+    private javax.swing.JTextField jTextField_maXe;
     private javax.swing.JTextField jTextField_route;
     private javax.swing.JTextField jTextField_searchCarFee;
     private javax.swing.JTextField jTextField_searchCarTravel;
@@ -768,9 +994,9 @@ public class CarOwnerForm extends javax.swing.JFrame {
             for (int i = 0; i < countRow; i++) {
                 int soChuyen = Integer.parseInt(jTable_inforCarFee.getValueAt(i, 1).toString());
                 double phi = Double.parseDouble(jTable_inforCarFee.getValueAt(i, 3).toString());
-                sum += soChuyen *phi ;
+                sum += soChuyen * phi;
             }
-            jTextField_sumCarFee.setText(sum +" đ");
+            jTextField_sumCarFee.setText(sum + " đ");
         }
     }
 }
