@@ -76,4 +76,8 @@ public interface CarDao {
     boolean updateParkLocaction(String viTriDo, String bsx, String thoiGianDoCu, String thoiGianDoMoi);
     
     boolean updateStatusNoAgree(String maXe);
+    
+    List<CarUpdate> getAllRequestByIdCarOwner(String cmt);
+    
+    boolean deleteRequestCarUpdate(String cmt);
 }

@@ -85,6 +85,8 @@ public class MysqlCarDao implements CarDao {
             + "WHERE xe.BienSoXe = vitrido.BienSoXe AND (Id = ? OR Id = ?) \n"
             + "AND (LEFT(ThoiGianDo,5) = RIGHT(xe.LichTrinh,5) OR LEFT(ThoiGianDo,4) = RIGHT(xe.LichTrinh,4) OR RIGHT(ThoiGianDo,5) = LEFT(xe.LichTrinh,5) OR RIGHT(ThoiGianDo,4) = LEFT(xe.LichTrinh,4)) ";
     private static final String UPDATE_PARK_LOCATION = "UPDATE vitrido SET ThoiGianDo = ? WHERE ViTriDoXe = ? AND BienSoXe = ? AND ThoiGianDo =?";
+    private static final String GET_ALL_REQUEST_BY_ID_CAROWNER = "SELECT * FROM xechocapnhat WHERE CmtChuXe = ?";
+    private static final String DELETE_REQUEST_BY_ID_CAROWNER = "DELETE FROM xechocapnhat WHERE CmtChuXe = ? AND (TinhTrang = ? OR TinhTrang = ?)";
 
     private static MysqlCarDao mysqlCarDao;
 
@@ -740,7 +742,7 @@ public class MysqlCarDao implements CarDao {
             pstm.setInt(1, 2);
             pstm.setString(2, maXe);
             int check = pstm.executeUpdate();
-            if(check >0){
+            if (check > 0) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -811,14 +813,56 @@ public class MysqlCarDao implements CarDao {
         }
         return "";
     }
-    
+
     @Override
-    public boolean updateStatusNoAgree(String maXe){
+    public boolean updateStatusNoAgree(String maXe) {
         try {
             Connection connection = Mysql.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareCall(UPDATE_STATUS_CAR_UPDATE);
             pstm.setInt(1, 1);
             pstm.setString(2, maXe);
+            int check = pstm.executeUpdate();
+            if (check > 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public List<CarUpdate> getAllRequestByIdCarOwner(String cmt) {
+        List<CarUpdate> listCarUpdates = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(GET_ALL_REQUEST_BY_ID_CAROWNER);
+            pstm.setString(1, cmt);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("Id");
+                String bsx = rs.getString("BienSoXe");
+                double giaVe = rs.getDouble("GiaVe");
+                String lichTrinh = rs.getString("LichTrinh");
+                Timestamp thoiGian = rs.getTimestamp("NgayGui");
+                int tinhTrang = rs.getInt("TinhTrang");
+                CarUpdate carUpdate = new CarUpdate(id, bsx, giaVe, lichTrinh, thoiGian, tinhTrang);
+                listCarUpdates.add(carUpdate);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarUpdates;
+    }
+
+    @Override
+    public boolean deleteRequestCarUpdate(String cmt) {
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(DELETE_REQUEST_BY_ID_CAROWNER);
+            pstm.setString(1, cmt);
+            pstm.setInt(2, 1);
+            pstm.setInt(3, 2);
             int check = pstm.executeUpdate();
             if(check >0){
                 return true;

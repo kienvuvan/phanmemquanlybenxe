@@ -257,4 +257,12 @@ public class Car {
     public boolean updateStatusNoAgree(String maXe){
         return carDao().updateStatusNoAgree(maXe);
     }
+    
+    public List<CarUpdate> getAllRequestByIdCarOwner(String cmt) {
+        return carDao().getAllRequestByIdCarOwner(cmt);
+    }
+    
+    public boolean deleteRequestCarUpdate(String cmt) {
+        return carDao().deleteRequestCarUpdate(cmt);
+    }
 }

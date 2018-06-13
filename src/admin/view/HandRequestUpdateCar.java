@@ -9,6 +9,7 @@ import car.controller.CarController;
 import carowner.controller.CarOwnerController;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import utils.Utils;
 
 /**
@@ -297,15 +298,7 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
 
     private void jComboBox_cmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cmtActionPerformed
         // TODO add your handling code here:
-        if (jComboBox_cmt.getSelectedItem() == null) {
-            jTextField_ten.setText("");
-            jComboBox_maXe.removeAllItems();
-            jTextField_ngayYeuCau.setText("");
-        } else {
-            String cmtChuXe = jComboBox_cmt.getSelectedItem().toString();
-            jTextField_ten.setText(carOwnerController.getNameByIdCarOwner(cmtChuXe));
-            carController.addListItemToJCombobox(jComboBox_maXe, carController.getAllIdCarRequestByCarOwner(cmtChuXe));
-        }
+        setIdCarOwner();
     }//GEN-LAST:event_jComboBox_cmtActionPerformed
 
     private void jComboBox_maXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_maXeActionPerformed
@@ -332,6 +325,7 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
                 boolean result = carController.updateCar(giaVe, maXe);
                 if (result) {
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                    getAllIdCarOwnerRequest();
                 } else {
                     JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                 }
@@ -346,6 +340,7 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
                     boolean kqua1 = carController.updateCar(giaVe, lichTrinh, maXe);
                     if (kqua && kqua1) {
                         JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                        getAllIdCarOwnerRequest();
                     } else {
                         JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                     }
@@ -370,6 +365,7 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
             boolean result = carController.updateStatusNoAgree(jTable_inforCarUpdate.getValueAt(0, 0).toString());
             if (result) {
                 JOptionPane.showMessageDialog(this, "Bạn đã không đồng ý với yêu cầu chủ xe. Thông báo này sẽ được gửi cho chủ xe");
+                getAllIdCarOwnerRequest();
             } else {
                 JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
             }
@@ -397,6 +393,7 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
                 boolean kqua1 = carController.updateCar(giaVe, lichTrinh, maXe);
                 if (kqua && kqua1) {
                     JOptionPane.showMessageDialog(jDialog_parkCar, "Cập nhật thành công");
+                    getAllIdCarOwnerRequest();
                 } else {
                     JOptionPane.showMessageDialog(jDialog_parkCar, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                 }
@@ -455,4 +452,20 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_ten;
     private javax.swing.JTextField jTextField_thoGianDo;
     // End of variables declaration//GEN-END:variables
+
+    private void setIdCarOwner() {
+        if (jComboBox_cmt.getSelectedItem() == null) {
+            jTextField_ten.setText("");
+            jComboBox_maXe.removeAllItems();
+            jTextField_ngayYeuCau.setText("");
+            DefaultTableModel model = (DefaultTableModel) jTable_inforCarNow.getModel();
+            DefaultTableModel model1 = (DefaultTableModel) jTable_inforCarUpdate.getModel();
+            model.setRowCount(0);
+            model1.setRowCount(0);
+        } else {
+            String cmtChuXe = jComboBox_cmt.getSelectedItem().toString();
+            jTextField_ten.setText(carOwnerController.getNameByIdCarOwner(cmtChuXe));
+            carController.addListItemToJCombobox(jComboBox_maXe, carController.getAllIdCarRequestByCarOwner(cmtChuXe));
+        }
+    }
 }

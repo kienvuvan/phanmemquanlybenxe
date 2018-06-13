@@ -89,6 +89,11 @@ public class CarOwnerForm extends javax.swing.JFrame {
         SpinnerModel spinnerModel1 =new SpinnerNumberModel(50000,0,3000000,10000);
         jSpinner2 = new javax.swing.JSpinner(spinnerModel1);
         jLabel10 = new javax.swing.JLabel();
+        jDialog_news = new javax.swing.JDialog();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable_news = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_inforCar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -126,6 +131,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenuItem_inforCarTravelDetail.setText("Xem thông tin chi tiết chuyến xe");
         jMenuItem_inforCarTravelDetail.addActionListener(new java.awt.event.ActionListener() {
@@ -361,6 +367,62 @@ public class CarOwnerForm extends javax.swing.JFrame {
         );
 
         jDialog_updateInforCarLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel14, jLabel18, jLabel7, jLabel8, jLabel9});
+
+        jDialog_news.setTitle("Thông báo");
+
+        jTable_news.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Thông báo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable_news.setRowHeight(24);
+        jScrollPane5.setViewportView(jTable_news);
+
+        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel11.setText("*Bạn vui lòng xóa các yêu cầu cập nhật xe đã được xử lý hoặc không được chấp nhận để thuận tiện cho việc gửi yêu cầu cập nhật sau này!!!");
+
+        jButton2.setText("Xóa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog_newsLayout = new javax.swing.GroupLayout(jDialog_news.getContentPane());
+        jDialog_news.getContentPane().setLayout(jDialog_newsLayout);
+        jDialog_newsLayout.setHorizontalGroup(
+            jDialog_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5)
+            .addGroup(jDialog_newsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jDialog_newsLayout.setVerticalGroup(
+            jDialog_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog_newsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_newsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog_newsLayout.createSequentialGroup()
+                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -733,6 +795,14 @@ public class CarOwnerForm extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem7);
 
+        jMenuItem8.setText("Thông báo");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -898,9 +968,29 @@ public class CarOwnerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        jDialog_news.setVisible(true);
+        jDialog_news.setSize(850, 300);
+        jDialog_news.setLocationRelativeTo(null);
+        carController.displayNews(jTable_news, carController.getAllRequestByIdCarOwner(cmt));
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        boolean result = carController.deleteRequestCarUpdate(cmt);
+        if(result){
+            JOptionPane.showMessageDialog(jDialog_news, "Xóa các yêu cầu đã được xử lý hoặc không được chấp thuận thành công");
+            carController.displayNews(jTable_news, carController.getAllRequestByIdCarOwner(cmt));
+        }else{
+            JOptionPane.showMessageDialog(jDialog_news, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_search;
     private javax.swing.JButton jButton_searchCarFee;
     private javax.swing.JButton jButton_searchFeeCar;
@@ -909,9 +999,11 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JDialog jDialog_inforCarTravel;
+    private javax.swing.JDialog jDialog_news;
     private javax.swing.JDialog jDialog_updateInforCar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -939,6 +1031,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem_inforCarTravelDetail;
     private javax.swing.JMenuItem jMenuItem_updateInforCar;
     private javax.swing.JPanel jPanel1;
@@ -957,11 +1050,13 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable_inforCar;
     private javax.swing.JTable jTable_inforCarFee;
     private javax.swing.JTable jTable_inforCarTravel;
     private javax.swing.JTable jTable_inforGuestInCarTravel;
+    private javax.swing.JTable jTable_news;
     private javax.swing.JTextField jTextField_bsx;
     private javax.swing.JTextField jTextField_date;
     private javax.swing.JTextField jTextField_idCar;
