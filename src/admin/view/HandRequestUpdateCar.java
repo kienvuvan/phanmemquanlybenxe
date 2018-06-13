@@ -45,8 +45,8 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
 
         jDialog_parkCar = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField_thoGianDo = new javax.swing.JTextField();
+        jComboBox_viTriDoXe = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jComboBox_cmt = new javax.swing.JComboBox<>();
@@ -69,28 +69,32 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
 
         jLabel1.setText("Vị trí đỗ xe : ");
 
-        jTextField1.setEditable(false);
+        jTextField_thoGianDo.setEditable(false);
 
         jLabel2.setText("Thời gian đỗ : ");
 
         jButton3.setText("Chấp nhận");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDialog_parkCarLayout = new javax.swing.GroupLayout(jDialog_parkCar.getContentPane());
         jDialog_parkCar.getContentPane().setLayout(jDialog_parkCarLayout);
         jDialog_parkCarLayout.setHorizontalGroup(
             jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog_parkCarLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1)
-                        .addComponent(jComboBox1, 0, 165, Short.MAX_VALUE))
-                    .addComponent(jButton3))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3)
+                    .addComponent(jComboBox_viTriDoXe, 0, 175, Short.MAX_VALUE)
+                    .addComponent(jTextField_thoGianDo))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jDialog_parkCarLayout.setVerticalGroup(
             jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,10 +102,10 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_viTriDoXe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jDialog_parkCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_thoGianDo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,8 +336,8 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                 }
             } else {
+                String thoiGianDo = Utils.cutRoute(jTable_inforCarNow.getValueAt(0, 3).toString()).get(1) + "-" + Utils.cutRoute(jTable_inforCarNow.getValueAt(1, 3).toString()).get(0);
                 if (checkTimeParkNew(lichTrinh, maXe)) {
-                    String thoiGianDo = Utils.cutRoute(jTable_inforCarNow.getValueAt(0, 3).toString()).get(1) + "-" + Utils.cutRoute(jTable_inforCarNow.getValueAt(1, 3).toString()).get(0);
                     String viTriDoXe = carController.getParkLocation(maXe);
                     String bsx = jTable_inforCarUpdate.getValueAt(0, 1).toString();
                     String lichTrinhVe = Utils.generateCarReturn(lichTrinh);
@@ -349,8 +353,10 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
                     if (JOptionPane.showConfirmDialog(null, "Hiện tại với thời gian đỗ xe mới.Vị trí đỗ xe đã bị trùng.Bạn có muốn chọn vị trí đỗ xe khác không ??", "Thông báo ",
                             JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
                         jDialog_parkCar.setVisible(true);
-                        jDialog_parkCar.setSize(323, 202);
+                        jDialog_parkCar.setSize(322, 225);
                         jDialog_parkCar.setLocationRelativeTo(null);
+                        carController.addListItemToJCombobox(jComboBox_viTriDoXe, carController.getAllParkLocation());
+                        jTextField_thoGianDo.setText(thoiGianDo);
                     }
                 }
             }
@@ -362,13 +368,41 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn hủy yêu cầu cập nhật xe này không ??", "Thông báo ",
                 JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
             boolean result = carController.updateStatusNoAgree(jTable_inforCarUpdate.getValueAt(0, 0).toString());
-            if(result){
+            if (result) {
                 JOptionPane.showMessageDialog(this, "Bạn đã không đồng ý với yêu cầu chủ xe. Thông báo này sẽ được gửi cho chủ xe");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (jComboBox_viTriDoXe.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Hiện tại không có vị trí đỗ xe.");
+        } else {
+            String viTriDo = jComboBox_viTriDoXe.getSelectedItem().toString();
+            String thoiGianDo = Utils.cutRoute(jTable_inforCarNow.getValueAt(0, 3).toString()).get(1) + "-" + Utils.cutRoute(jTable_inforCarNow.getValueAt(1, 3).toString()).get(0);
+            if (carController.checkParkLocation(viTriDo, thoiGianDo) == false) {
+                JOptionPane.showMessageDialog(jDialog_parkCar, "Vị trí đỗ với khoảng thời gian này đã có xe đỗ.Vui lòng chọn vị trí khác");
+            } else {
+                double giaVe = Double.parseDouble(jTable_inforCarUpdate.getValueAt(0, 2).toString());
+                String maXe = jTable_inforCarUpdate.getValueAt(0, 0).toString();
+                String lichTrinh = jTable_inforCarUpdate.getValueAt(0, 3).toString();
+                String viTriDoXe = carController.getParkLocation(maXe);
+                String bsx = jTable_inforCarUpdate.getValueAt(0, 1).toString();
+                String lichTrinhVe = Utils.generateCarReturn(lichTrinh);
+                String thoiGianDoMoi = Utils.cutRoute(lichTrinh).get(1) + "-" + Utils.cutRoute(lichTrinhVe).get(0);
+                boolean kqua = carController.updateParkLocaction(viTriDoXe, bsx, thoiGianDo, thoiGianDoMoi);
+                boolean kqua1 = carController.updateCar(giaVe, lichTrinh, maXe);
+                if (kqua && kqua1) {
+                    JOptionPane.showMessageDialog(jDialog_parkCar, "Cập nhật thành công");
+                } else {
+                    JOptionPane.showMessageDialog(jDialog_parkCar, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void getAllIdCarOwnerRequest() {
         carController.addListItemToJCombobox(jComboBox_cmt, carController.getAllIdCarOwnerRequest());
@@ -400,9 +434,9 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox_cmt;
     private javax.swing.JComboBox<String> jComboBox_maXe;
+    private javax.swing.JComboBox<String> jComboBox_viTriDoXe;
     private javax.swing.JDialog jDialog_parkCar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -417,8 +451,8 @@ public class HandRequestUpdateCar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JTable jTable_inforCarNow;
     private javax.swing.JTable jTable_inforCarUpdate;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField_ngayYeuCau;
     private javax.swing.JTextField jTextField_ten;
+    private javax.swing.JTextField jTextField_thoGianDo;
     // End of variables declaration//GEN-END:variables
 }
