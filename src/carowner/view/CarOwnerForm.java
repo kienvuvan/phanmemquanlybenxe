@@ -88,6 +88,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jTextField_maXe = new javax.swing.JTextField();
         SpinnerModel spinnerModel1 =new SpinnerNumberModel(50000,0,3000000,10000);
         jSpinner2 = new javax.swing.JSpinner(spinnerModel1);
+        jLabel10 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_inforCar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -276,12 +277,15 @@ public class CarOwnerForm extends javax.swing.JFrame {
 
         jTextField_maXe.setEditable(false);
 
+        jLabel10.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel10.setText("*Thông tin lộ trình cập nhật là chuyến xe đi từ nơi khởi hành đến Hà Nội");
+
         javax.swing.GroupLayout jDialog_updateInforCarLayout = new javax.swing.GroupLayout(jDialog_updateInforCar.getContentPane());
         jDialog_updateInforCar.getContentPane().setLayout(jDialog_updateInforCarLayout);
         jDialog_updateInforCarLayout.setHorizontalGroup(
             jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,7 +318,11 @@ public class CarOwnerForm extends javax.swing.JFrame {
                     .addComponent(jTextField_bsx)
                     .addComponent(jTextField_maXe)
                     .addComponent(jSpinner2))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jDialog_updateInforCarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialog_updateInforCarLayout.setVerticalGroup(
             jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +339,9 @@ public class CarOwnerForm extends javax.swing.JFrame {
                 .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSpinner2))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDialog_updateInforCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -830,7 +840,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe cần cập nhật thông tin");
         } else {
             jDialog_updateInforCar.setVisible(true);
-            jDialog_updateInforCar.setSize(327, 340);
+            jDialog_updateInforCar.setSize(400, 370);
             jDialog_updateInforCar.setLocationRelativeTo(null);
             jDialog_updateInforCar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             int maXe = Integer.parseInt(jTable_inforCar.getValueAt(index, 0).toString());
@@ -901,6 +911,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog_inforCarTravel;
     private javax.swing.JDialog jDialog_updateInforCar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

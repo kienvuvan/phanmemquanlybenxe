@@ -240,7 +240,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel8" max="32767" attributes="0"/>
@@ -283,7 +283,12 @@
                       <Component id="jTextField_maXe" alignment="0" max="32767" attributes="0"/>
                       <Component id="jSpinner2" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -305,7 +310,9 @@
                       <Component id="jLabel8" linkSize="9" max="32767" attributes="0"/>
                       <Component id="jSpinner2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel14" linkSize="9" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jComboBox3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -611,6 +618,14 @@
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(spinnerModel1)"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SpinnerModel spinnerModel1 =new SpinnerNumberModel(50000,0,3000000,10000);"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel10">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*Th&#xf4;ng tin l&#x1ed9; tr&#xec;nh c&#x1ead;p nh&#x1ead;t l&#xe0; chuy&#x1ebf;n xe &#x111;i t&#x1eeb; n&#x1a1;i kh&#x1edf;i h&#xe0;nh &#x111;&#x1ebf;n H&#xe0; N&#x1ed9;i"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
