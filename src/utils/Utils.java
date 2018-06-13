@@ -93,8 +93,21 @@ public class Utils {
 
         Time thoiGianBatDauVe = new Time(timeUntil.getTime() + 30 * 60 * 1000);
         Time thoiGianVe = new Time(thoiGianBatDauVe.getTime() + timeUntil.getTime() - timeArrive.getTime());
-        System.out.println(thoiGianVe.toString());
-        return thoiGianBatDauVe.getHours() + "h" + thoiGianBatDauVe.getMinutes() + "-" + thoiGianVe.getHours() + "h" + thoiGianVe.getMinutes();
+        int phutBdauVe = thoiGianBatDauVe.getMinutes();
+        String phutBatDauVe = "";
+        if(phutBdauVe <10){
+            phutBatDauVe = "0"+phutBdauVe;
+        }else{
+            phutBatDauVe = phutBdauVe+"";
+        }
+        int soPhutVe = thoiGianVe.getMinutes();
+        String phutVe = "";
+        if(soPhutVe <10){
+            phutVe = "0"+soPhutVe;
+        }else{
+            phutVe = soPhutVe +"";
+        }
+        return thoiGianBatDauVe.getHours() + "h" + phutBatDauVe + "-" + thoiGianVe.getHours() + "h" + phutVe;
     }
 
     public static boolean invalidTime(String lichTrinh){
@@ -160,6 +173,6 @@ public class Utils {
 ////        System.out.println(isCmt("034097001988"));
 //        System.out.println(isBsx("17M2-12345"));
 //        System.out.println(reverseRoute("Hà Nội - Thái Bình"));
-//        System.out.println(generateCarReturn("6h31-9h00"));
+        System.out.println(generateCarReturn("6h30-9h00"));
     }
 }

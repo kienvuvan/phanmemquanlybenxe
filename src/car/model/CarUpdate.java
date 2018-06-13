@@ -23,6 +23,13 @@ public class CarUpdate {
     public CarUpdate() {
     }
 
+    public CarUpdate(String maXe, String bsx, double giaVe, String lichTrinh) {
+        this.maXe = maXe;
+        this.bsx = bsx;
+        this.giaVe = giaVe;
+        this.lichTrinh = lichTrinh;
+    }
+
     public CarUpdate(String maXe, String bsx, double giaVe, String lichTrinh, Timestamp ngayGui, int tinhTrang) {
         this.maXe = maXe;
         this.bsx = bsx;

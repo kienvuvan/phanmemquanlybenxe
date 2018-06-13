@@ -7,6 +7,7 @@ package car.dao;
 
 import car.model.Car;
 import car.model.CarUpdate;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -55,4 +56,24 @@ public interface CarDao {
     int sendRequesttUpdateCar(String maXe, String bsx, String cmt, double giaVe, String lichTrinh);
     
     List<CarUpdate> getAllRequest();
+    
+    List<String> getAllIdCarOwnerRequest();
+    
+    List<String> getAllIdCarRequestByCarOwner(String cmt);
+    
+    Timestamp getTimeSendRequest(String id);
+    
+    List<Car> getCarByIdCar(String maXe);
+    
+    List<CarUpdate> getCarUpdateByIdCar(String maXe);
+    
+    boolean updateCar(double giaVe, String maXe);
+    
+    boolean updateCar(double giaVe, String lichTrinh, String maXe);
+    
+    String getParkLocation(String maXe);
+    
+    boolean updateParkLocaction(String viTriDo, String bsx, String thoiGianDoCu, String thoiGianDoMoi);
+    
+    boolean updateStatusNoAgree(String maXe);
 }

@@ -7,6 +7,7 @@ package car.model;
 
 import car.dao.CarDao;
 import car.dao.MysqlCarDao;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -47,6 +48,13 @@ public class Car {
         this.soGhe = soGhe;
         this.giaVe = giaVe;
         this.loTrinh = loTrinh;
+        this.lichTrinh = lichTrinh;
+    }
+
+    public Car(int id, String bsx, Double giaVe, String lichTrinh) {
+        this.id = id;
+        this.bsx = bsx;
+        this.giaVe = giaVe;
         this.lichTrinh = lichTrinh;
     }
 
@@ -204,5 +212,49 @@ public class Car {
     
     public List<CarUpdate> getAllRequest() {
         return carDao().getAllRequest();
+    }
+    
+    public List<String> getAllIdCarOwnerRequest() {
+        return carDao().getAllIdCarOwnerRequest();
+    }
+    
+    public List<String> getAllIdCarRequestByCarOwner(String cmt) {
+        return carDao().getAllIdCarRequestByCarOwner(cmt);
+    }
+    
+    public Timestamp getTimeSendRequest(String id) {
+        return carDao().getTimeSendRequest(id);
+    }
+    
+    public List<Car> getCarByIdCar(String maXe) {
+        return carDao().getCarByIdCar(maXe);
+    }
+    
+    public List<CarUpdate> getCarUpdateByIdCar(String maXe) {
+        return carDao().getCarUpdateByIdCar(maXe);
+    }
+    
+    public boolean updateCar(double gia, String maXe) {
+        return carDao().updateCar(gia, maXe);
+    }
+    
+    public boolean updateCar(double gia, String lichTrinh, String maXe) {
+        return carDao().updateCar(gia, lichTrinh, maXe);
+    }
+    
+    public String getParkLocation(String maXe) {
+        return carDao().getParkLocation(maXe);
+    }
+    
+    public boolean checkParkLocation(String viTriDo, String thoiGianDo) {
+        return carDao().checkParkLocation(viTriDo, thoiGianDo);
+    }
+    
+    public boolean updateParkLocaction(String viTriDo, String bsx, String thoiGianDoCu, String thoiGianDoMoi){
+        return carDao().updateParkLocaction(viTriDo, bsx, thoiGianDoCu, thoiGianDoMoi);
+    }
+    
+    public boolean updateStatusNoAgree(String maXe){
+        return carDao().updateStatusNoAgree(maXe);
     }
 }

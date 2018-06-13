@@ -11,6 +11,10 @@ import carowner.controller.CarOwnerController;
 import carowner.view.CarOwnerForm;
 import javax.swing.JOptionPane;
 import admin.view.AdminForm;
+import admin.view.HandRequestUpdateCar;
+import car.controller.CarController;
+import car.model.CarUpdate;
+import java.util.List;
 
 /**
  *
@@ -20,6 +24,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     private AdminController ac;
     private CarOwnerController coc;
+    private CarController carController;
 
     /**
      * Creates new form LoginForm
@@ -28,6 +33,7 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         ac = new AdminController();
         coc = new CarOwnerController();
+        carController = new CarController();
     }
 
     /**
@@ -158,9 +164,23 @@ public class LoginForm extends javax.swing.JFrame {
                     break;
                 case MysqlAdminDao.RESULT_LOGIN_SUCCESS:
                     JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-                    this.dispose();
-                    AdminForm adminForm = new AdminForm(userNameField.getText());
-                    adminForm.setVisible(true);
+                    List<CarUpdate> listCarUpdates = carController.getAllRequest();
+                    if (listCarUpdates.size() > 0) {
+                        if (JOptionPane.showConfirmDialog(null, "Hiện tại có chủ xe gửi yêu cầu cập nhật thông tin xe.\nBạn có muốn chuyển sang giao diện xem và xác nhận yêu cầu không ??", "Thông báo ",
+                                JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
+                            this.dispose();
+                            HandRequestUpdateCar handRequestUpdateCar = new HandRequestUpdateCar(userNameField.getText());
+                            handRequestUpdateCar.setVisible(true);
+                        } else {
+                            this.dispose();
+                            AdminForm adminForm = new AdminForm(userNameField.getText());
+                            adminForm.setVisible(true);
+                        }
+                    } else {
+                        this.dispose();
+                        AdminForm adminForm = new AdminForm(userNameField.getText());
+                        adminForm.setVisible(true);
+                    }
                     break;
                 case MysqlAdminDao.RESULT_ACCOUNT_INCORECT:
                     JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
