@@ -6,21 +6,28 @@
 package carowner.view;
 
 import car.controller.CarController;
+import carfee.controller.CarFeeDetailController;
 import carowner.controller.CarOwnerController;
 import carowner.model.CarOwner;
+import cartravel.controller.CarTravelController;
 import guest.view.HomeGuestForm;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author kienanh2903
  */
 public class CarOwnerForm extends javax.swing.JFrame {
-    
-    String cmt ;
+
+    String cmt;
     CarOwnerController coc;
     CarController carController;
+    CarTravelController carTravelController;
+    CarFeeDetailController carFeeDetailController;
+
     /**
      * Creates new form CarOwnerForm1
+     *
      * @param cmt
      */
     public CarOwnerForm(String cmt) {
@@ -29,6 +36,8 @@ public class CarOwnerForm extends javax.swing.JFrame {
         this.cmt = cmt;
         coc = new CarOwnerController();
         carController = new CarController();
+        carTravelController = new CarTravelController();
+        carFeeDetailController = new CarFeeDetailController();
         setVisiableInforCar();
     }
 
@@ -41,6 +50,20 @@ public class CarOwnerForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu_inforCarTravel = new javax.swing.JPopupMenu();
+        jMenuItem_inforCarTravelDetail = new javax.swing.JMenuItem();
+        jDialog_inforCarTravel = new javax.swing.JDialog();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField_idCarTravel = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField_idCar = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField_date = new javax.swing.JTextField();
+        jTextField_route = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable_inforGuestInCarTravel = new javax.swing.JTable();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel_inforCar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -53,10 +76,21 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jPanel_travelDetail = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_inforCarTravel = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jLabel31 = new javax.swing.JLabel();
+        jTextField_searchCarTravel = new javax.swing.JTextField();
+        jButton_searchFeeCar = new javax.swing.JButton();
+        jPanel_carFee = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jTextField_searchCarFee = new javax.swing.JTextField();
+        jButton_searchCarFee = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable_inforCarFee = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField_sumCarFee = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -67,6 +101,106 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+
+        jMenuItem_inforCarTravelDetail.setText("Xem thông tin chi tiết chuyến xe");
+        jMenuItem_inforCarTravelDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_inforCarTravelDetailActionPerformed(evt);
+            }
+        });
+        jPopupMenu_inforCarTravel.add(jMenuItem_inforCarTravelDetail);
+
+        jDialog_inforCarTravel.setTitle("Thông tin hành khách đăng ký chuyến xe");
+
+        jLabel2.setText("Mã chuyến xe : ");
+
+        jTextField_idCarTravel.setEditable(false);
+
+        jLabel3.setText("Biển số xe : ");
+
+        jTextField_idCar.setEditable(false);
+
+        jLabel4.setText("Ngày đi :");
+
+        jTextField_date.setEditable(false);
+
+        jTextField_route.setEditable(false);
+
+        jLabel5.setText("Lịch trình : ");
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin hành khách đăng ký chuyến xe :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        jTable_inforGuestInCarTravel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Chứng minh thư", "Họ tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable_inforGuestInCarTravel);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog_inforCarTravelLayout = new javax.swing.GroupLayout(jDialog_inforCarTravel.getContentPane());
+        jDialog_inforCarTravel.getContentPane().setLayout(jDialog_inforCarTravelLayout);
+        jDialog_inforCarTravelLayout.setHorizontalGroup(
+            jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_inforCarTravelLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_date, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(jTextField_idCarTravel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_idCar, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(jTextField_route))
+                .addGap(37, 37, 37))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialog_inforCarTravelLayout.setVerticalGroup(
+            jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_inforCarTravelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_idCarTravel)
+                    .addComponent(jTextField_idCar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(jDialog_inforCarTravelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_date, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_route, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,7 +227,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
                 .addComponent(jTextField_searchInforCar, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton_search, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,11 +264,11 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel_inforCarLayout = new javax.swing.GroupLayout(jPanel_inforCar);
@@ -152,16 +286,14 @@ public class CarOwnerForm extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel_travelDetail.setLayout(new java.awt.GridLayout());
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin những chuyến xe khách đăng ký", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Những chuyến xe có khách đăng ký mua vé", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_inforCarTravel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã chuyến xe", "Biển số xe", "Ngày đi", "Lộ trình", "Số khách đăng ký"
+                "Mã chuyến xe", "Biển số xe", "Ngày đi", "Lịch trình", "Số khách đăng ký"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -172,82 +304,209 @@ public class CarOwnerForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jTable_inforCarTravel.setComponentPopupMenu(jPopupMenu_inforCarTravel);
+        jScrollPane2.setViewportView(jTable_inforCarTravel);
+        if (jTable_inforCarTravel.getColumnModel().getColumnCount() > 0) {
+            jTable_inforCarTravel.getColumnModel().getColumn(0).setHeaderValue("Mã chuyến xe");
+        }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
         );
 
-        jPanel_travelDetail.add(jPanel4);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Những xe chưa có khách đăng ký mua vé", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jLabel31.setText("Nhập thông tin cần tin kiếm : ");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jButton_searchFeeCar.setText("Tìm kiếm");
+        jButton_searchFeeCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_searchFeeCarActionPerformed(evt);
             }
-        ));
-        jScrollPane3.setViewportView(jTable2);
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_searchCarTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButton_searchFeeCar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_searchCarTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_searchFeeCar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jPanel_travelDetail.add(jPanel1);
+        javax.swing.GroupLayout jPanel_travelDetailLayout = new javax.swing.GroupLayout(jPanel_travelDetail);
+        jPanel_travelDetail.setLayout(jPanel_travelDetailLayout);
+        jPanel_travelDetailLayout.setHorizontalGroup(
+            jPanel_travelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_travelDetailLayout.setVerticalGroup(
+            jPanel_travelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_travelDetailLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        jLabel32.setText("Nhập thông tin cần tin kiếm : ");
+
+        jButton_searchCarFee.setText("Tìm kiếm");
+        jButton_searchCarFee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_searchCarFeeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_searchCarFee, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jButton_searchCarFee, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_searchCarFee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_searchCarFee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin chi phí đỗ xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        jTable_inforCarFee.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Biển số xe", "Số chuyến", "Ngày thu", "Phí"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable_inforCarFee);
+
+        jLabel6.setText("Tổng phí : ");
+
+        jTextField_sumCarFee.setEditable(false);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_sumCarFee, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_sumCarFee, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout jPanel_carFeeLayout = new javax.swing.GroupLayout(jPanel_carFee);
+        jPanel_carFee.setLayout(jPanel_carFeeLayout);
+        jPanel_carFeeLayout.setHorizontalGroup(
+            jPanel_carFeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_carFeeLayout.setVerticalGroup(
+            jPanel_carFeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_carFeeLayout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jLayeredPane1.setLayer(jPanel_inforCar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel_travelDetail, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanel_carFee, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 794, Short.MAX_VALUE)
+            .addGap(0, 826, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_inforCar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel_inforCar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel_travelDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_travelDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_carFee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel_inforCar, jPanel_travelDetail});
+        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel_carFee, jPanel_travelDetail});
 
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel_inforCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel_inforCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel_travelDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel_travelDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_carFee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel_inforCar, jPanel_travelDetail});
+        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel_carFee, jPanel_travelDetail});
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/applications_system.png"))); // NOI18N
         jMenu1.setText("Hệ thống");
@@ -311,6 +570,11 @@ public class CarOwnerForm extends javax.swing.JFrame {
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setText("Thông tin chi phí xe");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
@@ -334,7 +598,7 @@ public class CarOwnerForm extends javax.swing.JFrame {
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -382,10 +646,56 @@ public class CarOwnerForm extends javax.swing.JFrame {
         setVisiableTravelDetail();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jButton_searchFeeCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_searchFeeCarActionPerformed
+        // TODO add your handling code here:
+        String key = jTextField_searchCarTravel.getText().trim();
+        carTravelController.displayInforCarTravel(jTable_inforCarTravel, carTravelController.searchCarTravelByIdOwner(cmt, key));
+    }//GEN-LAST:event_jButton_searchFeeCarActionPerformed
+
+    private void jMenuItem_inforCarTravelDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_inforCarTravelDetailActionPerformed
+        // TODO add your handling code here:
+        int index = jTable_inforCarTravel.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn chuyến xe cần xem thông tin");
+        } else {
+            jDialog_inforCarTravel.setVisible(true);
+            jDialog_inforCarTravel.setSize(765, 357);
+            jDialog_inforCarTravel.setLocationRelativeTo(null);
+            jDialog_inforCarTravel.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jTextField_idCarTravel.setText(jTable_inforCarTravel.getValueAt(index, 0).toString());
+            jTextField_idCar.setText(jTable_inforCarTravel.getValueAt(index, 1).toString());
+            jTextField_date.setText(jTable_inforCarTravel.getValueAt(index, 2).toString());
+            jTextField_route.setText(jTable_inforCarTravel.getValueAt(index, 3).toString());
+            carTravelController.displayInforGuestInCarTravel(jTable_inforGuestInCarTravel, carTravelController.getAllGuestInCarTravel(jTable_inforCarTravel.getValueAt(index, 0).toString()));
+        }
+    }//GEN-LAST:event_jMenuItem_inforCarTravelDetailActionPerformed
+
+    private void jButton_searchCarFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_searchCarFeeActionPerformed
+        // TODO add your handling code here:
+        String key = jTextField_searchCarFee.getText().trim();
+        carFeeDetailController.displayAllCarFeeDetail(jTable_inforCarFee, carFeeDetailController.searchCarFeeDetailByCarOwner(cmt, key));
+        calculateSumCarFee();
+    }//GEN-LAST:event_jButton_searchCarFeeActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        setVisiableCarFee();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_search;
+    private javax.swing.JButton jButton_searchCarFee;
+    private javax.swing.JButton jButton_searchFeeCar;
+    private javax.swing.JDialog jDialog_inforCarTravel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -397,29 +707,70 @@ public class CarOwnerForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem_inforCarTravelDetail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel_carFee;
     private javax.swing.JPanel jPanel_inforCar;
     private javax.swing.JPanel jPanel_travelDetail;
+    private javax.swing.JPopupMenu jPopupMenu_inforCarTravel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable_inforCar;
+    private javax.swing.JTable jTable_inforCarFee;
+    private javax.swing.JTable jTable_inforCarTravel;
+    private javax.swing.JTable jTable_inforGuestInCarTravel;
+    private javax.swing.JTextField jTextField_date;
+    private javax.swing.JTextField jTextField_idCar;
+    private javax.swing.JTextField jTextField_idCarTravel;
+    private javax.swing.JTextField jTextField_route;
+    private javax.swing.JTextField jTextField_searchCarFee;
+    private javax.swing.JTextField jTextField_searchCarTravel;
     private javax.swing.JTextField jTextField_searchInforCar;
+    private javax.swing.JTextField jTextField_sumCarFee;
     // End of variables declaration//GEN-END:variables
 
     private void setVisiableInforCar() {
         jPanel_inforCar.setVisible(true);
         jPanel_travelDetail.setVisible(false);
+        jPanel_carFee.setVisible(false);
         carController.displayInforCarForOwner(jTable_inforCar, carController.getAllInforCarForOwner(cmt));
     }
-    
+
     private void setVisiableTravelDetail() {
         jPanel_inforCar.setVisible(false);
         jPanel_travelDetail.setVisible(true);
+        jPanel_carFee.setVisible(false);
+        carTravelController.displayInforCarTravel(jTable_inforCarTravel, carTravelController.getAllCarTravelByIdOwner(cmt));
+    }
+
+    private void setVisiableCarFee() {
+        jPanel_inforCar.setVisible(false);
+        jPanel_travelDetail.setVisible(false);
+        jPanel_carFee.setVisible(true);
+        carFeeDetailController.displayAllCarFeeDetail(jTable_inforCarFee, carFeeDetailController.getAllCarFeeDetailByCarOwner(cmt));
+        calculateSumCarFee();
+    }
+
+    private void calculateSumCarFee() {
+        int countRow = jTable_inforCarFee.getRowCount();
+        if (countRow == 0) {
+            jTextField_sumCarFee.setText("0 đ");
+        } else {
+            double sum = 0;
+            for (int i = 0; i < countRow; i++) {
+                int soChuyen = Integer.parseInt(jTable_inforCarFee.getValueAt(i, 1).toString());
+                double phi = Double.parseDouble(jTable_inforCarFee.getValueAt(i, 3).toString());
+                sum += soChuyen *phi ;
+            }
+            jTextField_sumCarFee.setText(sum +" đ");
+        }
     }
 }

@@ -72,7 +72,7 @@ public class CarTravel {
     public void setThoiGian(String thoiGian) {
         this.thoiGian = thoiGian;
     }
-    
+
     public List<CarTravelDetail> getListDetail() {
         return listDetail;
     }
@@ -80,31 +80,44 @@ public class CarTravel {
     public void setListDetail(List<CarTravelDetail> listDetail) {
         this.listDetail = listDetail;
     }
-    
+
     public CarTravelDao carTravelDao() {
         return new MysqlCarTravelDao();
     }
+
     public String generateCarTravelId(String bienSoXe, Date ngayDi, String thoiGian) {
         return carTravelDao().generateCarTravelId(bienSoXe, ngayDi, thoiGian);
     }
-    
+
     public boolean checkCarTravelIdExit(String maChuyenXe) {
         return carTravelDao().checkCarTravelIdExit(maChuyenXe);
     }
-    
+
     public int bookTicket(CarTravel carTravel, Guest guest) {
         return carTravelDao().bookTicket(carTravel, guest);
     }
-    
-    public boolean checkTicketForDestroy(String maChuyenXe, String cmt){
+
+    public boolean checkTicketForDestroy(String maChuyenXe, String cmt) {
         return carTravelDao().checkTicketForDestroy(maChuyenXe, cmt);
     }
-    
+
     public int unbookTicket(String maChuyenXe, String cmt) {
         return carTravelDao().unbookTicket(maChuyenXe, cmt);
     }
-    
+
     public boolean creatCarTravel() {
         return carTravelDao().creatCarTravel();
+    }
+
+    public List<CarTravel> getAllCarTravelByIdOwner(String cmt) {
+        return carTravelDao().getAllCarTravelByIdOwner(cmt);
+    }
+
+    public List<CarTravel> searchCarTravelByIdOwner(String cmt, String key) {
+        return carTravelDao().searchCarTravelByIdOwner(cmt, key);
+    }
+    
+    public List<Guest> getAllGuestInCarTravel(String maChuyenXe) {
+        return carTravelDao().getAllGuestInCarTravel(maChuyenXe);
     }
 }

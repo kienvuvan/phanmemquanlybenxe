@@ -15,4 +15,8 @@ import java.util.List;
  */
 public interface CarFeeDetailDao {
     List<CarFeeDetail> getCarFeeDetailByCarOwner(String cmtChuXe, Date ngayThu);
+    
+    List<CarFeeDetail> getAllCarFeeDetailByCarOwner(String cmtChuXe);
+    
+    List<CarFeeDetail> searchCarFeeDetailByCarOwner(String cmtChuXe, String key);
 }

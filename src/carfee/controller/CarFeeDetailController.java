@@ -7,6 +7,7 @@ package carfee.controller;
 
 import carfee.model.CarFeeDetail;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -35,4 +36,23 @@ public class CarFeeDetailController {
         }
         jtb.setModel(dtm);
     }
+    
+    public List<CarFeeDetail> getAllCarFeeDetailByCarOwner(String cmtChuXe) {
+        return carFeeDetail.getAllCarFeeDetailByCarOwner(cmtChuXe);
+    }
+    
+    public void displayAllCarFeeDetail(JTable jtb, List<CarFeeDetail> listCarFeeDetails) {
+        DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
+        dtm.setRowCount(0);
+        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
+        for (CarFeeDetail feeDetail : listCarFeeDetails) {
+            dtm.addRow(new Object[]{feeDetail.getBsx(), feeDetail.getSoChuyen(),simple.format(feeDetail.getNgayThu()), feeDetail.getPhi()});
+        }
+        jtb.setModel(dtm);
+    }
+    
+    public List<CarFeeDetail> searchCarFeeDetailByCarOwner(String cmtChuXe, String key) {
+        return carFeeDetail.searchCarFeeDetailByCarOwner(cmtChuXe, key);
+    }
+    
 }

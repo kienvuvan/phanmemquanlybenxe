@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CarController {
 
-    private Car car;
+    private final Car car;
 
     public CarController() {
         car = new Car();

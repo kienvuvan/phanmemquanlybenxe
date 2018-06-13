@@ -86,4 +86,12 @@ public class CarFeeDetail {
     public List<CarFeeDetail> getCarFeeDetailByCarOwner(String cmtChuXe, Date ngayThu) {
         return carFeeDetailDao().getCarFeeDetailByCarOwner(cmtChuXe, ngayThu);
     }
+    
+    public List<CarFeeDetail> getAllCarFeeDetailByCarOwner(String cmtChuXe) {
+        return carFeeDetailDao().getAllCarFeeDetailByCarOwner(cmtChuXe);
+    }
+    
+    public List<CarFeeDetail> searchCarFeeDetailByCarOwner(String cmtChuXe, String key) {
+        return carFeeDetailDao().searchCarFeeDetailByCarOwner(cmtChuXe, key);
+    }
 }

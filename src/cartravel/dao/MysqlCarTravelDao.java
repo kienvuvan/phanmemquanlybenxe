@@ -9,6 +9,7 @@ import car.controller.CarController;
 import car.model.Car;
 import cartravel.controller.CarTravelController;
 import cartravel.model.CarTravel;
+import cartravel.model.CarTravelDetail;
 import com.mysql.cj.util.StringUtils;
 import guest.controller.GuestController;
 import guest.model.Guest;
@@ -17,6 +18,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,6 +41,12 @@ public class MysqlCarTravelDao implements CarTravelDao {
     private static final String UN_BOOKTICKET = "DELETE FROM chitietchuyenxe WHERE MaChuyenXe = ? AND MaHanhKhach = ?";
     private static final String CHECK_EXIT_CAR_TRAVEL = "SELECT COUNT(*) FROM chuyenxe WHERE BienSoXe =? AND Ngay =? AND ThoiGian =?";
     private static final String GET_MAX_ID_CAR_TRAVEL = "SELECT MAX(MaChuyenXe) FROM `chuyenxe` WHERE Ngay = ? AND BienSoXe = ?";
+    private static final String GET_ALL_CAR_TRAVEL_BY_ID_CAROWNER = "SELECT * FROM chuyenxe, xe WHERE chuyenxe.BienSoXe = xe.BienSoXe AND xe.CmtNhaXe = ? "
+            + "AND xe.LichTrinh = chuyenxe.ThoiGian ORDER BY Ngay DESC";
+    private static final String GET_ALL_CAR_TRAVEL_DETAIL_BY_ID_TRAVEL = "SELECT * FROM chitietchuyenxe WHERE MaChuyenXe = ?";
+    private static final String SEARCH_CAR_TRAVEL_BY_ID_CAROWNER = "SELECT * FROM chuyenxe, xe WHERE chuyenxe.BienSoXe = xe.BienSoXe AND xe.CmtNhaXe = ? "
+            + "AND xe.LichTrinh = chuyenxe.ThoiGian AND (MaChuyenXe LIKE ? OR xe.BienSoXe LIKE ? OR Ngay LIKE ? OR LichTrinh LIKE ? ) ORDER BY Ngay DESC ";
+    private static final String GET_ALL_GUEST_CAR_TRAVEL = "SELECT * FROM chitietchuyenxe, hanhkhach WHERE chitietchuyenxe.MaHanhKhach = hanhkhach.Cmt AND MaChuyenXe = ?";
 
     public static final int RESULT_DATE_NULL = 0;
     public static final int RESULT_DATE_BORN_NULL = 1;
@@ -338,5 +346,96 @@ public class MysqlCarTravelDao implements CarTravelDao {
             Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 1;
+    }
+
+    @Override
+    public List<CarTravel> getAllCarTravelByIdOwner(String cmt) {
+        List<CarTravel> listCarTravels = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(GET_ALL_CAR_TRAVEL_BY_ID_CAROWNER);
+            pstm.setString(1, cmt);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String maChuyenXe = rs.getString("MaChuyenXe");
+                String bsx = rs.getString("BienSoXe");
+                Date ngayDi = rs.getDate("Ngay");
+                String lichTrinh = rs.getString("LichTrinh");
+                CarTravel carTravel = new CarTravel(maChuyenXe, bsx, ngayDi, lichTrinh);
+                PreparedStatement pstm1 = connection.prepareCall(GET_ALL_CAR_TRAVEL_DETAIL_BY_ID_TRAVEL);
+                pstm1.setString(1, maChuyenXe);
+                ResultSet rs1 = pstm1.executeQuery();
+                List<CarTravelDetail> listCarTravelDetails = new ArrayList<>();
+                while (rs1.next()) {
+                    String maHanhKhach = rs1.getString("MaHanhKhach");
+                    listCarTravelDetails.add(new CarTravelDetail(maChuyenXe, maHanhKhach));
+                }
+                carTravel.setListDetail(listCarTravelDetails);
+                listCarTravels.add(carTravel);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarTravels;
+    }
+
+    @Override
+    public List<CarTravel> searchCarTravelByIdOwner(String cmt, String key) {
+        List<CarTravel> listCarTravels = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(SEARCH_CAR_TRAVEL_BY_ID_CAROWNER);
+            pstm.setString(1, cmt);
+            pstm.setString(2, "%" + key + "%");
+            pstm.setString(3, "%" + key + "%");
+            pstm.setString(4, "%" + key + "%");
+            pstm.setString(5, "%" + key + "%");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String maChuyenXe = rs.getString("MaChuyenXe");
+                String bsx = rs.getString("BienSoXe");
+                Date ngayDi = rs.getDate("Ngay");
+                String lichTrinh = rs.getString("LichTrinh");
+                CarTravel carTravel = new CarTravel(maChuyenXe, bsx, ngayDi, lichTrinh);
+                PreparedStatement pstm1 = connection.prepareCall(GET_ALL_CAR_TRAVEL_DETAIL_BY_ID_TRAVEL);
+                pstm1.setString(1, maChuyenXe);
+                ResultSet rs1 = pstm1.executeQuery();
+                List<CarTravelDetail> listCarTravelDetails = new ArrayList<>();
+                while (rs1.next()) {
+                    String maHanhKhach = rs1.getString("MaHanhKhach");
+                    listCarTravelDetails.add(new CarTravelDetail(maChuyenXe, maHanhKhach));
+                }
+                carTravel.setListDetail(listCarTravelDetails);
+                listCarTravels.add(carTravel);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarTravels;
+    }
+
+    @Override
+    public List<Guest> getAllGuestInCarTravel(String maChuyenXe) {
+        List<Guest> listGuests = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(GET_ALL_GUEST_CAR_TRAVEL);
+            pstm.setString(1, maChuyenXe);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                String cmt = rs.getString("Cmt");
+                String ten = rs.getString("HoTen");
+                Date ngaySinh = rs.getDate("NgaySinh");
+                String gioiTinh = rs.getString("GioiTinh");
+                String sdt = rs.getString("Sdt");
+                String email = rs.getString("Email");
+                String diaChi = rs.getString("DiaChi");
+                Guest guest = new Guest(cmt, ten, ngaySinh, gioiTinh, sdt, email, diaChi);
+                listGuests.add(guest);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarTravelDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listGuests;
     }
 }

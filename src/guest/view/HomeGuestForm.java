@@ -756,6 +756,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
             jDialog_bookTicket.setVisible(true);
             jDialog_bookTicket.setSize(620, 600);
             jDialog_bookTicket.setLocationRelativeTo(null);
+            jDialog_bookTicket.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             Date dateNow = new Date();
             Date ngaySinh = new Date(97, 2, 29);
             jXDatePicker1_ngayDatVeDi.setDate(dateNow);
