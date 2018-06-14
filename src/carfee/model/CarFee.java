@@ -5,7 +5,6 @@
  */
 package carfee.model;
 
-import car.dao.MysqlCarDao;
 import carfee.dao.CarFeeDao;
 import carfee.dao.MysqlCarFeeDao;
 import java.sql.Date;

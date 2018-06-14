@@ -18,9 +18,9 @@ import carowner.model.CarOwner;
 import carowner.view.InforAccount;
 import cartravel.controller.CarTravelController;
 import guest.view.HomeGuestForm;
-import information.controller.InformationController;
-import information.dao.MysqlInformationDao;
-import information.model.Information;
+import notification.controller.NotificationController;
+import notification.dao.MysqlNotificationDao;
+import notification.model.Notification;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -44,7 +44,7 @@ public class AdminForm extends javax.swing.JFrame {
     private final CarOwnerController coc;
     private final CarController carController;
     private final AdminController adminController;
-    private final InformationController informationController;
+    private final NotificationController informationController;
     private final CarFeeController carFeeController;
     private final CarTravelController carTravelController;
     private int id = 0;
@@ -60,7 +60,7 @@ public class AdminForm extends javax.swing.JFrame {
         coc = new CarOwnerController();
         carController = new CarController();
         adminController = new AdminController();
-        informationController = new InformationController();
+        informationController = new NotificationController();
         carFeeController = new CarFeeController();
         coc.displayInforCarOwner(jTable_inforCarOwner);
         coc.displayIdCarOwnerToComboBox(jComboBox_cmtChuXe);
@@ -1688,20 +1688,20 @@ public class AdminForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String tieuDe = jTextField_tieuDe.getText();
         String noiDung = jTextPane_noiDung.getText();
-        Information information = new Information(new Timestamp(Calendar.getInstance().getTimeInMillis()), tieuDe, noiDung, idAdmin);
+        Notification information = new Notification(new Timestamp(Calendar.getInstance().getTimeInMillis()), tieuDe, noiDung, idAdmin);
         int result = informationController.postNew(information);
         switch (result) {
-            case MysqlInformationDao.RESULT_EMPTY:
+            case MysqlNotificationDao.RESULT_EMPTY:
                 JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng điền đầy đủ");
                 break;
-            case MysqlInformationDao.RESULT_POST_SAME:
+            case MysqlNotificationDao.RESULT_POST_SAME:
                 JOptionPane.showMessageDialog(this, "Bài viết tương tự đã tồn tại");
                 break;
-            case MysqlInformationDao.RESULT_POST_SUCCESS:
+            case MysqlNotificationDao.RESULT_POST_SUCCESS:
                 JOptionPane.showMessageDialog(this, "Đăng thông báo thành công");
                 setVisiableManagerInformation();
                 break;
-            case MysqlInformationDao.RESULT_SQL_ERROR:
+            case MysqlNotificationDao.RESULT_SQL_ERROR:
                 JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                 break;
         }
@@ -1723,22 +1723,22 @@ public class AdminForm extends javax.swing.JFrame {
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Bạn vui lòng chọn thông báo cần cập nhật");
         } else {
-            Information information = new Information(id, new Timestamp(Calendar.getInstance().getTimeInMillis()), tieuDe, noiDung, idAdmin);
+            Notification information = new Notification(id, new Timestamp(Calendar.getInstance().getTimeInMillis()), tieuDe, noiDung, idAdmin);
             if (JOptionPane.showConfirmDialog(null, "Bạn có cập nhật thông báo này không ??", "Thông báo ",
                     JOptionPane.YES_OPTION) == JOptionPane.YES_NO_OPTION) {
                 int result = informationController.updateNew(information);
                 switch (result) {
-                    case MysqlInformationDao.RESULT_EMPTY:
+                    case MysqlNotificationDao.RESULT_EMPTY:
                         JOptionPane.showMessageDialog(this, "Các trường dữ liệu không được để trống.Vui lòng điền đầy đủ");
                         break;
-                    case MysqlInformationDao.RESULT_POST_SAME:
+                    case MysqlNotificationDao.RESULT_POST_SAME:
                         JOptionPane.showMessageDialog(this, "Bài viết tương tự đã tồn tại");
                         break;
-                    case MysqlInformationDao.RESULT_POST_SUCCESS:
+                    case MysqlNotificationDao.RESULT_POST_SUCCESS:
                         JOptionPane.showMessageDialog(this, "Cập nhật thông báo thành công");
                         setVisiableManagerInformation();
                         break;
-                    case MysqlInformationDao.RESULT_SQL_ERROR:
+                    case MysqlNotificationDao.RESULT_SQL_ERROR:
                         JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại sau");
                         break;
                 }

@@ -11,8 +11,8 @@ import cartravel.controller.CarTravelController;
 import cartravel.dao.MysqlCarTravelDao;
 import cartravel.model.CarTravel;
 import guest.model.Guest;
-import information.controller.InformationController;
-import information.model.Information;
+import notification.controller.NotificationController;
+import notification.model.Notification;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,8 +28,8 @@ public class HomeGuestForm extends javax.swing.JFrame {
     CarOwnerController coc;
     CarController cc;
     CarTravelController ctc;
-    InformationController ic;
-    List<Information> listInformations;
+    NotificationController ic;
+    List<Notification> listInformations;
     private int stt = 1;
 
     /**
@@ -42,7 +42,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
         cc = new CarController();
         ctc = new CarTravelController();
         coc.displayInforCarOwnerToJTable(jTable1);
-        ic = new InformationController();
+        ic = new NotificationController();
         listInformations = ic.getAllInfor();
         setVisiablePrevious();
         setVisiableNext();
@@ -562,7 +562,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
                         .addComponent(jTextField_cmtKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_unbookticketLayout.createSequentialGroup()
                         .addGap(323, 323, 323)
-                        .addComponent(jButton4)))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -585,8 +585,8 @@ public class HomeGuestForm extends javax.swing.JFrame {
                     .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(jTextField_cmtKhach))
                 .addGap(40, 40, 40)
-                .addComponent(jButton4)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jPanel_unbookticketLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel22, jLabel24});

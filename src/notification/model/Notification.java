@@ -3,36 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package information.model;
+package notification.model;
 
-import information.dao.InformationDao;
-import information.dao.MysqlInformationDao;
+import notification.dao.MysqlNotificationDao;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import notification.dao.NotificationDao;
 
 /**
  *
  * @author kienanh2903
  */
-public class Information {
+public class Notification {
     private int id;
     private Timestamp ngayDang;
     private String tieuDe;
     private String noiDung;
     private String cmtAdmin;
 
-    public Information() {
+    public Notification() {
     }
 
-    public Information(Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
+    public Notification(Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
         this.ngayDang = ngayDang;
         this.tieuDe = tieuDe;
         this.noiDung = noiDung;
         this.cmtAdmin = cmtAdmin;
     }
 
-    public Information(int id, Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
+    public Notification(int id, Timestamp ngayDang, String tieuDe, String noiDung, String cmtAdmin) {
         this.id = id;
         this.ngayDang = ngayDang;
         this.tieuDe = tieuDe;
@@ -80,19 +80,19 @@ public class Information {
         this.cmtAdmin = cmtAdmin;
     }
     
-    public InformationDao informationDao() {
-        return new MysqlInformationDao();
+    public NotificationDao informationDao() {
+        return new MysqlNotificationDao();
     }
     
-    public List<Information> getAllInfor() {
+    public List<Notification> getAllInfor() {
         return informationDao().getAllInfor();
     }
     
-    public int postNew(Information information) {
+    public int postNew(Notification information) {
         return informationDao().postNew(information);
     }
     
-    public int updateNew(Information information) {
+    public int updateNew(Notification information) {
         return informationDao().updateNew(information);
     }
     

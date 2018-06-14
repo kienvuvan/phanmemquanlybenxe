@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package information.dao;
+package notification.dao;
 
-import information.model.Information;
+import notification.model.Notification;
 import java.util.List;
 
 /**
  *
  * @author kienanh2903
  */
-public interface InformationDao {
-    List<Information> getAllInfor();
+public interface NotificationDao {
+    List<Notification> getAllInfor();
     
-    int postNew(Information information);
+    int postNew(Notification information);
     
-    int updateNew(Information information);
+    int updateNew(Notification information);
     
     boolean deleteNew(int id);
 }

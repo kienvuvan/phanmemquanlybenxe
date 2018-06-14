@@ -6,7 +6,7 @@
 package carowner.view;
 
 import account.controller.AccountController;
-import account.dao.AccountDao;
+import account.dao.MysqlAccountDao;
 import account.model.Account;
 import admin.controller.AdminController;
 import admin.dao.MysqlAdminDao;
@@ -502,19 +502,19 @@ public class InforAccount extends javax.swing.JFrame {
         Account acc = new Account(cmt, passOld, "Chủ xe");
         int result = ac.setOwnerPass(acc, passNew, passAgain);
         switch (result) {
-            case AccountDao.RESULT_EMPTY:
+            case MysqlAccountDao.RESULT_EMPTY:
                 JOptionPane.showMessageDialog(this, "Bạn phải điền đầy đủ thông tin");
                 break;
-            case AccountDao.RESULT_ACCOUNT_INCORRECT:
+            case MysqlAccountDao.RESULT_ACCOUNT_INCORRECT:
                 JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác.Vui lòng thử lại!!");
                 break;
-            case AccountDao.RESULT_PASSAGAIN_NOT_SAME:
+            case MysqlAccountDao.RESULT_PASSAGAIN_NOT_SAME:
                 JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp.Vui lòng nhập lại!!");
                 break;
-            case AccountDao.RESULT_SUCCESS:
+            case MysqlAccountDao.RESULT_SUCCESS:
                 JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công!!");
                 break;
-            case AccountDao.RESULT_SQL_ERROR:
+            case MysqlAccountDao.RESULT_SQL_ERROR:
                 JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại!!");
                 break;
         }
@@ -528,19 +528,19 @@ public class InforAccount extends javax.swing.JFrame {
         Account acc = new Account(cmt, passOld, "Admin");
         int result = ac.setAdminPass(acc, passNew, passAgain);
         switch (result) {
-            case AccountDao.RESULT_EMPTY:
+            case MysqlAccountDao.RESULT_EMPTY:
                 JOptionPane.showMessageDialog(this, "Bạn phải điền đầy đủ thông tin");
                 break;
-            case AccountDao.RESULT_ACCOUNT_INCORRECT:
+            case MysqlAccountDao.RESULT_ACCOUNT_INCORRECT:
                 JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác.Vui lòng thử lại!!");
                 break;
-            case AccountDao.RESULT_PASSAGAIN_NOT_SAME:
+            case MysqlAccountDao.RESULT_PASSAGAIN_NOT_SAME:
                 JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp.Vui lòng nhập lại!!");
                 break;
-            case AccountDao.RESULT_SUCCESS:
+            case MysqlAccountDao.RESULT_SUCCESS:
                 JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công!!");
                 break;
-            case AccountDao.RESULT_SQL_ERROR:
+            case MysqlAccountDao.RESULT_SQL_ERROR:
                 JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra.Vui lòng thử lại!!");
                 break;
         }

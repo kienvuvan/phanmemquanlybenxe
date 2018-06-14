@@ -5,7 +5,7 @@
  */
 package account.controller;
 
-import account.dao.AccountDao;
+import account.dao.MysqlAccountDao;
 import account.model.Account;
 
 /**
@@ -19,7 +19,7 @@ public class AccountController {
     }
 
 
-    AccountDao accDao = new AccountDao();
+    MysqlAccountDao accDao = new MysqlAccountDao();
     public static Account acc = new Account();
 
     public boolean checkOwnerAcc() {
@@ -32,5 +32,13 @@ public class AccountController {
     
     public int setAdminPass(Account acc, String passNew, String passAgain) {
         return accDao.setAdminPass(acc, passNew, passAgain);
+    }
+    
+    public int forgotPassAdmin(String cmt, String email) {
+        return accDao.forgotPassAdmin(cmt, email);
+    }
+    
+    public int forgotPassCarOwner(String cmt, String email) {
+        return accDao.forgotPassCarOwner(cmt, email);
     }
 }

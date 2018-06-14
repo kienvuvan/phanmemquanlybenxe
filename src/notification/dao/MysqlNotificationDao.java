@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package information.dao;
+package notification.dao;
 
 import com.mysql.cj.util.StringUtils;
-import information.model.Information;
+import notification.model.Notification;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ import mysql.Mysql;
  *
  * @author kienanh2903
  */
-public class MysqlInformationDao implements InformationDao {
+public class MysqlNotificationDao implements NotificationDao {
 
     private static final String GET_ALL_INFOR = "SELECT * FROM thongbao ORDER BY Ngay DESC";
     private static final String POST_NEW = "INSERT INTO thongbao VALUES(?,?,?,?,?)";
@@ -38,8 +38,8 @@ public class MysqlInformationDao implements InformationDao {
     public static final int RESULT_SQL_ERROR = 3;
 
     @Override
-    public List<Information> getAllInfor() {
-        List<Information> listInformations = new ArrayList<>();
+    public List<Notification> getAllInfor() {
+        List<Notification> listInformations = new ArrayList<>();
         try {
             Connection connection = Mysql.getInstance().getConnection();
             Statement stm = connection.createStatement();
@@ -50,17 +50,17 @@ public class MysqlInformationDao implements InformationDao {
                 String tieuDe = rs.getString("TieuDe");
                 String noiDung = rs.getString("NoiDung");
                 String cmt = rs.getString("CmtNhanVien");
-                Information information = new Information(id, ngayDang, tieuDe, noiDung, cmt);
+                Notification information = new Notification(id, ngayDang, tieuDe, noiDung, cmt);
                 listInformations.add(information);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MysqlNotificationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listInformations;
     }
 
     @Override
-    public int postNew(Information information) {
+    public int postNew(Notification information) {
         if (StringUtils.isNullOrEmpty(information.getTieuDe()) || StringUtils.isNullOrEmpty(information.getNoiDung())) {
             return RESULT_EMPTY;
         } else if (checkPost(information)) {
@@ -79,7 +79,7 @@ public class MysqlInformationDao implements InformationDao {
                     return RESULT_POST_SUCCESS;
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MysqlNotificationDao.class.getName()).log(Level.SEVERE, null, ex);
             }
             return RESULT_SQL_ERROR;
         }
@@ -94,12 +94,12 @@ public class MysqlInformationDao implements InformationDao {
                 return rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MysqlNotificationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 1;
     }
 
-    public boolean checkPost(Information information) {
+    public boolean checkPost(Notification information) {
         try {
             Connection connection = Mysql.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareCall(CHECK_POST);
@@ -112,13 +112,13 @@ public class MysqlInformationDao implements InformationDao {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MysqlNotificationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
     @Override
-    public int updateNew(Information information) {
+    public int updateNew(Notification information) {
         if (StringUtils.isNullOrEmpty(information.getTieuDe()) || StringUtils.isNullOrEmpty(information.getNoiDung())) {
             return RESULT_EMPTY;
         } else if (checkPost(information)) {
@@ -136,7 +136,7 @@ public class MysqlInformationDao implements InformationDao {
                     return RESULT_POST_SUCCESS;
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MysqlNotificationDao.class.getName()).log(Level.SEVERE, null, ex);
             }
             return RESULT_SQL_ERROR;
         }
@@ -153,7 +153,7 @@ public class MysqlInformationDao implements InformationDao {
                 return true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MysqlInformationDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MysqlNotificationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

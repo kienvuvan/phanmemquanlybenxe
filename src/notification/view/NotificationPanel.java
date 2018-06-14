@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package information.view;
+package notification.view;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -12,12 +12,12 @@ import java.text.SimpleDateFormat;
  *
  * @author kienanh2903
  */
-public class InforPanel extends javax.swing.JPanel {
+public class NotificationPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form Information
      */
-    public InforPanel(String stt, String tieuDe, Timestamp ngayDang, String nguoiDang, String noiDung) {
+    public NotificationPanel(String stt, String tieuDe, Timestamp ngayDang, String nguoiDang, String noiDung) {
         initComponents();
         jLabel_stt.setText("STT : "+stt);
         jLabel_tieuDe.setText(tieuDe);

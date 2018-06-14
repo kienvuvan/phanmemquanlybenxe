@@ -10,6 +10,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 /**
@@ -95,22 +96,22 @@ public class Utils {
         Time thoiGianVe = new Time(thoiGianBatDauVe.getTime() + timeUntil.getTime() - timeArrive.getTime());
         int phutBdauVe = thoiGianBatDauVe.getMinutes();
         String phutBatDauVe = "";
-        if(phutBdauVe <10){
-            phutBatDauVe = "0"+phutBdauVe;
-        }else{
-            phutBatDauVe = phutBdauVe+"";
+        if (phutBdauVe < 10) {
+            phutBatDauVe = "0" + phutBdauVe;
+        } else {
+            phutBatDauVe = phutBdauVe + "";
         }
         int soPhutVe = thoiGianVe.getMinutes();
         String phutVe = "";
-        if(soPhutVe <10){
-            phutVe = "0"+soPhutVe;
-        }else{
-            phutVe = soPhutVe +"";
+        if (soPhutVe < 10) {
+            phutVe = "0" + soPhutVe;
+        } else {
+            phutVe = soPhutVe + "";
         }
         return thoiGianBatDauVe.getHours() + "h" + phutBatDauVe + "-" + thoiGianVe.getHours() + "h" + phutVe;
     }
 
-    public static boolean invalidTime(String lichTrinh){
+    public static boolean invalidTime(String lichTrinh) {
         StringTokenizer stk = new StringTokenizer(lichTrinh, "-");
         List<String> thoiGian = new ArrayList<>();
         while (stk.hasMoreTokens()) {
@@ -130,11 +131,13 @@ public class Utils {
             thoiGianDen.add(stk2.nextToken());
         }
         Time timeUntil = new Time(Integer.valueOf(thoiGianDen.get(0)), Integer.valueOf(thoiGianDen.get(1)), 0);
-        if(timeUntil.getTime() < timeArrive.getTime()){
+        if (timeUntil.getTime() < timeArrive.getTime()) {
             return false;
-        }else return true;
+        } else {
+            return true;
+        }
     }
-    
+
     public static String generateCarTravelId(String bienSoXe, Date ngayDi) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(ngayDi);
@@ -158,7 +161,7 @@ public class Utils {
         return bienSoXe + dayStr + monthStr + yearStr;
     }
 
-    public static List<String> cutRoute(String loTrinh){
+    public static List<String> cutRoute(String loTrinh) {
         StringTokenizer stk = new StringTokenizer(loTrinh, "-");
         List<String> listToken = new ArrayList<>();
         while (stk.hasMoreTokens()) {
@@ -166,7 +169,18 @@ public class Utils {
         }
         return listToken;
     }
-    
+
+    public static String randomString() {
+        String AB = "KIEN1997";
+        Random rnd = new Random();
+        int len = AB.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
         System.out.println(generateCarTravelId("17M2-1234", dateNow));
@@ -174,5 +188,6 @@ public class Utils {
 //        System.out.println(isBsx("17M2-12345"));
 //        System.out.println(reverseRoute("Hà Nội - Thái Bình"));
         System.out.println(generateCarReturn("6h30-9h00"));
+        System.out.println(randomString());
     }
 }
