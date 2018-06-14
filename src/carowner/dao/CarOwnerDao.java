@@ -21,7 +21,7 @@ public interface CarOwnerDao {
     
     List<CarOwner> getAllListCarOwner();
 
-    List<CarOwner> searchCarOwner();
+    List<CarOwner> searchCarOwner(String key);
 
     List<CarOwner> getAllInforCarOwner();
 

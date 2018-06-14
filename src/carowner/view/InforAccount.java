@@ -376,7 +376,7 @@ public class InforAccount extends javax.swing.JFrame {
         jTextField_nhaXe.setText(carOwner.getNhaXe());
         jTextField_sdt.setText(carOwner.getSdt());
         jTextField_email.setText(carOwner.getEmail());
-        if (carOwner.getGioitinh().equalsIgnoreCase("Nam")) {
+        if (carOwner.getGioiTinh().equalsIgnoreCase("Nam")) {
             jRadioButton_nam.setSelected(true);
         } else {
             jRadioButton_nu.setSelected(true);

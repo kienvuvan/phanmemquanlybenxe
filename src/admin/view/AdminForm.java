@@ -1819,7 +1819,7 @@ public class AdminForm extends javax.swing.JFrame {
             jTextField_carOwner.setText(carOwner.getNhaXe());
             jTextField_phone.setText(carOwner.getSdt());
             jTextField_email1.setText(carOwner.getEmail());
-            jTextField_sex.setText(carOwner.getGioitinh());
+            jTextField_sex.setText(carOwner.getGioiTinh());
             SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
             jTextField_born.setText(simple.format(carOwner.getNgaySinh()));
             jTextField_adress.setText(carOwner.getDiaChi());

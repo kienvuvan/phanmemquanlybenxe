@@ -41,7 +41,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
         coc = new CarOwnerController();
         cc = new CarController();
         ctc = new CarTravelController();
-        coc.displayInforCarOwnerToJTable(jTable1);
+        coc.displayInforCarOwnerToJTable(jTable_carTravel);
         ic = new NotificationController();
         listInformations = ic.getAllInfor();
         setVisiablePrevious();
@@ -108,10 +108,10 @@ public class HomeGuestForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField_searchCarForBookTicket = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButton_searchCarForBookTicket = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_carTravel = new javax.swing.JTable();
         jPanel_unbookticket = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -122,6 +122,13 @@ public class HomeGuestForm extends javax.swing.JFrame {
         jTextField_cmtKhach = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jPanel_searchInfor = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jTextField_searchInforCarOwner = new javax.swing.JTextField();
+        jButton_searchInforCarOwner = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_inforCarOwner = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -438,10 +445,10 @@ public class HomeGuestForm extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Nhập thông tin cần tìm kiếm :");
 
-        jButton1.setText("Tìm kiếm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_searchCarForBookTicket.setText("Tìm kiếm");
+        jButton_searchCarForBookTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_searchCarForBookTicketActionPerformed(evt);
             }
         });
 
@@ -450,13 +457,13 @@ public class HomeGuestForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,13 +472,13 @@ public class HomeGuestForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_searchCarForBookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách chuyến xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_carTravel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -487,8 +494,8 @@ public class HomeGuestForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setComponentPopupMenu(jPopupMenu_bookticket);
-        jScrollPane1.setViewportView(jTable1);
+        jTable_carTravel.setComponentPopupMenu(jPopupMenu_bookticket);
+        jScrollPane1.setViewportView(jTable_carTravel);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -591,15 +598,86 @@ public class HomeGuestForm extends javax.swing.JFrame {
 
         jPanel_unbookticketLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel22, jLabel24});
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm thông tin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Nhập thông tin cần tìm kiếm :");
+
+        jButton_searchInforCarOwner.setText("Tìm kiếm");
+        jButton_searchInforCarOwner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_searchInforCarOwnerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_searchInforCarOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jButton_searchInforCarOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_searchInforCarOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_searchInforCarOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin chủ xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        jTable_inforCarOwner.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Chứng minh thư", "Tên", "Giới tính", "Tên nhà xe", "Số điện thoại", "Email", "Ngày sinh", "Địa chỉ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable_inforCarOwner);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel_searchInforLayout = new javax.swing.GroupLayout(jPanel_searchInfor);
         jPanel_searchInfor.setLayout(jPanel_searchInforLayout);
         jPanel_searchInforLayout.setHorizontalGroup(
             jPanel_searchInforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_searchInforLayout.setVerticalGroup(
             jPanel_searchInforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(jPanel_searchInforLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(jPanel_news, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -611,7 +689,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 729, Short.MAX_VALUE)
+            .addGap(0, 730, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel_bookticket, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,11 +714,6 @@ public class HomeGuestForm extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/applications_system.png"))); // NOI18N
         jMenu1.setText("Hệ thống");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
 
         jMenuItem5.setText("Đăng nhập");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -731,7 +804,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        setVisiableSearchInfor();
+        setVisiableSearchInforCarOwner();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -741,15 +814,15 @@ public class HomeGuestForm extends javax.swing.JFrame {
         loginForm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_searchCarForBookTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_searchCarForBookTicketActionPerformed
         // TODO add your handling code here:
         String keySearch = jTextField_searchCarForBookTicket.getText();
-        cc.displaySearchCarForBookTicket(jTable1, keySearch);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        cc.displaySearchCarForBookTicket(jTable_carTravel, keySearch);
+    }//GEN-LAST:event_jButton_searchCarForBookTicketActionPerformed
 
     private void jMenuItem_bookticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_bookticketActionPerformed
         // TODO add your handling code here:
-        int index = jTable1.getSelectedRow();
+        int index = jTable_carTravel.getSelectedRow();
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn xe để đặt vé.Vui lòng chọn lại");
         } else {
@@ -761,12 +834,12 @@ public class HomeGuestForm extends javax.swing.JFrame {
             Date ngaySinh = new Date(97, 2, 29);
             jXDatePicker1_ngayDatVeDi.setDate(dateNow);
             jXDatePicker_ngaySinh.setDate(ngaySinh);
-            jTextField_bsx.setText(jTable1.getValueAt(index, 0).toString());
-            jTextField_nhaXe.setText(jTable1.getValueAt(index, 1).toString());
-            jTextField_soGhe.setText(jTable1.getValueAt(index, 2).toString());
-            jTextField_giaVe.setText(jTable1.getValueAt(index, 5).toString());
-            jTextField_loTrinh.setText(jTable1.getValueAt(index, 3).toString());
-            jTextField_lichTrinh.setText(jTable1.getValueAt(index, 4).toString());
+            jTextField_bsx.setText(jTable_carTravel.getValueAt(index, 0).toString());
+            jTextField_nhaXe.setText(jTable_carTravel.getValueAt(index, 1).toString());
+            jTextField_soGhe.setText(jTable_carTravel.getValueAt(index, 2).toString());
+            jTextField_giaVe.setText(jTable_carTravel.getValueAt(index, 5).toString());
+            jTextField_loTrinh.setText(jTable_carTravel.getValueAt(index, 3).toString());
+            jTextField_lichTrinh.setText(jTable_carTravel.getValueAt(index, 4).toString());
         }
     }//GEN-LAST:event_jMenuItem_bookticketActionPerformed
 
@@ -926,12 +999,14 @@ public class HomeGuestForm extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+    private void jButton_searchInforCarOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_searchInforCarOwnerActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenu1ActionPerformed
+        String key = jTextField_searchInforCarOwner.getText().trim();
+        coc.displayResultSearchInforCarOwner(jTable_inforCarOwner, coc.searchCarOwner(key));
+    }//GEN-LAST:event_jButton_searchInforCarOwnerActionPerformed
 
     private void setVisiablePrevious() {
         if (stt == 1) {
@@ -997,9 +1072,10 @@ public class HomeGuestForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton_searchCarForBookTicket;
+    private javax.swing.JButton jButton_searchInforCarOwner;
     private javax.swing.JDialog jDialog_bookTicket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1018,6 +1094,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1041,6 +1118,8 @@ public class HomeGuestForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_bookticket;
     private javax.swing.JPanel jPanel_information;
@@ -1051,7 +1130,9 @@ public class HomeGuestForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton_nam;
     private javax.swing.JRadioButton jRadioButton_nu;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable_carTravel;
+    private javax.swing.JTable jTable_inforCarOwner;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField_bsx;
     private javax.swing.JTextField jTextField_cmt;
@@ -1065,6 +1146,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_nhaXe;
     private javax.swing.JTextField jTextField_sdt;
     private javax.swing.JTextField jTextField_searchCarForBookTicket;
+    private javax.swing.JTextField jTextField_searchInforCarOwner;
     private javax.swing.JTextField jTextField_soGhe;
     private javax.swing.JTextField jTextField_ten;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1_ngayDatVeDi;
@@ -1092,10 +1174,11 @@ public class HomeGuestForm extends javax.swing.JFrame {
         jPanel_searchInfor.setVisible(false);
     }
 
-    private void setVisiableSearchInfor() {
+    private void setVisiableSearchInforCarOwner() {
         jPanel_news.setVisible(false);
         jPanel_bookticket.setVisible(false);
         jPanel_unbookticket.setVisible(false);
         jPanel_searchInfor.setVisible(true);
+        coc.displayInforCarOwner(jTable_inforCarOwner);
     }
 }

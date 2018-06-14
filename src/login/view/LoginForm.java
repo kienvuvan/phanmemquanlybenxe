@@ -18,6 +18,7 @@ import admin.view.AdminForm;
 import admin.view.HandRequestUpdateCar;
 import car.controller.CarController;
 import car.model.CarUpdate;
+import guest.view.HomeGuestForm;
 import java.util.List;
 
 /**
@@ -142,8 +143,13 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Trang đăng nhập ");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Tài khoản :");
@@ -332,6 +338,13 @@ public class LoginForm extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.dispose();
+        HomeGuestForm homeGuestForm = new HomeGuestForm();
+        homeGuestForm.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

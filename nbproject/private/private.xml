@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carowner/controller/CarOwnerController.java</file>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carowner/dao/MysqlCarOwnerDao.java</file>
             <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/login/view/LoginForm.java</file>
-            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/utils/Utils.java</file>
-            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/admin/view/AdminForm.java</file>
-            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/account/dao/MysqlAccountDao.java</file>
-            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/account/controller/AccountController.java</file>
+            <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/carowner/dao/CarOwnerDao.java</file>
             <file>file:/C:/Users/vukien/Desktop/Quanlybenxe/src/guest/view/HomeGuestForm.java</file>
         </group>
     </open-files>

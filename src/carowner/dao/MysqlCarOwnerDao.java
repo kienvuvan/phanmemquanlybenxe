@@ -45,6 +45,8 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String UPDATE_INFOR_CAROWNER = "UPDATE chuxe SET HoTen = ?, NhaXe = ?, Sdt = ?, Email = ?, GioiTinh = ?, NgaySinh =?, DiaChi =? "
             + "WHERE Cmt = ?";
     private static final String GET_ALL_CAROWNER = "SELECT * FROM chuxe";
+    private static final String SEARCH_INFOR_CAROWNER = "SELECT * FROM chuxe WHERE Cmt LIKE ? OR HoTen LIKE ? OR NhaXe LIKE ? "
+            + "OR Sdt LIKE ? OR Email LIKE ? OR GioiTinh LIKE ? OR NgaySinh LIKE ? OR DiaChi LIKE ?";
     private static final String GET_ALL_CAR_BY_CAROWNER = "SELECT * FROM xe WHERE CmtNhaXe =?";
     private static final String GET_NAME_BY_ID_CAROWNER = "SELECT HoTen FROM chuxe WHERE Cmt =?";
     private static final String GET_ALL_CAR_BY_ID_CAROWNER = "SELECT * FROM xe,chuxe WHERE xe.CmtNhaXe = chuxe.Cmt And CmtNhaXe = ?";
@@ -52,7 +54,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     private static final String GET_CAR_OWNER = "SELECT * FROM chuxe WHERE Cmt = ?";
     private static final String CHECK_ACCOUNT_CAROWNER = "SELECT Cmt, MatKhau FROM chuxe WHERE Cmt = ? AND MatKhau =?";
     private static final String GET_GRAGE_BY_CMT = "SELECT DISTINCT chuxe.NhaXe FROM chuxe, xe WHERE xe.CmtNhaXe = chuxe.Cmt AND xe.BienSoXe = ?";
-    
+
     public static final int RESULT_EMPTY = 0;
     public static final int RESULT_ERROR_CMT = 1;
     public static final int RESULT_ERROR_SDT = 2;
@@ -63,7 +65,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     @Override
     public int addCarOwner(CarOwner carOwner) {
         if (StringUtils.isNullOrEmpty(carOwner.getCmt()) || StringUtils.isNullOrEmpty(carOwner.getTen()) || StringUtils.isNullOrEmpty(carOwner.getNhaXe())
-                || StringUtils.isNullOrEmpty(carOwner.getSdt()) || StringUtils.isNullOrEmpty(carOwner.getEmail()) || StringUtils.isNullOrEmpty(carOwner.getGioitinh())
+                || StringUtils.isNullOrEmpty(carOwner.getSdt()) || StringUtils.isNullOrEmpty(carOwner.getEmail()) || StringUtils.isNullOrEmpty(carOwner.getGioiTinh())
                 || StringUtils.isNullOrEmpty(carOwner.getDiaChi()) || carOwner.getNgaySinh() == null) {
             return RESULT_EMPTY;
         } else if (Utils.isCmt(carOwner.getCmt()) == false) {
@@ -81,7 +83,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 pstmt.setString(3, carOwner.getNhaXe());
                 pstmt.setString(4, carOwner.getSdt());
                 pstmt.setString(5, carOwner.getEmail());
-                pstmt.setString(6, carOwner.getGioitinh());
+                pstmt.setString(6, carOwner.getGioiTinh());
                 pstmt.setDate(7, carOwner.getNgaySinh());
                 pstmt.setString(8, carOwner.getDiaChi());
                 pstmt.setString(9, HashPassword.hashPass("1"));
@@ -99,7 +101,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     @Override
     public int updateInforCarOwner(CarOwner carOwnerUpdate) {
         if (StringUtils.isNullOrEmpty(carOwnerUpdate.getTen()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getNhaXe())
-                || StringUtils.isNullOrEmpty(carOwnerUpdate.getSdt()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getEmail()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getGioitinh())
+                || StringUtils.isNullOrEmpty(carOwnerUpdate.getSdt()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getEmail()) || StringUtils.isNullOrEmpty(carOwnerUpdate.getGioiTinh())
                 || StringUtils.isNullOrEmpty(carOwnerUpdate.getDiaChi()) || carOwnerUpdate.getNgaySinh() == null) {
             return RESULT_EMPTY;
         } else if (Utils.isCmt(carOwnerUpdate.getCmt()) == false) {
@@ -116,7 +118,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
                 pstmt.setString(2, carOwnerUpdate.getNhaXe());
                 pstmt.setString(3, carOwnerUpdate.getSdt());
                 pstmt.setString(4, carOwnerUpdate.getEmail());
-                pstmt.setString(5, carOwnerUpdate.getGioitinh());
+                pstmt.setString(5, carOwnerUpdate.getGioiTinh());
                 pstmt.setDate(6, carOwnerUpdate.getNgaySinh());
                 pstmt.setString(7, carOwnerUpdate.getDiaChi());
                 pstmt.setString(8, carOwnerUpdate.getCmt());
@@ -165,8 +167,36 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
     }
 
     @Override
-    public List<CarOwner> searchCarOwner() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<CarOwner> searchCarOwner(String key) {
+        List<CarOwner> listCarOwners = new ArrayList<>();
+        try {
+            Connection connection = Mysql.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareCall(SEARCH_INFOR_CAROWNER);
+            pstm.setString(1, "%"+key+"%");
+            pstm.setString(2, "%"+key+"%");
+            pstm.setString(3, "%"+key+"%");
+            pstm.setString(4, "%"+key+"%");
+            pstm.setString(5, "%"+key+"%");
+            pstm.setString(6, "%"+key+"%");
+            pstm.setString(7, "%"+key+"%");
+            pstm.setString(8, "%"+key+"%");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String cmtNhaXe = rs.getString(COLUMN_CMT_CAROWNER);
+                String ten = rs.getString(COLUMN_NAME_CAROWNER);
+                String nhaXe = rs.getString(COLUMN_NHAXE_CAROWNER);
+                String sdt = rs.getString(COLUMN_SDT_CAROWNER);
+                String email = rs.getString(COLUMN_EMAIL_CAROWNER);
+                String gioiTinh = rs.getString(COLUMN_GIOITINH_CAROWNER);
+                Date ngaySinh = rs.getDate(COLUMN_NGAYSINH_CAROWNER);
+                String diaChi = rs.getString(COLUMN_DIACHI_CAROWNER);
+                CarOwner carOwner = new CarOwner(cmtNhaXe, ten, nhaXe, sdt, email, gioiTinh, ngaySinh, diaChi);
+                listCarOwners.add(carOwner);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlCarOwnerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCarOwners;
     }
 
     @Override
@@ -260,7 +290,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
             pstm.setString(2, carOwner.getNhaXe());
             pstm.setString(3, carOwner.getSdt());
             pstm.setString(4, carOwner.getEmail());
-            pstm.setString(5, carOwner.getGioitinh());
+            pstm.setString(5, carOwner.getGioiTinh());
             pstm.setDate(6, carOwner.getNgaySinh());
             pstm.setString(7, carOwner.getDiaChi());
             pstm.setString(8, carOwner.getCmt());
@@ -324,7 +354,7 @@ public class MysqlCarOwnerDao implements CarOwnerDao {
             PreparedStatement pstm = connection.prepareStatement(GET_GRAGE_BY_CMT);
             pstm.setString(1, bsx);
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getString("NhaXe");
             }
         } catch (SQLException ex) {

@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CarOwnerController {
 
-    private CarOwner carOwner;
+    private final CarOwner carOwner;
 
     public CarOwnerController() {
         carOwner = new CarOwner();
@@ -40,6 +40,7 @@ public class CarOwnerController {
     public void displayInforCarOwnerToJTable(JTable jtb) {
         List<CarOwner> listCarOwners = getAllListCarOwner();
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
+        dtm.setRowCount(0);
         for (int i = 0; i < listCarOwners.size(); i++) {
             String nhaXe = listCarOwners.get(i).getNhaXe();
             List<Car> listCar = listCarOwners.get(i).getListCar();
@@ -59,9 +60,10 @@ public class CarOwnerController {
         List<CarOwner> listCarOwners = getAllInforCarOwner();
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
         SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
+        dtm.setRowCount(0);
         for (int i = 0; i < listCarOwners.size(); i++) {
             CarOwner co = listCarOwners.get(i);
-            dtm.addRow(new Object[]{co.getCmt(), co.getTen(), co.getGioitinh(), co.getNhaXe(), co.getSdt(), co.getEmail(),
+            dtm.addRow(new Object[]{co.getCmt(), co.getTen(), co.getGioiTinh(), co.getNhaXe(), co.getSdt(), co.getEmail(),
                 simple.format(co.getNgaySinh()), co.getDiaChi()});
         }
         jtb.setModel(dtm);
@@ -70,7 +72,7 @@ public class CarOwnerController {
     public void addCarOwnerToJTable(CarOwner co, JTable jtb) {
         DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
         SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
-        dtm.addRow(new Object[]{co.getCmt(), co.getTen(), co.getGioitinh(), co.getNhaXe(), co.getSdt(), co.getEmail(),
+        dtm.addRow(new Object[]{co.getCmt(), co.getTen(), co.getGioiTinh(), co.getNhaXe(), co.getSdt(), co.getEmail(),
             simple.format(co.getNgaySinh()), co.getDiaChi()});
         jtb.setModel(dtm);
     }
@@ -118,6 +120,29 @@ public class CarOwnerController {
 
     public String getGarageByBsx(String bsx) {
         return carOwner.getGarageByBsx(bsx);
+    }
+
+    public List<CarOwner> searchCarOwner(String key) {
+        return carOwner.searchCarOwner(key);
+    }
+
+    public void displayResultSearchInforCarOwner(JTable jtb, List<CarOwner> listCarOwners) {
+        DefaultTableModel dtm = (DefaultTableModel) jtb.getModel();
+        SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
+        dtm.setRowCount(0);
+        int width = jtb.getColumnModel().getColumn(2).getPreferredWidth();
+        if (listCarOwners.isEmpty()) {
+            dtm.addRow(new Object[]{"","","","Không có chủ xe nào được tìm thấy"});
+            jtb.getColumnModel().getColumn(3).setPreferredWidth(300);
+        } else {
+            for (int i = 0; i < listCarOwners.size(); i++) {
+                CarOwner co = listCarOwners.get(i);
+                dtm.addRow(new Object[]{co.getCmt(), co.getTen(), co.getGioiTinh(), co.getNhaXe(), co.getSdt(), co.getEmail(),
+                    simple.format(co.getNgaySinh()), co.getDiaChi()});
+                jtb.getColumnModel().getColumn(3).setPreferredWidth(width);
+            }
+        }
+        jtb.setModel(dtm);
     }
 
 }
