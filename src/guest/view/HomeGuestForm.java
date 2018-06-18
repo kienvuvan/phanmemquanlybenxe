@@ -829,7 +829,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
             jDialog_bookTicket.setVisible(true);
             jDialog_bookTicket.setSize(620, 600);
             jDialog_bookTicket.setLocationRelativeTo(null);
-            jDialog_bookTicket.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//            jDialog_bookTicket.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             Date dateNow = new Date();
             Date ngaySinh = new Date(97, 2, 29);
             jXDatePicker1_ngayDatVeDi.setDate(dateNow);
@@ -909,7 +909,7 @@ public class HomeGuestForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(jDialog_bookTicket, "Đăng ký thành công.Chúng tôi đã gửi các thông tin đến email của bạn.Vui lòng kiểm tra lại");
                     SendMail.send(email, "Đăng ký vé xe online bến xe khách Hà Nội", "Bạn vừa đăng ký vé xe thông qua hệ thống đặt vé online.\n"
                             + "Thông tin chuyến xe:\n"
-                            + "Mã chuyến xe : " + maChuyenXe
+                            + "Mã chuyến xe : " + maChuyenXe+"\n"
                             + "Biển số xe : " + bienSoXe + "\n"
                             + "Nhà xe : " + jTextField_nhaXe.getText() + "\n"
                             + "Lộ trình : " + jTextField_loTrinh.getText() + "\n"
@@ -1025,8 +1025,6 @@ public class HomeGuestForm extends javax.swing.JFrame {
         }
         if (stt == checkStt) {
             jLabel_next.setVisible(false);
-            System.out.println(stt + " " + checkStt);
-            System.out.println((float) listInformations.size());
         } else {
             jLabel_next.setVisible(true);
         }
